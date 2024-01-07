@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
 
-function App() {
+export default function App() {
   
 
   return (
-    <div>
-     
+    <div className='text-red-300'>
+     Hello
     </div>
   )
 }
