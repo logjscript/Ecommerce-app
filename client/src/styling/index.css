@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dashboard-header {
+    @apply text-base text-gray-800 flex grow justify-center items-center;
+}
