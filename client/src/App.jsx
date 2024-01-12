@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Dashboard from './components/Dashboard';
-import HomePageImages from './components/HomePageImages';
+import HomePage from './components/HomePage';
 
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <div>
         <Dashboard />
-        <HomePageImages />
+        <HomePage />
     </div>
   )
 }

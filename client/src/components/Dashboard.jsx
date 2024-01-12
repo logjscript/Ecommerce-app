@@ -12,7 +12,7 @@ export default function Dashboard () {
                 <button className='dashboard-header-title'>Shoes</button>
             </div>
 
-            <div className='dashboard-group font-pacifico text-3xl justify-center'>Branding</div>
+            <div className='dashboard-group font-pacifico text-3xl justify-center'>Brand</div>
 
             <div className='dashboard-group justify-end pr-6'>
                 <button className='dashboard-header-title'>Home</button>
