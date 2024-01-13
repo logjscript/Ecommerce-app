@@ -1,16 +1,15 @@
-import React from 'react';
-import image1 from '../images/home-img-1.jpg';
-import image2 from '../images/home-img-2.jpg';
-import image3 from '../images/home-img-3.jpg';
-
+import React, { useContext } from 'react';
+import { useImages } from './ImageContext';
 
 export default function HomePage() {
+    const { imageGroups } = useImages();
+    
     return (
         <>
             <div className='box-border flex justify-evenly w-screen'>
-                <img src={image2} className='home-img'/>
-                <img src={image3} className='home-img'/>
-                <img src={image1} className='home-img'/>
+                <img src={imageGroups.home[1]} className='home-img'/>
+                <img src={imageGroups.home[2]} className='home-img'/>
+                <img src={imageGroups.home[0]} className='home-img'/>
             </div>
 
             <div className='h-92 text-gray-800 flex flex-col justify-center items-center py-24'> 
