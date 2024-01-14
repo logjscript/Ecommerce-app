@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useImages } from './ImageContext';
+import ImageScroller from './ImageScroller';
 
-export default function HomePage() {
+export default function HomePage({ func }) {
     const { imageGroups } = useImages();
     
     return (
@@ -17,6 +18,7 @@ export default function HomePage() {
                 <div className='font-pacifico text-8xl flex justify-center items-center pt-4 pb-12'>Brand</div>
                 <button className='bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl'>Shop Now</button>
             </div>
+            <ImageScroller func={func} />
         </>
     )
 }

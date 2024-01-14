@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 export default function Dashboard () {
     return (
-        <div className='bg-slate-100 w-screen h-20 flex items-center'>
+        <div className='bg-slate-100 w-screen h-20 flex items-center fixed top-0'>
             
             <div className='dashboard-group pl-6 justify-start'>
                 <button className='dashboard-header-title'>Hats</button>
