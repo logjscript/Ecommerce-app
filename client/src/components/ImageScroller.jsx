@@ -16,11 +16,11 @@ export default function ImageScroller({ func }) {
     }
 
     return (
-        <div className='relative flex items-center mb-12'>
+        <div className='relative flex items-center mb-8'>
             <MdChevronLeft onClick={slideLeft} size={40} className='opacity-50 cursor-pointer hover:opacity-100' />
             <div id='slider' className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
                 {allClothes.map((item, i) =>(
-                    <img key={i} src={item} alt='/' onClick={() => func(i)} className='w-[220px] h-[220px] object-cover inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' />
+                    <img key={i} src={item.link} alt='/' onClick={() => func(i)} className='w-[220px] h-[220px] object-cover inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' />
                 ))} 
             </div>
             <MdChevronRight onClick={slideRight} size={40} className='opacity-50 cursor-pointer hover:opacity-100' />

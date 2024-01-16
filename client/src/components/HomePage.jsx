@@ -6,7 +6,7 @@ export default function HomePage({ func }) {
     const { imageGroups } = useImages();
     
     return (
-        <>
+        <div className='pt-[5.75rem]'>
             <div className='box-border flex justify-evenly w-screen'>
                 <img src={imageGroups.home[1]} className='home-img'/>
                 <img src={imageGroups.home[2]} className='home-img'/>
@@ -19,6 +19,6 @@ export default function HomePage({ func }) {
                 <button className='bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl'>Shop Now</button>
             </div>
             <ImageScroller func={func} />
-        </>
+        </div>
     )
 }

@@ -9,6 +9,11 @@ import ProductSection from './components/ProductSection';
 export default function App() {
   const [type, setType] = useState(null)
 
+  function handleClickDashboard(e) {
+    setType(e.target.value);
+    window.scrollTo(0,0);
+  }
+
   function handleClickScrollBar(id) {
     switch(true) {
       case id < 4: {
@@ -40,7 +45,7 @@ export default function App() {
 
   return (
     <ImageProvider>
-        <Dashboard />
+        <Dashboard handleClickDashboard={handleClickDashboard} />
         {(!type) ? <HomePage func={handleClickScrollBar} /> : <ProductSection clothingType={type}/>}
     </ImageProvider>
   )

@@ -6,21 +6,15 @@ export default function ProductSection({ clothingType }) {
     const { imageGroups } = useImages();
 
     return (
-        <div className="grid grid-cols-[repeat(2,minmax(200px,50%))] grid-rows-[repeat(2,minmax(200px,50%))] gap-x-[6%] gap-y-[8%] pt-[10%]">
+        <div className="grid grid-cols-[repeat(2,minmax(200px,50%))] grid-rows-[repeat(2,minmax(200px,50%))] pt-[10%] gap-y-[5%] mb-[5%]">
             
-                <img src={imageGroups[clothingType][0]} alt="/" className="w-[80%] h-[90%] object-cover justify-self-end self-start rounded-2xl" />
-                
-            
-                <img src={imageGroups[clothingType][1]} alt="/" className="w-[80%] h-[90%] object-cover justify-self-start self-start rounded-2xl" />
-                
-         
-           
-                <img src={imageGroups[clothingType][2]} alt="/" className="w-[80%] h-[90%] object-cover justify-self-end self-start rounded-2xl" />
-                
-           
-            
-                <img src={imageGroups[clothingType][3]} alt="/" className="w-[80%] h-[90%] ] object-cover justify-self-start self-start rounded-2xl" />
-                
+                {imageGroups[clothingType].map((image, i) => (
+                    <div key={image.id} className="w-full h-full flex flex-col justify-start items-center gap-4 place-self-center">
+                        <img src={image.link} alt="/" className="w-[80%] h-[80%] object-cover rounded-2xl shadow-lg hover:scale-105 ease-in-out duration-300" />
+                        <div className="text-base text-gray-800 opacity-70">{image.value}</div>
+                        <button className='bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl hover:opacity-50 ease-in-out duration-200'>Add to bag</button>
+                    </div>
+                ))}               
         </div>
     )
 }
