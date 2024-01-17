@@ -4,10 +4,13 @@ import HomePage from './components/HomePage';
 import { ImageProvider } from './components/ImageContext'
 import ImageScroller from './components/ImageScroller';
 import ProductSection from './components/ProductSection';
+import SignIn from './components/SignIn'
 
 
 export default function App() {
-  const [type, setType] = useState(null)
+  const [type, setType] = useState(null);
+  const [signedIn, setSignedIn] = useState(false);
+  const [canceled, setCanceled] = useState(true);
 
   function handleClickDashboard(e) {
     setType(e.target.value);
@@ -43,10 +46,15 @@ export default function App() {
     window.scrollTo(0, 0);
   }
 
+  // let compToDisplay;
+
+  // if()
+
   return (
     <ImageProvider>
-        <Dashboard handleClickDashboard={handleClickDashboard} />
+        <Dashboard handleClickDashboard={handleClickDashboard} canceledFunc={() => setCanceled(false)} />
         {(!type) ? <HomePage func={handleClickScrollBar} /> : <ProductSection clothingType={type}/>}
+        {(signedIn || canceled) ? null : <SignIn signedInFunc={() => setSignedIn(true)} canceledFunc={() => setCanceled(true)} />}
     </ImageProvider>
   )
 }

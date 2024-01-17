@@ -19,3 +19,11 @@
 .home-img {
     @apply home-img-width;
 }
+
+.invalid {
+    @apply border-red-500 shadow-sm;
+}
+
+.valid {
+    @apply border-green-500 shadow-sm;
+}
