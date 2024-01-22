@@ -10,6 +10,11 @@ import SignIn from './components/SignIn'
 export default function App() {
   const [type, setType] = useState(null);
   const [signedIn, setSignedIn] = useState(false);
+  //Hook up with server, have sign in button show name, connect bag to account
+  const [userInfo, setUserInfo] = useState({
+    userName: '',
+    password: ''
+  })
   const [canceled, setCanceled] = useState(true);
 
   function handleClickDashboard(e) {
@@ -52,9 +57,9 @@ export default function App() {
 
   return (
     <ImageProvider>
-        <Dashboard handleClickDashboard={handleClickDashboard} canceledFunc={() => setCanceled(false)} />
+        <Dashboard handleClickDashboard={handleClickDashboard} canceledFunc={() => setCanceled(false)} signedIn={signedIn} username={userInfo.userName} />
         {(!type) ? <HomePage func={handleClickScrollBar} /> : <ProductSection clothingType={type}/>}
-        {(signedIn || canceled) ? null : <SignIn signedInFunc={() => setSignedIn(true)} canceledFunc={() => setCanceled(true)} />}
+        {(signedIn || canceled) ? null : <SignIn signedInFunc={() => setSignedIn(true)} canceledFunc={() => setCanceled(true)} setUserInfo={setUserInfo} userInfo={userInfo} />}
     </ImageProvider>
   )
 }
