@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userInfo }) {
     const [newUserInfo, setNewUserInfo] = useState({
-        userName: '', 
+        username: '', 
         password: '', 
         verifyPassword: '',
         passwordMatch: true
@@ -56,7 +56,7 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
     function handleUserChange(e) {
         setNewUserInfo({
             ...newUserInfo,
-            userName: e.target.value
+            username: e.target.value
         })
         e.target.value ? setInputColor({...inputColor, user: 'border-green-500 shadow-sm outline-none'}) : setInputColor({...inputColor, user: 'border-gray-400 shadow-sm'})
     }
@@ -90,13 +90,13 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
     function handleButtonClick() {
         // submit info to db
 
-        if (newUserInfo.userName &&
+        if (newUserInfo.username &&
             newUserInfo.password &&
             newUserInfo.verifyPassword &&
             newUserInfo.passwordMatch) {
 
             setNewUserInfo({
-                userName: '', 
+                username: '', 
                 password: '', 
                 verifyPassword: '',
                 passwordMatch: true
@@ -115,18 +115,24 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
 
     async function fetchUsername() {
         try {
-            const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.userName}`);
+            const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`);
 
             if (!response.ok) {
                 throw new Error('Username does not exist');
             } 
 
-            const [{ username, password }] = await response.json();
+            const [{ username, password, items, total }] = await response.json();
 
             if (userInfo.password !== password) {
                 throw new Error('Password is incorrect');
             }
 
+            setUserInfo({
+                username: username,
+                password: password,
+                items: items, 
+                total: total
+            })
             signedInFunc();
         } catch (error) {
             console.error(error);
@@ -152,8 +158,8 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
                     <label htmlFor="userInput" className="row-span-1 col-span-1 self-center justify-self-end text-gray-800">Username:</label>
                     <input type="text" 
                            id="userInput" 
-                           value={userInfo.userName}
-                           onChange={(e) => setUserInfo({...userInfo, userName: e.target.value})}
+                           value={userInfo.username}
+                           onChange={(e) => setUserInfo({...userInfo, username: e.target.value})}
                            placeholder="Add your username here" 
                            className="row-span-1 col-span-1 w-[90%] h-[80%] place-self-center rounded-lg border-solid border-2 border-gray-400 pl-4" 
                     />
@@ -187,7 +193,7 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
                     <label htmlFor="userInput" className="row-span-1 col-span-1 self-center justify-self-end text-gray-800 text-lg outline-none border{}"> Create Username:</label>
                     <input type="text" 
                            id="userInput" 
-                           value={newUserInfo.userName}
+                           value={newUserInfo.username}
                            onChange={(e) => handleUserChange(e)}
                            placeholder="Create your username here" 
                            className={`row-span-1 col-span-1 w-[90%] h-[80%] place-self-center rounded-lg border-solid border-2 ${inputColor.user} pl-4 text-lg`} />

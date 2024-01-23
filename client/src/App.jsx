@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dashboard from './components/Dashboard';
 import HomePage from './components/HomePage';
-import { ImageProvider } from './components/ImageContext'
-import ImageScroller from './components/ImageScroller';
+import { ImageProvider } from './components/ImageContext';
 import ProductSection from './components/ProductSection';
-import SignIn from './components/SignIn'
+import SignIn from './components/SignIn';
+import Bag from './components/Bag';
 
 
 export default function App() {
@@ -12,14 +12,25 @@ export default function App() {
   const [signedIn, setSignedIn] = useState(false);
   //Hook up with server, have sign in button show name, connect bag to account
   const [userInfo, setUserInfo] = useState({
-    userName: '',
-    password: ''
+    username: '',
+    password: '',
+    items: [],
+    total: null,
   })
   const [canceled, setCanceled] = useState(true);
 
   function handleClickDashboard(e) {
     setType(e.target.value);
     window.scrollTo(0,0);
+  }
+
+  function handleBagClick() {
+    if (!signedIn) {
+      setCanceled(false);
+    } else {
+      setType('bag');
+      window.scrollTo(0,0);
+    }
   }
 
   function handleClickScrollBar(id) {
@@ -51,14 +62,19 @@ export default function App() {
     window.scrollTo(0, 0);
   }
 
-  // let compToDisplay;
-
-  // if()
+  let compToDisplay;
+    if (!type) {
+      compToDisplay = <HomePage func={handleClickScrollBar} />;
+    } else if (type === 'bag') {
+      compToDisplay = <Bag userInfo={userInfo} />;
+    } else {
+      compToDisplay = <ProductSection clothingType={type}/>;
+    }
 
   return (
     <ImageProvider>
-        <Dashboard handleClickDashboard={handleClickDashboard} canceledFunc={() => setCanceled(false)} signedIn={signedIn} username={userInfo.userName} />
-        {(!type) ? <HomePage func={handleClickScrollBar} /> : <ProductSection clothingType={type}/>}
+        <Dashboard handleClickDashboard={handleClickDashboard} handleBagClick={handleBagClick} canceledFunc={() => setCanceled(false)} signedIn={signedIn} username={userInfo.username} />
+        {compToDisplay}
         {(signedIn || canceled) ? null : <SignIn signedInFunc={() => setSignedIn(true)} canceledFunc={() => setCanceled(true)} setUserInfo={setUserInfo} userInfo={userInfo} />}
     </ImageProvider>
   )

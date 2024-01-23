@@ -6,7 +6,7 @@ export default function ProductSection({ clothingType }) {
     const { imageGroups } = useImages();
 
     return (
-        <div className="grid grid-cols-[repeat(2,minmax(200px,50%))] grid-rows-[repeat(2,minmax(200px,50%))] pt-[10%] gap-y-[5%] mb-[5%]">
+        <div className="grid grid-cols-[repeat(2,minmax(200px,50%))] grid-rows-[repeat(2,minmax(200px,50%))] pt-[7.75rem] gap-y-[5%] mb-[5%]">
             
                 {imageGroups[clothingType].map((image, i) => (
                     <div key={image.id} className="w-full h-full flex flex-col justify-start items-center gap-4 place-self-center">
