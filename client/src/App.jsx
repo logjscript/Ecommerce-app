@@ -15,7 +15,7 @@ export default function App() {
     username: '',
     password: '',
     items: [],
-    total: null,
+    total: 0,
   })
   const [canceled, setCanceled] = useState(true);
 
@@ -68,7 +68,7 @@ export default function App() {
     } else if (type === 'bag') {
       compToDisplay = <Bag userInfo={userInfo} />;
     } else {
-      compToDisplay = <ProductSection clothingType={type}/>;
+      compToDisplay = <ProductSection clothingType={type} userInfo={userInfo} setUserInfo={setUserInfo} signedIn={signedIn} setCanceled={setCanceled} />;
     }
 
   return (

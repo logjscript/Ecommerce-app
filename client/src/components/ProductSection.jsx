@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useImages } from "./ImageContext";
+import Button from './Button';
 
 
-export default function ProductSection({ clothingType }) {
+export default function ProductSection({ clothingType, userInfo, setUserInfo, signedIn, setCanceled }) {
     const { imageGroups } = useImages();
 
     return (
@@ -12,7 +13,7 @@ export default function ProductSection({ clothingType }) {
                     <div key={image.id} className="w-full h-full flex flex-col justify-start items-center gap-4 place-self-center">
                         <img src={image.link} alt="/" className="w-[80%] h-[80%] object-cover rounded-2xl shadow-lg hover:scale-105 ease-in-out duration-300" />
                         <div className="text-base text-gray-800 opacity-70">{image.value}</div>
-                        <button className='bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl hover:opacity-50 ease-in-out duration-200'>Add to bag</button>
+                        <Button item={image} userInfo={userInfo} setUserInfo={setUserInfo} signedIn={signedIn} setCanceled={setCanceled} />
                     </div>
                 ))}               
         </div>
