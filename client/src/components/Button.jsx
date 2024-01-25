@@ -1,10 +1,6 @@
 
 export default function Button({ item, userInfo, setUserInfo, signedIn, setCanceled }) {
 
-    console.log(JSON.stringify({...userInfo, items: [
-        ...userInfo.items, {price: item.value, img_path: item.link, item_name: item.name}
-    ]}))
-
     const itemToBag = async () => {
         try {
             const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`, {
@@ -29,7 +25,7 @@ export default function Button({ item, userInfo, setUserInfo, signedIn, setCance
         !signedIn ? setCanceled(false) : await itemToBag();
         setUserInfo({
             ...userInfo, items: [
-                ...userInfo.items, {price: item.value, img_path: item.link, item_name: item.name}
+                ...(userInfo.items || []), {price: item.value, img_path: item.link, item_name: item.name}
             ]
         })
     }

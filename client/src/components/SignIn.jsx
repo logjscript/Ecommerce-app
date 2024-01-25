@@ -7,7 +7,6 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
         verifyPassword: '',
         passwordMatch: true
     });
-    
     const [inputColor, setInputColor] = useState({
         user: 'border-gray-400 shadow-sm', 
         password: 'border-gray-400 shadow-sm', 
@@ -18,18 +17,18 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
     const [signInError, setSignInError] = useState(null);
 
     useEffect(() => {
-        if (newUserInfo.password) {
+        if ((newUserInfo.verifyPassword && newUserInfo.password === '') || (newUserInfo.verifyPassword && newUserInfo.verifyPassword !== newUserInfo.password)){
+            setInputColor({
+                ...inputColor,
+                password: 'border-red-500 shadow-sm outline-none',
+                verifyPassword: 'border-red-500 shadow-sm outline-none'
+            })
+        } else if (newUserInfo.password) {
             if (newUserInfo.verifyPassword === '') {
                 setInputColor({
                     ...inputColor,
                     password: 'border-green-500 shadow-sm outline-none', 
                     verifyPassword: 'border-gray-400 shadow-sm'
-                });
-            } else if (newUserInfo.verifyPassword && newUserInfo.verifyPassword !== newUserInfo.password){
-                setInputColor({
-                    ...inputColor,
-                    password: 'border-red-500 shadow-sm outline-none',
-                    verifyPassword: 'border-red-500 shadow-sm outline-none'
                 });
             } else {
                 setInputColor({
@@ -38,12 +37,6 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
                     verifyPassword: 'border-green-500 shadows-sm outline-none'
                 });
             }
-        } else if (newUserInfo.verifyPassword && newUserInfo.password === ''){
-            setInputColor({
-                ...inputColor,
-                password: 'border-red-500 shadow-sm outline-none',
-                verifyPassword: 'border-red-500 shadow-sm outline-none'
-            })
         } else {
             setInputColor({
                 ...inputColor,
@@ -87,29 +80,60 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
         })
     }
 
-    function handleButtonClick() {
-        // submit info to db
-
-        if (newUserInfo.username &&
-            newUserInfo.password &&
-            newUserInfo.verifyPassword &&
-            newUserInfo.passwordMatch) {
-
-            setNewUserInfo({
-                username: '', 
-                password: '', 
-                verifyPassword: '',
-                passwordMatch: true
-            })
-            setInputColor({
-                user: 'border-gray-400 shadow-sm', 
-                password: 'border-gray-400 shadow-sm', 
-                verifyPassword: 'border-gray-400 shadow-sm'
-            })
-            setErrorIsVisible(false);
-            setExistingAccount(true);
-        } else {
+    async function handleButtonClick() {
+        if (!newUserInfo.username || 
+            !newUserInfo.password || 
+            !newUserInfo.verifyPassword) {
+            
             setErrorIsVisible(true);
+        }
+
+        try {
+            if (newUserInfo.username &&
+                newUserInfo.password &&
+                newUserInfo.verifyPassword &&
+                newUserInfo.passwordMatch) {
+    
+                setNewUserInfo({
+                    username: '', 
+                    password: '', 
+                    verifyPassword: '',
+                    passwordMatch: true
+                })
+                setInputColor({
+                    user: 'border-gray-400 shadow-sm', 
+                    password: 'border-gray-400 shadow-sm', 
+                    verifyPassword: 'border-gray-400 shadow-sm'
+                })
+                await addUsername();
+                setErrorIsVisible(false);
+                setExistingAccount(true);
+            } 
+        } catch (error) {
+            console.error(error);
+            console.error(error.message)
+            if (error.message === 'Username already exists') {
+                setSignInError(error.message);
+            } 
+        }   
+    }
+
+    async function addUsername() {
+        try {
+            const response = await fetch('http://localhost:5200/api/v1/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({...newUserInfo})
+            });
+    
+            if (!response.ok) {
+                throw new Error('Username already exists');
+            }
+        } catch (error) {
+            console.error(error);
+            throw error;
         }
     }
 
@@ -148,8 +172,7 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
     return (
         existingAccount ? (
             <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20">
-                <div className="w-[50%] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-cols-[25%_1fr] grid-rows-[25%_repeat(3,1fr)_repeat(2,.5fr)] gap-y-2">
-                    
+                <div className="w-[50%] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-cols-[25%_1fr] grid-rows-[25%_repeat(3,1fr)_repeat(2,.5fr)] gap-y-2">  
                     <div className="relative flex justify-center items-start col-span-2 row-span-1">
                         <h1 className="text-3xl place-self-center text-gray-800 pt-4">Sign In</h1>
                         <button  onClick={canceledFunc} className="absolute right-[.75rem] top-[.3rem] text-xl text-gray-500">x</button>
@@ -174,8 +197,6 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
                     />
                     
                     <button className='col-span-2 place-self-center bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl hover:opacity-50 ease-in-out duration-200' onClick={async () => handleLogInButton()}>Log In</button>
-
-                    {signInError && (<div className="text-red-400 col-span-2 mx-auto place-self-center">{signInError}</div>)}
 
                     <p className="col-span-2 place-self-center text-sm">Don't have an account? <span onClick={() => setExistingAccount(false)} className="text-blue-500 cursor-pointer">Click here</span></p>
                 </div>
@@ -218,6 +239,8 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
                         />
                         {(!newUserInfo.passwordMatch) && <div className="absolute left-[10%] bottom-[-1rem] text-red-400 text-sm z-30">Passwords do not match</div>}
                     </div>
+
+                    {signInError && (<div className="text-red-400 col-span-2 mx-auto place-self-center">{signInError}</div>)}
 
                     <button onClick={handleButtonClick} className='col-span-2 place-self-center bg-gray-800 text-white rounded-3xl w-44 h-11 text-xl hover:opacity-50 ease-in-out duration-200'>Create Account</button>
                 </div>
