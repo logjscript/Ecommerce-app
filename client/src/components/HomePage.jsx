@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useImages } from './ImageContext';
 import ImageScroller from './ImageScroller';
 
-export default function HomePage({ func }) {
+export default function HomePage({ func, setType }) {
     const { imageGroups } = useImages();
     
     return (
@@ -16,7 +16,7 @@ export default function HomePage({ func }) {
             <div className='h-92 text-gray-800 flex flex-col justify-center items-center py-24'> 
                 <div className='font-fjalla text-6xl flex justify-center items-center'>BUILD YOUR</div>
                 <div className='font-pacifico text-8xl flex justify-center items-center pt-4 pb-12'>Brand</div>
-                <button className='bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl'>Shop Now</button>
+                <button onClick={() => {setType('hats'); window.scrollTo(0, 0)}} className='bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl'>Shop Now</button>
             </div>
             <ImageScroller func={func} />
         </div>

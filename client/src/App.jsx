@@ -64,7 +64,7 @@ export default function App() {
 
   let compToDisplay;
     if (!type) {
-      compToDisplay = <HomePage func={handleClickScrollBar} />;
+      compToDisplay = <HomePage func={handleClickScrollBar} setType={setType} />;
     } else if (type === 'bag') {
       compToDisplay = <Bag userInfo={userInfo} />;
     } else {
