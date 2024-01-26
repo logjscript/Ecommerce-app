@@ -28,7 +28,7 @@ const addUser = (req, res) => {
     pool.query(queries.checkUsernameExists, [username], (error, results) => {
         if (error) throw error;
         if (results.rows.length) {
-            res.send('Username already exists.');
+            return res.status(400).send('Username already exists.');
         } else {
             pool.query(queries.addUser, [username, password], (error, results) => {
                 if (error) throw error;
@@ -54,16 +54,19 @@ const deleteUser = (req, res) => {
     })
 }
 
-const updateUser = (req, res) => {
-    const oldUsername = req.params.username;
-    const { username } = req.body
+const updateUserInfo = (req, res) => {
+    const username = req.params.username;
+    const { items, total } = req.body;
 
-    pool.query(queries.getUserById, [oldUsername], (error, results) => {
+    const jsonItems = JSON.stringify(items);
+    
+
+    pool.query(queries.getUserById, [username], (error, results) => {
         const noUserFound = !results.rows.length;
         if (noUserFound) {
             res.send('User does not exist in the database.');
         }
-        pool.query(queries.updateUser, [username, oldUsername], (error, results) => {
+        pool.query(queries.updateUserInfo, [jsonItems, total, username], (error, results) => {
             if (error) throw error;
             res.status(200).send('User updated successfully.')
         })
@@ -75,5 +78,5 @@ module.exports = {
     getUserById,
     addUser,
     deleteUser,
-    updateUser
+    updateUserInfo
 }

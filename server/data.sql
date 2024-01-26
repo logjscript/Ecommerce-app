@@ -9,9 +9,10 @@ CREATE TABLE user_list(
 INSERT INTO user_list(username, password, items, total) VALUES (
 'Logan', 
 'password', 
-[
+'[
     {"item_name": "item1", "price": "21.99", "img_path": "/thisisIMG1"},
     {"item_name": "item2", "price": "23.99", "img_path": "/thisisIMG2"}
-],
+]',
 0.00
 );
+
