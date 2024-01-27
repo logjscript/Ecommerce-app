@@ -1,28 +1,6 @@
 import { useEffect, useRef } from "react";
 
 export default function Button({ item, userInfo, setUserInfo, signedIn, setCanceled }) {
-    const quantityRef = useRef(null);
-
-        const itemToBag = async () => {
-
-            try {
-                const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({...userInfo, items: [
-                        ...(userInfo.items || []), {value: item.value, link: item.link, name: item.name, quantity: quantityRef.current}
-                    ]})
-                });
-    
-                if (!response.ok) {
-                    throw new Error('Data cannot be sent');
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        }
 
     const handleClick = async () => {
         try {
@@ -43,18 +21,13 @@ export default function Button({ item, userInfo, setUserInfo, signedIn, setCance
                         ...userInfo,
                         items: updatedState
                     })
-                    quantityRef.current = userInfo.items[existingItemIndex].quantity + 1;
                 } else {
                     setUserInfo({
                         ...userInfo, items: [
                             ...(userInfo.items || []), {value: item.value, link: item.link, name: item.name, quantity: 1}
                         ]
                     });
-                    quantityRef.current = 1;
                 }
-
-                itemToBag();
-                
             } else {
                 setCanceled(false);
             }
