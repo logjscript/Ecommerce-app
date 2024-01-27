@@ -1,6 +1,7 @@
+import DeleteBagItem from "./DeleteBagItem";
 
 
-export default function Bag({ userInfo }) {
+export default function Bag({ userInfo, setUserInfo }) {
 
     const userTotalPrice = userInfo.items?.reduce((acc, item) => {    
         if (item.value[0] === '$') {
@@ -22,6 +23,7 @@ export default function Bag({ userInfo }) {
                                 <img src={item.link} className="w-[200px]"/>
                                 <div>{item.name}</div>
                                 <div>{`${item.quantity} x ${item.value}`}</div>
+                                <DeleteBagItem item={item} setUserInfo={setUserInfo} userInfo={userInfo} />
                             </div>
                         )))}
                     </div>

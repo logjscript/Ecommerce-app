@@ -18,6 +18,30 @@ export default function App() {
   })
   const [canceled, setCanceled] = useState(true);
 
+  useEffect(() => {
+    if (signedIn) {
+      itemToBag();
+    }
+}, [userInfo.items])
+
+const itemToBag = async () => {
+    try {
+        const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({...userInfo})
+        });
+
+        if (!response.ok) {
+            throw new Error('Data cannot be sent');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
   function handleClickDashboard(e) {
     setType(e.target.value);
     window.scrollTo(0,0);
@@ -65,7 +89,7 @@ export default function App() {
     if (!type) {
       compToDisplay = <HomePage func={handleClickScrollBar} setType={setType} />;
     } else if (type === 'bag') {
-      compToDisplay = <Bag userInfo={userInfo} />;
+      compToDisplay = <Bag userInfo={userInfo} setUserInfo={setUserInfo} />;
     } else {
       compToDisplay = <ProductSection clothingType={type} userInfo={userInfo} setUserInfo={setUserInfo} signedIn={signedIn} setCanceled={setCanceled} />;
     }
