@@ -10,7 +10,6 @@ import Bag from './components/Bag';
 export default function App() {
   const [type, setType] = useState(null);
   const [signedIn, setSignedIn] = useState(false);
-  //Hook up with server, have sign in button show name, connect bag to account
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',

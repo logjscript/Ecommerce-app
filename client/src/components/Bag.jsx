@@ -13,7 +13,7 @@ export default function Bag({ userInfo }) {
 
     return (
         <>
-            <h1 className="pt-[8rem]">Total: ${userTotalPrice.toFixed(2)}</h1>
+            <h1 className="pt-[8rem]">Total: {userTotalPrice ? `$${userTotalPrice.toFixed(2)}` : '$0.00'}</h1>
             <div>
                 {userInfo.items ? (
                     <div className="pt-[8rem]">

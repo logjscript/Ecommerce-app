@@ -2,16 +2,9 @@ import { useEffect, useRef } from "react";
 
 export default function Button({ item, userInfo, setUserInfo, signedIn, setCanceled }) {
     const quantityRef = useRef(null);
-    
-    useEffect(() => {
-        const existingItem = userInfo.items?.find(oldItem => oldItem.name === item.name);
-        if (existingItem) {
-            quantityRef.current = existingItem.quantity;
-        } else {
-            quantityRef.current = 0;
-        }
-        
+
         const itemToBag = async () => {
+
             try {
                 const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`, {
                     method: 'PUT',
@@ -30,17 +23,11 @@ export default function Button({ item, userInfo, setUserInfo, signedIn, setCance
                 console.error(error);
             }
         }
-        if (userInfo.items) {
-            itemToBag();
-        }
-    }, [userInfo.items])
 
     const handleClick = async () => {
         try {
             if (signedIn) {
                 const existingItemIndex = userInfo.items?.findIndex(bagItem => {
-                    console.log(bagItem.name);
-                    console.log(item.name);
                     return bagItem.name === item.name;
                 });
                 console.log(existingItemIndex);
@@ -65,6 +52,9 @@ export default function Button({ item, userInfo, setUserInfo, signedIn, setCance
                     });
                     quantityRef.current = 1;
                 }
+
+                itemToBag();
+                
             } else {
                 setCanceled(false);
             }
