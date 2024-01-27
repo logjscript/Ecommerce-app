@@ -39,7 +39,7 @@ export default function Button({ item, userInfo, setUserInfo, signedIn, setCance
     return (
         <button 
             className=
-            ' bg-gray-800 text-white text-xl rounded-3xl w-36 h-11 hover:opacity-50 ease-in-out duration-200'
+            ' bg-gray-800 text-white text-xl rounded-3xl w-36 h-11 opacity-100 hover:opacity-50 ease-in-out duration-200'
                 
             onClick={handleClick}
         >
