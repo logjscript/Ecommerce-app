@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useImages } from "./ImageContext";
-import Button from './Button';
+import ProductSectionButton from './ProductSectionButton';
 
 
 export default function ProductSection({ clothingType, userInfo, setUserInfo, signedIn, setCanceled }) {
@@ -13,7 +13,7 @@ export default function ProductSection({ clothingType, userInfo, setUserInfo, si
                     <div key={image.id} className="w-full h-full flex flex-col justify-start items-center gap-4 place-self-center">
                         <img src={image.link} alt="/" className="w-[80%] h-[80%] object-cover rounded-2xl shadow-lg hover:scale-105 ease-in-out duration-300" />
                         <div className="text-base text-gray-800 opacity-70">{image.value}</div>
-                        <Button item={image} userInfo={userInfo} setUserInfo={setUserInfo} signedIn={signedIn} setCanceled={setCanceled} />
+                        <ProductSectionButton item={image} userInfo={userInfo} setUserInfo={setUserInfo} signedIn={signedIn} setCanceled={setCanceled} />
                     </div>
                 ))}               
         </div>
