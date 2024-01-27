@@ -96,7 +96,7 @@ const itemToBag = async () => {
 
   return (
     <ImageProvider>
-        <Dashboard handleClickDashboard={handleClickDashboard} handleBagClick={handleBagClick} canceledFunc={() => setCanceled(false)} signedIn={signedIn} username={userInfo.username} />
+        <Dashboard handleClickDashboard={handleClickDashboard} handleBagClick={handleBagClick} canceledFunc={() => setCanceled(false)} signedIn={signedIn} userInfo={userInfo} />
         {compToDisplay}
         {(signedIn || canceled) ? null : <SignIn signedInFunc={() => setSignedIn(true)} canceledFunc={() => setCanceled(true)} setUserInfo={setUserInfo} userInfo={userInfo} />}
     </ImageProvider>
