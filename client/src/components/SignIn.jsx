@@ -141,6 +141,10 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
         try {
             const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`);
 
+            if (!userInfo.username || !userInfo.password) {
+                throw new Error('Please fill in both fields');
+            }
+
             if (!response.ok) {
                 throw new Error('Username does not exist');
             } 
@@ -165,8 +169,13 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
     }
 
     async function handleLogInButton() {
-        setErrorIsVisible(null);
-        fetchUsername().then(username => console.log(username));
+        setErrorIsVisible(false);
+        try {
+            const response = await fetchUsername();
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -197,7 +206,7 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
                     />
                     
                     <button className='col-span-2 place-self-center bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl hover:opacity-50 ease-in-out duration-200' onClick={async () => handleLogInButton()}>Log In</button>
-
+                    {signInError && <div>{signInError}</div>}
                     <p className="col-span-2 place-self-center text-sm">Don't have an account? <span onClick={() => setExistingAccount(false)} className="text-blue-500 cursor-pointer">Click here</span></p>
                 </div>
             </div> 
