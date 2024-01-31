@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, getByTestId } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import HomePage from '../src/components/HomePage';
 import { ImageProvider } from '../src/components/ImageContext';
@@ -29,4 +29,4 @@ describe('Homepage', () => {
 
         expect(mockSetType).toHaveBeenCalledWith('hats');
     });
-})
+});
