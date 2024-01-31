@@ -17,7 +17,7 @@ describe('Homepage', () => {
         expect(divElement).toBeInTheDocument();
     });
 
-    test('should set type state to hats on click', () => {
+    test("should set 'type' state to 'hats' on click", () => {
         render(
             <ImageProvider>
                 <HomePage setType={mockSetType}/>

@@ -56,26 +56,6 @@ describe('DeleteBagItem', () => {
     });
 
     test('should delete item in userInfo state when item.quantity === 1', () => {
-        const userInfo = {
-            username: 'User', 
-            password: 'pass', 
-            items: [
-                {
-                    link: '../../public/images/tshirt-imgs/shirt1.jpg', 
-                    value: '$42.99', 
-                    name: 'Tshirt One', 
-                    quantity: 1, 
-                },
-                {
-                    link: '../../public/images/pants-imgs/pants2.jpg', 
-                    value: '$69.99', 
-                    name: 'Pants Two', 
-                    quantity: 2, 
-                },
-            ],  
-            total: 0,
-        }
-
         render(
             <DeleteBagItem 
                 item={userInfo.items[0]} 

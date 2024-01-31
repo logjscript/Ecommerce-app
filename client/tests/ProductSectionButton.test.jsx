@@ -40,7 +40,7 @@ describe('ProductSectionButton', () => {
         expect(buttonElement).toBeInTheDocument();
     });
 
-    test('should change canceled state to false if not signed in', () => {
+    test("should change 'canceled' state to 'false' if not signed in", () => {
         render(
             <ProductSectionButton 
                 signedIn={false}

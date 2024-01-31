@@ -57,7 +57,7 @@ describe('ImageScroller', () => {
         expect(divElement.scrollLeft).toBe(500);
     });
     
-    test('should set type state based on index of img clicked', () => {
+    test("should set 'type' state based on index of img clicked", () => {
         render(
             <ImageProvider>
                 <ImageScroller setType={mockSetType} />
@@ -69,5 +69,4 @@ describe('ImageScroller', () => {
         fireEvent.click(imgElement);
         expect(mockSetType).toHaveBeenCalledWith('hats');
     });
-
 });
