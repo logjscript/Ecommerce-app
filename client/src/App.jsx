@@ -40,20 +40,6 @@ const itemToBag = async () => {
     } catch (error) {
         console.error(error);
     }
-}
-
-  function handleClickDashboard(e) {
-    setType(e.target.value);
-    window.scrollTo(0,0);
-  }
-
-  function handleBagClick() {
-    if (!signedIn) {
-      setCanceled(false);
-    } else {
-      setType('bag');
-      window.scrollTo(0,0);
-    }
   }
 
   let compToDisplay;
@@ -67,7 +53,7 @@ const itemToBag = async () => {
 
   return (
     <ImageProvider>
-        <Dashboard handleClickDashboard={handleClickDashboard} handleBagClick={handleBagClick} canceledFunc={() => setCanceled(false)} signedIn={signedIn} userInfo={userInfo} setUserInfo={setUserInfo} setSignedIn={setSignedIn} setCanceled={setCanceled} setType={setType}/>
+        <Dashboard signedIn={signedIn} userInfo={userInfo} setUserInfo={setUserInfo} setSignedIn={setSignedIn} setCanceled={setCanceled} setType={setType}/>
         {compToDisplay}
         {(signedIn || canceled) ? null : <SignIn signedInFunc={() => setSignedIn(true)} canceledFunc={() => setCanceled(true)} setUserInfo={setUserInfo} userInfo={userInfo} />}
     </ImageProvider>

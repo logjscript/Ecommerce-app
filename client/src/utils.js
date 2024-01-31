@@ -9,4 +9,11 @@ export const userTotalPrice = (items) => {
         }
     }, 0);
     return total;
-} 
+};
+
+//Dashboard component functions
+
+export const itemsInBag = (items) => {
+    return items?.reduce((acc, item) => {return item.quantity + acc}, 0);
+}
+
