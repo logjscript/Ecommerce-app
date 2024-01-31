@@ -56,38 +56,9 @@ const itemToBag = async () => {
     }
   }
 
-  function handleClickScrollBar(id) {
-    switch(true) {
-      case id < 4: {
-        setType('hats');
-        break;
-      }
-      case id >= 4 && id < 8: {
-        setType('sweatshirts');
-        break;
-      }
-      case id >= 8 && id < 12: {
-        setType('tShirts');
-        break;
-      }
-      case id >= 12 && id < 16: {
-        setType('pants');
-        break;
-      }
-      case id >= 16 && id < 20: {
-        setType('shoes');
-        break;
-      }
-      default: {
-        throw Error('Unknown');
-      }
-    }
-    window.scrollTo(0, 0);
-  }
-
   let compToDisplay;
     if (!type) {
-      compToDisplay = <HomePage func={handleClickScrollBar} setType={setType} />;
+      compToDisplay = <HomePage setType={setType} />;
     } else if (type === 'bag') {
       compToDisplay = <Bag userInfo={userInfo} setUserInfo={setUserInfo} />;
     } else {

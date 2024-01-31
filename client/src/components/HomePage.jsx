@@ -18,7 +18,7 @@ export default function HomePage({ func, setType }) {
                 <div className='font-pacifico text-8xl flex justify-center items-center pt-4 pb-12'>Brand</div>
                 <button onClick={() => {setType('hats'); window.scrollTo(0, 0)}} className='bg-gray-800 text-white rounded-3xl w-36 h-11 text-xl opacity-100 hover:opacity-50 duration-200 ease-in-out'>Shop Now</button>
             </div>
-            <ImageScroller func={func} />
+            <ImageScroller setType={setType} />
         </div>
     )
 }
