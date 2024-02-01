@@ -70,6 +70,8 @@ export const changeBorderColor = (green, gray, red, password, verifyPassword, se
     }
 }
 
+//CreateUserButton component functions
+
 export const addUsername = async (newUserInfo) => {
     try {
         const response = await fetch('http://localhost:5200/api/v1/users', {

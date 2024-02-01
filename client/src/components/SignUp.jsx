@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { addUsername, changeBorderColor } from "../utils";
+import { changeBorderColor } from "../utils";
+import CreateUserButton from "./CreateUserButton";
 
 export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError }) {
 
@@ -14,8 +15,8 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
         password: borderColors[1], 
         verifyPassword: borderColors[1]
     });
-
     const [passwordError, setPasswordError] = useState('');
+    const errorMessage = signInError ? signInError : passwordError; 
 
     useEffect(() => {
         changeBorderColor(
@@ -28,14 +29,17 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
         );
     }, [newUserInfo.password, newUserInfo.verifyPassword]);
 
-    const errorMessage = signInError ? signInError : passwordError 
 
     function handleUserChange(e) {
         setNewUserInfo({
             ...newUserInfo,
             username: e.target.value
         })
-        e.target.value ? setInputColor({...inputColor, user: 'border-green-500 shadow-sm outline-none'}) : setInputColor({...inputColor, user: 'border-gray-400 shadow-sm'})
+        e.target.value ? (
+            setInputColor({...inputColor, user: borderColors[0]})
+        ) : (
+            setInputColor({...inputColor, user: borderColors[1]})
+        )
     }
 
     function handlePasswordChange(e) {
@@ -63,40 +67,6 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
             passwordMatch: matchPasswords
         })
     }
-
-    async function handleCreateClick() {        
-        try {
-            if (!newUserInfo.username || 
-                !newUserInfo.password || 
-                !newUserInfo.verifyPassword) {
-                
-                throw new Error('Please fill in all required fields')
-            }
-
-            if (newUserInfo.username &&
-                newUserInfo.password &&
-                newUserInfo.verifyPassword &&
-                newUserInfo.passwordMatch) {
-    
-                setNewUserInfo({
-                    username: '', 
-                    password: '', 
-                    verifyPassword: '',
-                    passwordMatch: true
-                })
-                setInputColor({
-                    user: borderColors[1], 
-                    password: borderColors[1], 
-                    verifyPassword: borderColors[1]
-                })
-                await addUsername(newUserInfo);
-                setExistingAccount(true);
-            } 
-        } catch (error) {
-            setSignInError(error.message);
-        }   
-    }
-
 
     return (
         <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20">
@@ -162,12 +132,14 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
                     {errorMessage}
                 </div>
 
-                <button 
-                    onClick={handleCreateClick} 
-                    className='col-span-2 place-self-center bg-gray-800 text-white rounded-3xl w-44 h-11 text-xl hover:opacity-50 ease-in-out duration-200'
-                >
-                    Create Account
-                </button>
+                <CreateUserButton 
+                    newUserInfo={newUserInfo} 
+                    setNewUserInfo={setNewUserInfo}
+                    setInputColor={setInputColor} 
+                    setExistingAccount={setExistingAccount} 
+                    setSignInError={setSignInError}
+                    borderColors={borderColors}
+                />
             </div>
         </div> 
     )
