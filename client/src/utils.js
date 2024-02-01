@@ -18,6 +18,7 @@ export const itemToBag = async (userInfo) => {
     }
   }
 
+
 //Bag component functions
 
 export const userTotalPrice = (items) => {
@@ -31,33 +32,41 @@ export const userTotalPrice = (items) => {
     return total;
 };
 
+
 //Dashboard component functions
 
 export const itemsInBag = (items) => {
     return items?.reduce((acc, item) => {return item.quantity + acc}, 0);
 }
 
+
 //SignUp component functions
 
-export const changeBorderColor = (green, gray, red, password, verifyPassword, setInputColor, inputColor) => {
+export const changeBorderColor = (green, gray, red, password, verifyPassword, setInputColor, inputColor, setPasswordError) => {
     if (verifyPassword && (password === '' || verifyPassword !== password)){
         setInputColor({
             ...inputColor,
             password: red,
             verifyPassword: red
         });
+
+        setPasswordError('Passwords do not match');
     } else if (password) {
         setInputColor({
             ...inputColor,
             password: green, 
             verifyPassword: !verifyPassword ? gray : green
         });
+
+        setPasswordError('');
     } else {
         setInputColor({
             ...inputColor,
             password: gray,
             verifyPassword: gray
         });
+
+        setPasswordError('');
     }
 }
 
@@ -73,6 +82,8 @@ export const addUsername = async (newUserInfo) => {
 
         if (!response.ok) {
             throw new Error('Username already exists');
+        } else if (!newUserInfo.passwordMatch) {
+            throw new Error ('Passwords do not match');
         }
     } catch (error) {
         console.error(error);
@@ -80,8 +91,8 @@ export const addUsername = async (newUserInfo) => {
     }
 }
 
-//LogIn component functions 
 
+//LogIn component functions 
 
 export const fetchUsername = async (userInfo, setUserInfo, setSignInError, signedInFunc) => {
     try {

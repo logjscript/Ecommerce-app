@@ -1,9 +1,8 @@
 import { fetchUsername } from "../utils";
 
-export default function LogIn({ canceledFunc, setUserInfo, userInfo, setExistingAccount, signedInFunc, signInError, setErrorIsVisible, setSignInError }) {
+export default function LogIn({ canceledFunc, setUserInfo, userInfo, setExistingAccount, signedInFunc, signInError, setSignInError }) {
 
     async function handleLogInButton() {
-        setErrorIsVisible(false);
         try {
             const response = await fetchUsername(userInfo, setUserInfo, setSignInError, signedInFunc);
             console.log(response);

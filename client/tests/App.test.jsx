@@ -5,7 +5,6 @@ import { itemToBag } from '../src/utils';
 import { userInfo } from './testUserInfo';
 
 global.fetch = vi.fn();
-const mockSetType = vi.fn();
 
 describe('App', () => {
     test('should render on page', () => {

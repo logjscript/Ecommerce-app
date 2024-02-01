@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { addUsername, changeBorderColor } from "../utils";
 
-export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setExistingAccount, signInError, errorIsVisible, setErrorIsVisible, setSignInError }) {
+export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError }) {
 
     const borderColors = [
         'border-green-500 shadow-sm outline-none',
@@ -15,15 +15,20 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
         verifyPassword: borderColors[1]
     });
 
+    const [passwordError, setPasswordError] = useState('');
+
     useEffect(() => {
         changeBorderColor(
             ...borderColors, 
             newUserInfo.password, 
             newUserInfo.verifyPassword,
             setInputColor,
-            inputColor
+            inputColor,
+            setPasswordError
         );
-    }, [newUserInfo.password, newUserInfo.verifyPassword])
+    }, [newUserInfo.password, newUserInfo.verifyPassword]);
+
+    const errorMessage = signInError ? signInError : passwordError 
 
     function handleUserChange(e) {
         setNewUserInfo({
@@ -33,7 +38,7 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
         e.target.value ? setInputColor({...inputColor, user: 'border-green-500 shadow-sm outline-none'}) : setInputColor({...inputColor, user: 'border-gray-400 shadow-sm'})
     }
 
-    function handlePassChange(e) {
+    function handlePasswordChange(e) {
         const passInput = e.target.value;
         let matchPasswords = passInput === newUserInfo.verifyPassword;
         if (newUserInfo.verifyPassword === ''){
@@ -59,15 +64,15 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
         })
     }
 
-    async function handleButtonClick() {
-        if (!newUserInfo.username || 
-            !newUserInfo.password || 
-            !newUserInfo.verifyPassword) {
-            
-            setErrorIsVisible(true);
-        }
-
+    async function handleCreateClick() {        
         try {
+            if (!newUserInfo.username || 
+                !newUserInfo.password || 
+                !newUserInfo.verifyPassword) {
+                
+                throw new Error('Please fill in all required fields')
+            }
+
             if (newUserInfo.username &&
                 newUserInfo.password &&
                 newUserInfo.verifyPassword &&
@@ -85,74 +90,65 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
                     verifyPassword: borderColors[1]
                 })
                 await addUsername(newUserInfo);
-                setErrorIsVisible(false);
                 setExistingAccount(true);
             } 
         } catch (error) {
-            if (error.message === 'Username already exists') {
-                setSignInError(error.message);
-            } 
+            setSignInError(error.message);
         }   
     }
 
 
     return (
         <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20">
-        <div className="w-[50%] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-cols-[25%_1fr] grid-rows-[25%_repeat(4,1fr)] gap-y-2">
-            <div className="relative flex justify-center items-start col-span-2 row-span-1">
-                <h1 className="text-3xl place-self-center text-gray-800 pt-4">
-                    Sign Up
-                </h1>
-                <button 
-                    onClick={canceledFunc} 
-                    className="absolute right-[.75rem] top-[.3rem] text-xl text-gray-500"
-                >
-                    x
-                </button>
+            <div className="w-[50%] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-cols-[25%_1fr] grid-rows-[25%_repeat(4,1fr)] gap-y-2">
+                <div className="relative flex justify-center items-start col-span-2 row-span-1">
+                    <h1 className="text-3xl place-self-center text-gray-800 pt-4">
+                        Sign Up
+                    </h1>
+                    <button 
+                        onClick={canceledFunc} 
+                        className="absolute right-[.75rem] top-[.3rem] text-xl text-gray-500"
+                    >
+                        x
+                    </button>
+                </div>
 
-                {errorIsVisible && (
-                    <div className="absolute bottom-[-.4rem] left-[30%] text-red-400 text-lg">
-                        Please fill in all required fields
-                    </div>
-                )}
-            </div>
+                <label 
+                    htmlFor="userInput" 
+                    className="row-span-1 col-span-1 self-center justify-self-end text-gray-800 text-lg outline-none border{}"
+                > 
+                    Create Username:
+                </label>
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    value={newUserInfo.username}
+                    onChange={(e) => handleUserChange(e)}
+                    placeholder="Create your username here" 
+                    className={`row-span-1 col-span-1 w-[90%] h-[80%] place-self-center rounded-lg border-solid border-2 ${inputColor.user} pl-4 text-lg`} />
 
-            <label 
-                htmlFor="userInput" 
-                className="row-span-1 col-span-1 self-center justify-self-end text-gray-800 text-lg outline-none border{}"
-            > 
-                Create Username:
-            </label>
-            <input 
-                type="text" 
-                id="userInput" 
-                value={newUserInfo.username}
-                onChange={(e) => handleUserChange(e)}
-                placeholder="Create your username here" 
-                className={`row-span-1 col-span-1 w-[90%] h-[80%] place-self-center rounded-lg border-solid border-2 ${inputColor.user} pl-4 text-lg`} />
+                <label 
+                    htmlFor="passInput" 
+                    className="self-center justify-self-end text-gray-800 pl-5 text-lg"
+                > 
+                    Create Password:
+                </label> 
+                <input 
+                    type="password" 
+                    id="passInput" 
+                    placeholder="Create your password here" 
+                    value={newUserInfo.password}
+                    onChange={(e) => handlePasswordChange(e)} 
+                    className={`w-[90%] h-[80%] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.password}`}
+                />
 
-            <label 
-                htmlFor="passInput" 
-                className="self-center justify-self-end text-gray-800 pl-5 text-lg"
-            > 
-                Create Password:
-            </label> 
-            <input 
-                type="password" 
-                id="passInput" 
-                placeholder="Create your password here" 
-                value={newUserInfo.password}
-                onChange={(e) => handlePassChange(e)} 
-                className={`w-[90%] h-[80%] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.password}`}
-            />
-
-            <label 
-                htmlFor="verifyPassInput" 
-                className="self-center justify-self-end text-gray-800 pl-5 text-lg"
-            > 
-                Verify Password:
-            </label>
-            <div className='w-full h-full flex justify-center items-center relative'>
+                <label 
+                    htmlFor="verifyPassInput" 
+                    className="self-center justify-self-end text-gray-800 pl-5 text-lg"
+                > 
+                    Verify Password:
+                </label>
+                
                 <input 
                     type="password" 
                     id="verifyPassInput" 
@@ -161,27 +157,18 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
                     onChange={(e) => handleVerifyChange(e)} 
                     className={`w-[90%] h-[80%] rounded-lg border-2 border-solid pl-4 text-lg ${inputColor.verifyPassword}`}
                 />
-
-                {(!newUserInfo.passwordMatch) && (
-                    <div className="absolute left-[10%] bottom-[-1rem] text-red-400 text-sm z-30">
-                        Passwords do not match
-                    </div>
-                )}
-            </div>
-
-            {signInError && (
+                
                 <div className="text-red-400 col-span-2 mx-auto place-self-center">
-                    {signInError}
+                    {errorMessage}
                 </div>
-            )}
 
-            <button 
-                onClick={handleButtonClick} 
-                className='col-span-2 place-self-center bg-gray-800 text-white rounded-3xl w-44 h-11 text-xl hover:opacity-50 ease-in-out duration-200'
-            >
-                Create Account
-            </button>
-        </div>
-    </div> 
+                <button 
+                    onClick={handleCreateClick} 
+                    className='col-span-2 place-self-center bg-gray-800 text-white rounded-3xl w-44 h-11 text-xl hover:opacity-50 ease-in-out duration-200'
+                >
+                    Create Account
+                </button>
+            </div>
+        </div> 
     )
 }
