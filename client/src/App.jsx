@@ -12,33 +12,62 @@ export default function App() {
     const [signedIn, setSignedIn] = useState(false);
     const [canceled, setCanceled] = useState(true);
     const [userInfo, setUserInfo] = useState({
-      username: '',
-      password: '',
-      items: [],
-      total: 0,
-    })
+        username: '',
+        password: '',
+        items: [],
+        total: 0,
+    });
 
     useEffect(() => {
-      if (signedIn) {
-        itemToBag(userInfo);
-      }
-    }, [userInfo.items]);
+        if (signedIn) {
+            itemToBag(userInfo);
+        }
+    }, [userInfo.items, signedIn]);
 
-  let compToDisplay;
-    if (!type) {
-      compToDisplay = <HomePage setType={setType} />;
-    } else if (type === 'bag') {
-      compToDisplay = <Bag userInfo={userInfo} setUserInfo={setUserInfo} />;
-    } else {
-      compToDisplay = <ProductSection clothingType={type} userInfo={userInfo} setUserInfo={setUserInfo} signedIn={signedIn} setCanceled={setCanceled} />;
-    }
+    let compToDisplay;
+        if (!type) {
+            compToDisplay = <HomePage setType={setType} />
+        } else if (type === 'bag') {
+            compToDisplay = (
+                <Bag 
+                    userInfo={userInfo} 
+                    setUserInfo={setUserInfo} 
+                />
+            );
+        } else {
+            compToDisplay = (
+                <ProductSection 
+                    clothingType={type} 
+                    userInfo={userInfo} 
+                    setUserInfo={setUserInfo} 
+                    signedIn={signedIn} 
+                    setCanceled={setCanceled} 
+                />
+            );
+        }
 
-  return (
-    <ImageProvider>
-        <Dashboard signedIn={signedIn} userInfo={userInfo} setUserInfo={setUserInfo} setSignedIn={setSignedIn} setCanceled={setCanceled} setType={setType}/>
-        {compToDisplay}
-        {(signedIn || canceled) ? null : <SignIn signedInFunc={() => setSignedIn(true)} canceledFunc={() => setCanceled(true)} setUserInfo={setUserInfo} userInfo={userInfo} />}
-    </ImageProvider>
-  )
+    return (
+        <div data-testid='div'>
+          <ImageProvider>
+              <Dashboard
+                  signedIn={signedIn}
+                  userInfo={userInfo}
+                  setUserInfo={setUserInfo}
+                  setSignedIn={setSignedIn}
+                  setCanceled={setCanceled}
+                  setType={setType}
+              />
+              {compToDisplay}
+              {(signedIn || canceled) ? null : (
+                  <SignIn
+                      signedInFunc={() => setSignedIn(true)}
+                      canceledFunc={() => setCanceled(true)}
+                      setUserInfo={setUserInfo}
+                      userInfo={userInfo}
+                  />
+              )}
+          </ImageProvider>
+        </div>
+    )
 }
 

@@ -65,6 +65,7 @@ export default function Dashboard ({ signedIn, userInfo, setUserInfo, setSignedI
                 {signedIn && (<button onClick={handleSignOutClick}>Sign Out</button>)}
 
                 <button 
+                    data-testid='bag'
                     onClick={() => handleBagClick()} 
                     className='relative dashboard-header-title'
                 >
