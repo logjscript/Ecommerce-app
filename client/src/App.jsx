@@ -5,42 +5,24 @@ import { ImageProvider } from './components/ImageContext';
 import ProductSection from './components/ProductSection';
 import SignIn from './components/SignIn';
 import Bag from './components/Bag';
-
+import { itemToBag } from './utils';
 
 export default function App() {
-  const [type, setType] = useState(null);
-  const [signedIn, setSignedIn] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    username: '',
-    password: '',
-    items: [],
-    total: 0,
-  })
-  const [canceled, setCanceled] = useState(true);
+    const [type, setType] = useState(null);
+    const [signedIn, setSignedIn] = useState(false);
+    const [canceled, setCanceled] = useState(true);
+    const [userInfo, setUserInfo] = useState({
+      username: '',
+      password: '',
+      items: [],
+      total: 0,
+    })
 
-  useEffect(() => {
-    if (signedIn) {
-      itemToBag();
-    }
-}, [userInfo.items])
-
-const itemToBag = async () => {
-    try {
-        const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({...userInfo})
-        });
-
-        if (!response.ok) {
-            throw new Error('Data cannot be sent');
-        }
-    } catch (error) {
-        console.error(error);
-    }
-  }
+    useEffect(() => {
+      if (signedIn) {
+        itemToBag(userInfo);
+      }
+    }, [userInfo.items]);
 
   let compToDisplay;
     if (!type) {

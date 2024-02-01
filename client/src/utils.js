@@ -1,3 +1,23 @@
+//App component functions
+
+export const itemToBag = async (userInfo) => {
+    try {
+        const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({...userInfo})
+        });
+
+        if (!response.ok) {
+            throw new Error('Data cannot be sent');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+  }
+
 //Bag component functions
 
 export const userTotalPrice = (items) => {
