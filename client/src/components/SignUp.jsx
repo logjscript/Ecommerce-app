@@ -29,7 +29,6 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
         );
     }, [newUserInfo.password, newUserInfo.verifyPassword]);
 
-
     function handleUserChange(e) {
         setNewUserInfo({
             ...newUserInfo,
@@ -69,7 +68,10 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
     }
 
     return (
-        <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20">
+        <div
+            data-testid='signUpDiv' 
+            className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
+        >
             <div className="w-[50%] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-cols-[25%_1fr] grid-rows-[25%_repeat(4,1fr)] gap-y-2">
                 <div className="relative flex justify-center items-start col-span-2 row-span-1">
                     <h1 className="text-3xl place-self-center text-gray-800 pt-4">

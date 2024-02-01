@@ -12,7 +12,10 @@ export default function LogIn({ canceledFunc, setUserInfo, userInfo, setExisting
     }
 
     return (
-        <div className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20">
+        <div 
+            data-testid='logInDiv'
+            className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
+        >
             <div className="w-[50%] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-cols-[25%_1fr] grid-rows-[25%_repeat(3,1fr)_repeat(2,.5fr)] gap-y-2">  
                 <div className="relative flex justify-center items-start col-span-2 row-span-1">
                     <h1 className="text-3xl place-self-center text-gray-800 pt-4">
@@ -68,6 +71,7 @@ export default function LogIn({ canceledFunc, setUserInfo, userInfo, setExisting
                 <p className="col-span-2 place-self-center text-sm">
                     Don't have an account? 
                     <span 
+                        data-testid='span'
                         onClick={() => setExistingAccount(false)} 
                         className="text-blue-500 cursor-pointer"
                     >

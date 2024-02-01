@@ -29,7 +29,7 @@ describe('App', () => {
         });
     });
 
-    test('should display HomePage component', async () => {
+    test('should display HomePage component', () => {
         render(<App />);
 
         const buttonElement = screen.getByText(/shop now/i);
