@@ -66,7 +66,7 @@ export default function LogIn({ canceledFunc, setUserInfo, userInfo, setExisting
                     Log In
                 </button>
 
-                {signInError && <div>{signInError}</div>}
+                {signInError && <div data-testid='signInError'>{signInError}</div>}
 
                 <p className="col-span-2 place-self-center text-sm">
                     Don't have an account? 
