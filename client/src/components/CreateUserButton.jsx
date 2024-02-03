@@ -21,13 +21,14 @@ export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInput
                     password: '', 
                     verifyPassword: '',
                     passwordMatch: true
-                })
+                });
                 setInputColor({
                     user: borderColors[1], 
                     password: borderColors[1], 
                     verifyPassword: borderColors[1]
-                })
+                });
                 await addUsername(newUserInfo);
+                setSignInError(null);
                 setExistingAccount(true);
             } 
         } catch (error) {
