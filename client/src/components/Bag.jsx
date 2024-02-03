@@ -1,25 +1,18 @@
 import DeleteBagItem from "./DeleteBagItem";
-
+import { userTotalPrice } from "../utils";
 
 export default function Bag({ userInfo, setUserInfo }) {
 
-    const userTotalPrice = userInfo.items?.reduce((acc, item) => {    
-        if (item.value[0] === '$') {
-            return acc + Number((item.value.slice(1)) * item.quantity);
-        } else {
-            return acc + Number((item.value) * item.quantity);
-        }
-    }, 0);
-    console.log(userTotalPrice)
+    const priceTotal = userTotalPrice(userInfo.items);    
 
     return (
         <>
-            <h1 className="pt-[8rem]">Total: {userTotalPrice ? `$${userTotalPrice.toFixed(2)}` : '$0.00'}</h1>
-            <div>
-                {userInfo.items ? (
+            <h1 className="pt-[8rem]">Total: {priceTotal ? `$${priceTotal.toFixed(2)}` : '$0.00'}</h1>
+            <div data-testid='testContainerDiv'>
+                {(userInfo.items && userInfo.items.length > 0) ? (
                     <div className="pt-[8rem]">
                         {userInfo.items.map((item => (
-                            <div key={item.name} className="flex gap-4 justify-center">
+                            <div data-testid='testMappedDiv' key={item.name} className="flex gap-4 justify-center">
                                 <img src={item.link} className="w-[200px]"/>
                                 <div>{item.name}</div>
                                 <div>{`${item.quantity} x ${item.value}`}</div>
