@@ -1,9 +1,33 @@
+import { useEffect, useState } from 'react';
 import DeleteBagItem from "./DeleteBagItem";
+import PurchaseButton from './PurchaseButton';
 import { userTotalPrice } from "../utils";
 
 export default function Bag({ userInfo, setUserInfo }) {
+    const [bought, setBought] = useState(false);
+    const [showPurchaseButton, setShowPurchaseButton] = useState(null);
+    const priceTotal = userTotalPrice(userInfo.items);   
 
-    const priceTotal = userTotalPrice(userInfo.items);    
+    useEffect(() => {
+        if (userInfo.items.length > 0) {
+            setBought(false);
+
+            setShowPurchaseButton(
+                <PurchaseButton 
+                    setBought={setBought} 
+                    userInfo={userInfo} 
+                    setUserInfo={setUserInfo} 
+                /> 
+            );
+        } else if (userInfo.items.length === 0 && bought === true) {
+            setShowPurchaseButton(<div>Thank you for shopping with us!</div>);
+        } else {
+            setShowPurchaseButton(null);
+        }
+    }, [userInfo.items])
+    
+    
+
 
     return (
         <>
@@ -24,7 +48,8 @@ export default function Bag({ userInfo, setUserInfo }) {
                     <div className="pt-[8rem] text-center">No Items</div>
                 )}
             </div>
+
+            {showPurchaseButton}
         </>
-        
     )
 }
