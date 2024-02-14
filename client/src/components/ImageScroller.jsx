@@ -1,7 +1,10 @@
 import { useImages } from './ImageContext';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
-export default function ImageScroller({ setType }) {
+export default function ImageScroller() {
+    const { setType } = useContext(UserContext);
     const { allClothes } = useImages();
 
     function handleClickScrollBar(id) {

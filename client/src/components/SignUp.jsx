@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { changeBorderColor } from "../utils";
 import CreateUserButton from "./CreateUserButton";
+import { UserContext } from "./UserContext";
 
-export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError }) {
+export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError }) {
+    const { setCanceled } = useContext(UserContext);
 
     const borderColors = [
         'border-green-500 shadow-sm outline-none',
@@ -78,7 +80,7 @@ export default function SignUp({ canceledFunc, setNewUserInfo, newUserInfo, setE
                         Sign Up
                     </h1>
                     <button 
-                        onClick={canceledFunc} 
+                        onClick={() => setCanceled(true)} 
                         className="absolute right-[.75rem] top-[.3rem] text-xl text-gray-500"
                     >
                         x

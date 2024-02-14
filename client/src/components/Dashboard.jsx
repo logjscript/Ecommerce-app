@@ -1,6 +1,9 @@
 import { itemsInBag } from "../utils";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
-export default function Dashboard ({ signedIn, userInfo, setUserInfo, setSignedIn, setCanceled, setType }) {
+export default function Dashboard () {
+    const { setType, signedIn, setSignedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
     const totalItems = itemsInBag(userInfo?.items);
 
     const handleSignOutClick = () => {
@@ -30,7 +33,7 @@ export default function Dashboard ({ signedIn, userInfo, setUserInfo, setSignedI
     }
 
     return (
-        <div data-testid='container' className='bg-slate-100 w-screen min-h-20 flex items-center fixed top-0 z-10'>   
+        <div data-testid='container' className='bg-slate-100 w-screen min-h-20 flex items-center fixed top-0 z-10'>  
             <div className='dashboard-group pl-6 justify-start'>
                 <button data-testid='itemTypeButton' onClick={(e) => handleTypeClick(e)} value='hats'className='dashboard-header-title'>Hats</button>
                 <button onClick={(e) => handleTypeClick(e)} value='sweatshirts' className='dashboard-header-title'>Sweatshirts</button>

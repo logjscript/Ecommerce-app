@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useContext } from 'react';
 import Dashboard from './components/Dashboard';
 import HomePage from './components/HomePage';
 import { ImageProvider } from './components/ImageContext';
@@ -6,65 +6,34 @@ import ProductSection from './components/ProductSection';
 import SignIn from './components/SignIn';
 import Bag from './components/Bag';
 import { itemToBag } from './utils';
+import { UserContext } from "./components/UserContext";
+
 
 export default function App() {
-    const [type, setType] = useState(null);
-    const [signedIn, setSignedIn] = useState(false);
-    const [canceled, setCanceled] = useState(true);
-    const [userInfo, setUserInfo] = useState({
-        username: '',
-        password: '',
-        items: [],
-        total: 0,
-    });
+    const { type, signedIn, canceled, userInfo } = useContext(UserContext);
 
     useEffect(() => {
         if (signedIn) {
             itemToBag(userInfo);
         }
-    }, [userInfo.items, signedIn]);
+    }, [userInfo?.items, signedIn]);
 
     let compToDisplay;
         if (!type) {
-            compToDisplay = <HomePage setType={setType} />
+            compToDisplay = <HomePage />
         } else if (type === 'bag') {
-            compToDisplay = (
-                <Bag 
-                    userInfo={userInfo} 
-                    setUserInfo={setUserInfo} 
-                />
-            );
+            compToDisplay = <Bag />;
         } else {
-            compToDisplay = (
-                <ProductSection 
-                    clothingType={type} 
-                    userInfo={userInfo} 
-                    setUserInfo={setUserInfo} 
-                    signedIn={signedIn} 
-                    setCanceled={setCanceled} 
-                />
-            );
+            compToDisplay = <ProductSection />;
         }
 
     return (
         <div data-testid='div'>
           <ImageProvider>
-              <Dashboard
-                  signedIn={signedIn}
-                  userInfo={userInfo}
-                  setUserInfo={setUserInfo}
-                  setSignedIn={setSignedIn}
-                  setCanceled={setCanceled}
-                  setType={setType}
-              />
+            <Dashboard />
               {compToDisplay}
               {(signedIn || canceled) ? null : (
-                  <SignIn
-                      signedInFunc={() => setSignedIn(true)}
-                      canceledFunc={() => setCanceled(true)}
-                      setUserInfo={setUserInfo}
-                      userInfo={userInfo}
-                  />
+                  <SignIn />
               )}
           </ImageProvider>
         </div>

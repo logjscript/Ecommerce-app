@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import DeleteBagItem from "./DeleteBagItem";
 import PurchaseButton from './PurchaseButton';
 import { userTotalPrice } from "../utils";
+import { UserContext } from "./UserContext";
 
-export default function Bag({ userInfo, setUserInfo }) {
+export default function Bag() {
+    const { userInfo, setUserInfo } = useContext(UserContext);
     const [bought, setBought] = useState(false);
     const [showPurchaseButton, setShowPurchaseButton] = useState(null);
     const priceTotal = userTotalPrice(userInfo.items);   
