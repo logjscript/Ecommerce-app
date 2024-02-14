@@ -1,14 +1,31 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import PurchaseButton from '../src/components/PurchaseButton';
-import { userInfo } from './testUserInfo';
+import { UserContext } from '../src/components/UserContext';
 
 const mockSetBought = vi.fn();
 const mockSetUserInfo = vi.fn();
+let userInfo;
+
+beforeEach(() => {
+    userInfo = {
+        username: 'user',
+        password: 'password',
+        items: [
+            { name: 'Item 1', value: 10.00, quantity: 1, link: 'link1' },
+            { name: 'Item 2', value: 15.00, quantity: 2, link: 'link2' }
+        ],
+        total: 40.00
+    };
+});
 
 describe('PurchaseButton', () => {
     test('should render', () => {
-        render(<PurchaseButton />);
+        render(
+            <UserContext.Provider value={{ userInfo, setUserInfo: mockSetUserInfo }}>
+                <PurchaseButton setBought={mockSetBought} />
+            </UserContext.Provider>
+        );
 
         const buttonElement = screen.getByRole('button');
         expect(buttonElement).toBeInTheDocument();
@@ -16,11 +33,9 @@ describe('PurchaseButton', () => {
 
     test('should change bought value on click event', () => {
         render(
-            <PurchaseButton 
-                setBought={mockSetBought}
-                userInfo={userInfo}
-                setUserInfo={mockSetUserInfo}
-            />
+            <UserContext.Provider value={{ userInfo, setUserInfo: mockSetUserInfo }}>
+                <PurchaseButton setBought={mockSetBought} />
+            </UserContext.Provider>
         );
         
         const buttonElement = screen.getByRole('button');
@@ -31,11 +46,9 @@ describe('PurchaseButton', () => {
 
     test('should change userInfo value on click event', () => {
         render(
-            <PurchaseButton 
-                setBought={mockSetBought}
-                userInfo={userInfo}
-                setUserInfo={mockSetUserInfo}
-            />
+            <UserContext.Provider value={{ userInfo, setUserInfo: mockSetUserInfo }}>
+                <PurchaseButton setBought={mockSetBought} />
+            </UserContext.Provider>
         );
         
         const buttonElement = screen.getByRole('button');

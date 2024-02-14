@@ -2,38 +2,37 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import Dashboard from '../src/components/Dashboard';
 import { itemsInBag } from '../src/utils';
+import { UserContext } from '../src/components/UserContext';
 
 const mockSetType = vi.fn();
 const mockSetCanceled = vi.fn();
 const mockSetSignedIn = vi.fn();
 const mockSetUserInfo = vi.fn();
 
-const userInfo = {
-    username: 'User', 
-    password: 'pass', 
-    items: [
-        {
-            link: '../../public/images/tshirt-imgs/shirt1.jpg', 
-            value: '$42.99', 
-            name: 'Tshirt One', 
-            quantity: 2, 
-        },
-        {
-            link: '../../public/images/pants-imgs/pants2.jpg', 
-            value: '$69.99', 
-            name: 'Pants Two', 
-            quantity: 1, 
-        },
-    ],  
-    total: 0,
-};
+let userInfo;
 
-const totalItems = itemsInBag(userInfo?.items);
+beforeEach(() => {
+    userInfo = {
+        username: 'user',
+        password: 'password',
+        items: [
+            { name: 'Item 1', value: 10.00, quantity: 1, link: 'link1' },
+            { name: 'Item 2', value: 15.00, quantity: 2, link: 'link2' }
+        ],
+        total: 40.00
+    };
+});
 
 describe('Dashboard', () => {
     test('should render on page', () => {
         render(
-            <Dashboard userInfo={userInfo}/>
+            <UserContext.Provider value={{ 
+                signedIn: true, setSignedIn: mockSetSignedIn, 
+                userInfo, setUserInfo: mockSetUserInfo,
+                setType: mockSetType, setCanceled: mockSetCanceled
+             }}>
+                <Dashboard />
+            </UserContext.Provider>
         );
 
         const divElement = screen.getByTestId('container');
@@ -41,7 +40,15 @@ describe('Dashboard', () => {
     });
 
     test("should set 'type' state when clicking an item header", () => {
-        render(<Dashboard setType={mockSetType} />);
+        render(
+            <UserContext.Provider value={{ 
+                signedIn: true, setSignedIn: mockSetSignedIn, 
+                userInfo, setUserInfo: mockSetUserInfo,
+                setType: mockSetType, setCanceled: mockSetCanceled
+                }}>
+                <Dashboard />
+            </UserContext.Provider>
+        );
 
         const buttonElement = screen.getByTestId('itemTypeButton');
         fireEvent.click(buttonElement);
@@ -50,7 +57,15 @@ describe('Dashboard', () => {
     });
 
     test('should show username and sign out button when signed in', () => {
-        render(<Dashboard signedIn={true} userInfo={userInfo} />);
+        render(
+            <UserContext.Provider value={{ 
+                signedIn: true, setSignedIn: mockSetSignedIn, 
+                userInfo, setUserInfo: mockSetUserInfo,
+                setType: mockSetType, setCanceled: mockSetCanceled
+             }}>
+                <Dashboard />
+            </UserContext.Provider>
+        );
 
         const divElement = screen.getByText(/Hello/i);
         const buttonElement = screen.getByText(/Sign Out/i)
@@ -60,7 +75,17 @@ describe('Dashboard', () => {
     });
 
     test('should show number of items in Bag when signed in and items > 0', () => {
-        render(<Dashboard signedIn={true} userInfo={userInfo} />);
+        render(
+            <UserContext.Provider value={{ 
+                signedIn: true, setSignedIn: mockSetSignedIn, 
+                userInfo, setUserInfo: mockSetUserInfo,
+                setType: mockSetType, setCanceled: mockSetCanceled
+             }}>
+                <Dashboard />
+            </UserContext.Provider>
+        );
+
+        const totalItems = itemsInBag(userInfo?.items);
 
         const divElement = screen.getByTestId('itemQuantity');
         const divContent = Number(divElement.textContent);
@@ -70,7 +95,17 @@ describe('Dashboard', () => {
     });
 
     test('should not show number of items in Bag when there are no items in Bag', () => {
-        render(<Dashboard signedIn={true} userInfo={{...userInfo, items: []}} />);
+        userInfo.items = [];
+
+        render(
+            <UserContext.Provider value={{ 
+                signedIn: true, setSignedIn: mockSetSignedIn, 
+                userInfo, setUserInfo: mockSetUserInfo,
+                setType: mockSetType, setCanceled: mockSetCanceled
+             }}>
+                <Dashboard />
+            </UserContext.Provider>
+        );
 
         const divElement = screen.queryByTestId('itemQuantity');
 
@@ -78,7 +113,15 @@ describe('Dashboard', () => {
     });
 
     test('should show sign in button when signed out', () => {
-        render(<Dashboard signedIn={false} userInfo={userInfo} />);
+        render(
+            <UserContext.Provider value={{ 
+                signedIn: false, setSignedIn: mockSetSignedIn, 
+                userInfo, setUserInfo: mockSetUserInfo,
+                setType: mockSetType, setCanceled: mockSetCanceled
+                }}>
+                <Dashboard />
+            </UserContext.Provider>
+        );
 
         const buttonElement = screen.getByText(/Sign In/i)
 
@@ -87,14 +130,13 @@ describe('Dashboard', () => {
 
     test("should set appropriate state when clicking 'sign out'", () => {
         render(
-            <Dashboard 
-                setSignedIn={mockSetSignedIn}
-                setCanceled={mockSetCanceled}
-                setType={mockSetType}
-                setUserInfo={mockSetUserInfo}
-                userInfo={userInfo}
-                signedIn={true}
-            />
+            <UserContext.Provider value={{ 
+                signedIn: true, setSignedIn: mockSetSignedIn, 
+                userInfo, setUserInfo: mockSetUserInfo,
+                setType: mockSetType, setCanceled: mockSetCanceled
+                }}>
+                <Dashboard />
+            </UserContext.Provider>
         );
 
         const buttonElement = screen.getByText(/Sign out/i);

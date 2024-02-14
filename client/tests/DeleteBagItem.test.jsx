@@ -1,33 +1,39 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, vi } from 'vitest';
 import DeleteBagItem from '../src/components/DeleteBagItem';
+import { UserContext } from '../src/components/UserContext';
 
 const mockSetUserInfo = vi.fn();
+let userInfo;
 
-const userInfo = {
-    username: 'User', 
-    password: 'pass', 
-    items: [
-        {
-            link: '../../public/images/tshirt-imgs/shirt1.jpg', 
-            value: '$42.99', 
-            name: 'Tshirt One', 
-            quantity: 1, 
-        },
-        {
-            link: '../../public/images/pants-imgs/pants2.jpg', 
-            value: '$69.99', 
-            name: 'Pants Two', 
-            quantity: 3, 
-        },
-    ],  
-    total: 0,
-}
+beforeEach(() => {
+    userInfo = {
+        username: 'User', 
+        password: 'pass', 
+        items: [
+            {
+                link: '../../public/images/tshirt-imgs/shirt1.jpg', 
+                value: '$42.99', 
+                name: 'Tshirt One', 
+                quantity: 1, 
+            },
+            {
+                link: '../../public/images/pants-imgs/pants2.jpg', 
+                value: '$69.99', 
+                name: 'Pants Two', 
+                quantity: 3, 
+            },
+        ],  
+        total: 0,
+    }
+});
 
 describe('DeleteBagItem', () => {
     test('should render on page', () => {
         render(
-            <DeleteBagItem />
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <DeleteBagItem item={userInfo.items[0]} />
+            </UserContext.Provider>
         );
 
         const buttonElement = screen.getByRole('button');
@@ -36,11 +42,9 @@ describe('DeleteBagItem', () => {
 
     test('should decrement item quantity in userInfo state when item.quantity > 1', () => {
         render(
-            <DeleteBagItem 
-                item={userInfo.items[1]} 
-                userInfo={userInfo} 
-                setUserInfo={mockSetUserInfo}
-            />
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <DeleteBagItem item={userInfo.items[1]} />
+            </UserContext.Provider>
         );
 
         const buttonElement = screen.getByRole('button');
@@ -57,11 +61,9 @@ describe('DeleteBagItem', () => {
 
     test('should delete item in userInfo state when item.quantity === 1', () => {
         render(
-            <DeleteBagItem 
-                item={userInfo.items[0]} 
-                userInfo={userInfo} 
-                setUserInfo={mockSetUserInfo}
-            />
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <DeleteBagItem item={userInfo.items[0]} />
+            </UserContext.Provider>
         );
 
         const buttonElement = screen.getByRole('button');

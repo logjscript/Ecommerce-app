@@ -3,19 +3,28 @@ import { describe, expect, test, vi } from 'vitest';
 import App from '../src/App';
 import { itemToBag } from '../src/utils';
 import { userInfo } from './testUserInfo';
+import UserProvider from '../src/components/UserContext';
 
 global.fetch = vi.fn();
 
 describe('App', () => {
     test('should render on page', () => {
-        render(<App />);
+        render(
+            <UserProvider>
+                <App />
+            </UserProvider>
+        );
 
         const divElement = screen.getByTestId('div');
         expect(divElement).toBeInTheDocument();
     });
 
     test('should update data with PUT method', async () => {
-        render(<App />);
+        render(
+            <UserProvider>
+                <App />
+            </UserProvider>
+        );
 
         await itemToBag(userInfo);
 
@@ -30,14 +39,22 @@ describe('App', () => {
     });
 
     test('should display HomePage component', () => {
-        render(<App />);
+        render(
+            <UserProvider>
+                <App />
+            </UserProvider>
+        );
 
         const buttonElement = screen.getByText(/shop now/i);
         expect(buttonElement).toBeInTheDocument();
     });
 
     test('should display ProductSection component', async () => {
-        render(<App />);
+        render(
+            <UserProvider>
+                <App />
+            </UserProvider>
+        );
 
         const buttonElement = screen.getByText(/hats/i);
         fireEvent.click(buttonElement);
@@ -49,7 +66,11 @@ describe('App', () => {
     });
 
     test('should display SignIn component', async () => {
-        render(<App />);
+        render(
+            <UserProvider>
+                <App />
+            </UserProvider>
+        );
 
         const buttonElement = screen.getByTestId('bag');
         fireEvent.click(buttonElement);

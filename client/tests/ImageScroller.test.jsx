@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import ImageScroller from '../src/components/ImageScroller';
 import { ImageProvider } from '../src/components/ImageContext';
+import { UserContext } from '../src/components/UserContext';
 
 const mockSetType = vi.fn();
 
@@ -10,7 +11,9 @@ describe('ImageScroller', () => {
     test('should render on page', () => {
         render(
             <ImageProvider>
-                <ImageScroller />
+                <UserContext.Provider value={{ setType: mockSetType}}>
+                    <ImageScroller />
+                </UserContext.Provider>
             </ImageProvider>
         );
 
@@ -21,7 +24,9 @@ describe('ImageScroller', () => {
     test('should render images on page', () => {
         render(
             <ImageProvider>
-                <ImageScroller />
+                <UserContext.Provider value={{ setType: mockSetType}}>
+                    <ImageScroller />
+                </UserContext.Provider>
             </ImageProvider>
         );
 
@@ -34,7 +39,9 @@ describe('ImageScroller', () => {
     test('should decrease scrollLeft value by 500 on click', () => {
         render(
             <ImageProvider>
-                <ImageScroller />
+                <UserContext.Provider value={{ setType: mockSetType}}>
+                    <ImageScroller />
+                </UserContext.Provider>
             </ImageProvider>
         );
 
@@ -47,10 +54,11 @@ describe('ImageScroller', () => {
     test('should increase scrollLeft value by 500 on click', () => {
         render(
             <ImageProvider>
-                <ImageScroller />
+                <UserContext.Provider value={{ setType: mockSetType}}>
+                    <ImageScroller />
+                </UserContext.Provider>
             </ImageProvider>
         );
-
         const divElement = screen.getByTestId('slider');
         const rightArrow = screen.getByTestId('right');
         fireEvent.click(rightArrow);
@@ -60,7 +68,9 @@ describe('ImageScroller', () => {
     test("should set 'type' state based on index of img clicked", () => {
         render(
             <ImageProvider>
-                <ImageScroller setType={mockSetType} />
+                <UserContext.Provider value={{ setType: mockSetType}}>
+                    <ImageScroller />
+                </UserContext.Provider>
             </ImageProvider>
         );
 
