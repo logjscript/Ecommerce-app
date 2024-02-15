@@ -96,7 +96,7 @@ export const addUsername = async (newUserInfo) => {
 
 //LogIn component functions 
 
-export const fetchUsername = async (userInfo, setUserInfo, setSignInError, signedInFunc) => {
+export const fetchUsername = async (userInfo, setUserInfo, setSignInError, setSignedIn) => {
     try {
         const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`);
         if (response.ok) {
@@ -118,7 +118,7 @@ export const fetchUsername = async (userInfo, setUserInfo, setSignInError, signe
             throw new Error('Username does not exist');
         } 
       
-        signedInFunc();
+        setSignedIn(true);
     } catch (error) {
         console.error(error);
         setSignInError(error.message);

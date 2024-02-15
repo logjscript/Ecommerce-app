@@ -1,4 +1,8 @@
-export default function PurchaseButton({ setBought, userInfo, setUserInfo }) {
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+
+export default function PurchaseButton({ setBought }) {
+    const { userInfo, setUserInfo } = useContext(UserContext);
     function handleClick() {
         setBought(true);
         setUserInfo({

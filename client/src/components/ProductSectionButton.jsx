@@ -1,4 +1,8 @@
-export default function ProductSectionButton({ item, userInfo, setUserInfo, signedIn, setCanceled }) {
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+
+export default function ProductSectionButton({ item }) {
+    const { signedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
 
     const handleClick = () => {
 

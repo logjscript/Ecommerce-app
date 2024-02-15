@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
-export default function DeleteBagItem({ item, userInfo, setUserInfo }) {
-
+export default function DeleteBagItem({ item }) {
+    const { userInfo, setUserInfo } = useContext(UserContext);
+    
     const handleClick = () => {
         const existingItem = userInfo.items.findIndex(bagItem => bagItem.name === item.name);
         const updatedState = [...userInfo.items];

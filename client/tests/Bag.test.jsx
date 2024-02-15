@@ -1,33 +1,31 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import Bag from '../src/components/Bag';
 import { userTotalPrice } from '../src/utils';
+import { UserContext } from '../src/components/UserContext';
 
-const userInfo = {
-    username: 'User', 
-    password: 'pass', 
-    items: [
-        {
-            link: '../../public/images/tshirt-imgs/shirt1.jpg', 
-            value: '$42.99', 
-            name: 'Tshirt One', 
-            quantity: 2, 
-        },
-        {
-            link: '../../public/images/pants-imgs/pants2.jpg', 
-            value: '$69.99', 
-            name: 'Pants Two', 
-            quantity: 1, 
-        },
-    ],  
-    total: 0,
-};
+const mockSetUserInfo = vi.fn();
+let userInfo;
 
-const priceTotal = userTotalPrice(userInfo.items);
+beforeEach(() => {
+    userInfo = {
+        username: 'user',
+        password: 'password',
+        items: [
+            { name: 'Item 1', value: 10.00, quantity: 1, link: 'link1' },
+            { name: 'Item 2', value: 15.00, quantity: 2, link: 'link2' }
+        ],
+        total: 40.00
+    };
+});
 
 describe('Bag', () => {
     test('should render on page', () => {
-        render(<Bag userInfo={userInfo} />);
+        render(
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <Bag />
+            </UserContext.Provider>
+        );
 
         const headerElement = screen.getByRole('heading');
         const divElement = screen.getByTestId('testContainerDiv');
@@ -36,7 +34,13 @@ describe('Bag', () => {
     });
     
     test('should render total price on page when userTotalPrice is truthy', () => {
-        render(<Bag userInfo={userInfo} />);
+        render(
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <Bag />
+            </UserContext.Provider>
+        );
+
+        const priceTotal = userTotalPrice(userInfo.items);
 
         const headerElement = screen.getByRole('heading');
         const headerContent = headerElement.textContent;
@@ -44,7 +48,14 @@ describe('Bag', () => {
     });
 
     test("should render '$0.00' when userTotalPrice is falsy", () => {
-        render(<Bag userInfo={{...userInfo, items: []}} />);
+        userInfo.items = [];
+        userInfo.total = 0.00;
+
+        render(
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <Bag />
+            </UserContext.Provider>
+        );
 
         const headerElement = screen.getByRole('heading');
         const headerContent = headerElement.textContent;
@@ -52,8 +63,12 @@ describe('Bag', () => {
     });
 
     test('should render mapped items when userInfo.items is truthy', () => {
-        render(<Bag userInfo={userInfo} />);
-
+        render(
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <Bag />
+            </UserContext.Provider>
+        );
+            console.log(userInfo);
         const divElements = screen.getAllByTestId('testMappedDiv');
         divElements.forEach((div) => {
             expect(div).toBeInTheDocument();
@@ -61,7 +76,14 @@ describe('Bag', () => {
     });
 
     test("should render 'no items' when userInfo.items is falsy", () => {
-        render(<Bag userInfo={{...userInfo, items: []}} />);
+        userInfo.items = [];
+        userInfo.total = 0.00;
+
+        render(
+            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+                <Bag />
+            </UserContext.Provider>
+        );
 
         const divElement = screen.getByText(/No Items/i);
         expect(divElement).toBeInTheDocument();

@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import HomePage from '../src/components/HomePage';
 import { ImageProvider } from '../src/components/ImageContext';
+import { UserContext } from '../src/components/UserContext';
 
 const mockSetType = vi.fn();
 
@@ -9,7 +10,9 @@ describe('Homepage', () => {
     test('should render on page', () => {
         render(
             <ImageProvider>
-                <HomePage />
+                <UserContext.Provider value={{ setType: mockSetType }}>
+                    <HomePage />
+                </UserContext.Provider>
             </ImageProvider>
         );
 
@@ -20,7 +23,9 @@ describe('Homepage', () => {
     test("should set 'type' state to 'hats' on click", () => {
         render(
             <ImageProvider>
-                <HomePage setType={mockSetType}/>
+                <UserContext.Provider value={{ setType: mockSetType }}>
+                    <HomePage />
+                </UserContext.Provider>
             </ImageProvider>
         );
 

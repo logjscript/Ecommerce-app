@@ -1,18 +1,40 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect } from 'vitest';
 import SignIn from '../src/components/SignIn';
-import { userInfo } from './testUserInfo';
+import { UserContext } from '../src/components/UserContext';
+
+let userInfo;
+
+beforeEach(() => {
+    userInfo = {
+        username: 'user',
+        password: 'password',
+        items: [
+            { name: 'Item 1', value: 10.00, quantity: 1, link: 'link1' },
+            { name: 'Item 2', value: 15.00, quantity: 2, link: 'link2' }
+        ],
+        total: 40.00
+    };
+});
 
 describe('SignIn', () => {
     test('should render LogIn component', () => {
-        render(<SignIn userInfo={userInfo} />);
+        render(
+            <UserContext.Provider value={{ userInfo }}>
+                <SignIn />
+            </UserContext.Provider>
+        );
 
         const logInElement = screen.getByTestId('logInDiv');
         expect(logInElement).toBeInTheDocument();
     });
 
     test('should render SignUp component', async () => {
-        render(<SignIn userInfo={userInfo} signedInFunc={() => true} canceledFunc={() => true} />);
+        render(
+            <UserContext.Provider value={{ userInfo }}>
+                <SignIn />
+            </UserContext.Provider>
+        );
 
         const buttonElement = screen.getByTestId('span');
         expect(buttonElement).toBeInTheDocument();

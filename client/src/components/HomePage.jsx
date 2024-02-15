@@ -1,8 +1,11 @@
-import React from 'react';
 import { useImages } from './ImageContext';
 import ImageScroller from './ImageScroller';
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
-export default function HomePage({ setType }) {
+
+export default function HomePage() {
+    const { setType } = useContext(UserContext);
     const { imageGroups } = useImages();
     
     return (
@@ -26,7 +29,7 @@ export default function HomePage({ setType }) {
                     Shop Now
                 </button>
             </div>
-            <ImageScroller setType={setType} />
+            <ImageScroller />
         </div>
     )
 }

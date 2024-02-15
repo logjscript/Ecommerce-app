@@ -1,10 +1,14 @@
 import { fetchUsername } from "../utils";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
-export default function LogIn({ canceledFunc, setUserInfo, userInfo, setExistingAccount, signedInFunc, signInError, setSignInError }) {
+
+export default function LogIn({ setExistingAccount, signInError, setSignInError }) {
+    const { setSignedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
 
     async function handleLogInButton() {
         try {
-            const response = await fetchUsername(userInfo, setUserInfo, setSignInError, signedInFunc);
+            const response = await fetchUsername(userInfo, setUserInfo, setSignInError, setSignedIn);
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -22,7 +26,7 @@ export default function LogIn({ canceledFunc, setUserInfo, userInfo, setExisting
                         Sign In
                     </h1>
                     <button 
-                        onClick={canceledFunc} 
+                        onClick={() => setCanceled(true)} 
                         className="absolute right-[.75rem] top-[.3rem] text-xl text-gray-500"
                     >
                         x

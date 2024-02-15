@@ -1,13 +1,30 @@
-import { getByTestId, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, test} from 'vitest';
 import ProductSection from '../src/components/ProductSection';
 import { ImageProvider } from '../src/components/ImageContext';
+import { UserContext } from '../src/components/UserContext';
+
+let userInfo;
+
+beforeEach(() => {
+    userInfo = {
+        username: 'user',
+        password: 'password',
+        items: [
+            { name: 'Item 1', value: 10.00, quantity: 1, link: 'link1' },
+            { name: 'Item 2', value: 15.00, quantity: 2, link: 'link2' }
+        ],
+        total: 40.00
+    };
+});
 
 describe('ProductSection', () => {
     test('should render on page', () => {
         render(
             <ImageProvider>
-                <ProductSection clothingType={'hats'} />
+                <UserContext.Provider value={{ type: 'hats'}}>
+                    <ProductSection />
+                </UserContext.Provider>
             </ImageProvider>
         );
 
@@ -15,10 +32,12 @@ describe('ProductSection', () => {
         expect(divElement).toBeInTheDocument();
     });
     
-    test('should render images on page', () => {
+    test('should render hat images on page', () => {
         render(
             <ImageProvider>
-                <ProductSection clothingType={'hats'} />
+                <UserContext.Provider value={{ type: 'hats'}}>
+                    <ProductSection />
+                </UserContext.Provider>
             </ImageProvider>
         );
 

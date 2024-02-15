@@ -2,8 +2,7 @@ import { useState } from "react";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 
-export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userInfo }) {
-    
+export default function SignIn() {
     const [newUserInfo, setNewUserInfo] = useState({
         username: '', 
         password: '', 
@@ -18,11 +17,7 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
     return (
         existingAccount ? (
             <LogIn 
-                canceledFunc={canceledFunc} 
-                setUserInfo={setUserInfo} 
-                userInfo={userInfo} 
                 setExistingAccount={setExistingAccount} 
-                signedInFunc={signedInFunc}
                 signInError={signInError}
                 setErrorIsVisible={setErrorIsVisible}
                 setSignInError={setSignInError}
@@ -30,7 +25,6 @@ export default function SignIn({ signedInFunc, canceledFunc, setUserInfo, userIn
         ) : (
            <SignUp 
                 errorIsVisible={errorIsVisible}
-                canceledFunc={canceledFunc} 
                 setNewUserInfo={setNewUserInfo} 
                 newUserInfo={newUserInfo} 
                 setExistingAccount={setExistingAccount} 
