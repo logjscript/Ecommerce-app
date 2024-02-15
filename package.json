@@ -2,10 +2,10 @@
   "name": "ecommerce_site",
   "version": "1.0.0",
   "description": "",
-  "main": "db.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "if-env TYPE=server && (cd server && npm i) || (cd client && npm i)",
+    "server": "node ./server/server.js",
+    "client": "cd client && npm start"
   },
   "keywords": [],
   "author": "",
