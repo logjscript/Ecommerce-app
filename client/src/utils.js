@@ -1,8 +1,11 @@
+
+const apiUrl = import.meta.env.VITE_APP_SERVERURL;
+
 //App component functions
 
 export const itemToBag = async (userInfo) => {
     try {
-        const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`, {
+        const response = await fetch(`${apiUrl}/${userInfo.username}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -74,7 +77,7 @@ export const changeBorderColor = (green, gray, red, password, verifyPassword, se
 
 export const addUsername = async (newUserInfo) => {
     try {
-        const response = await fetch('http://localhost:5200/api/v1/users', {
+        const response = await fetch(`${apiUrl}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -98,7 +101,7 @@ export const addUsername = async (newUserInfo) => {
 
 export const fetchUsername = async (userInfo, setUserInfo, setSignInError, setSignedIn) => {
     try {
-        const response = await fetch(`http://localhost:5200/api/v1/users/${userInfo.username}`);
+        const response = await fetch(`${apiUrl}/${userInfo.username}`);
         if (response.ok) {
             const [{ username, password, items, total }] = await response.json();
 
