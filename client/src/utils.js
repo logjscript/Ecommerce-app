@@ -99,16 +99,24 @@ export const addUsername = async (newUserInfo) => {
 
 //LogIn component functions 
 
-export const fetchUsername = async (userInfo, setUserInfo, setSignInError, setSignedIn) => {
+export const checkUserInfo = async (userInfo, setUserInfo, setSignInError, setSignedIn) => {
     try {
-        const response = await fetch(`${apiUrl}/${userInfo.username}`);
+        const response = await fetch(`${apiUrl}/${userInfo.username}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userInfo.username,
+                password: userInfo.password
+            })
+        });
+
         if (response.ok) {
             const [{ username, password, items, total }] = await response.json();
 
             if (!userInfo.username || !userInfo.password) {
                 throw new Error('Please fill in both fields');
-            } else if (userInfo.password !== password) {
-                throw new Error('Password is incorrect');
             }
               
             setUserInfo({
@@ -116,10 +124,10 @@ export const fetchUsername = async (userInfo, setUserInfo, setSignInError, setSi
                 password: password,
                 items: items, 
                 total: total
-            });
+            });      
         } else {
-            throw new Error('Username does not exist');
-        } 
+            throw new Error('Username or password is incorrect');
+        }
       
         setSignedIn(true);
     } catch (error) {

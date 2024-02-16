@@ -1,12 +1,12 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import LogIn from '../src/components/LogIn';
-import { fetchUsername } from '../src/utils';
+import { checkUserInfo } from '../src/utils';
 import { UserContext } from '../src/components/UserContext';
 
 vi.mock('../src/utils', ()=> {
     return {
-        fetchUsername: vi.fn().mockImplementation((username) => {
+        checkUserInfo: vi.fn().mockImplementation((username) => {
             if (username === 'user') {
                 mockSetSignedIn();
             } else {
@@ -136,7 +136,7 @@ describe('LogIn', () => {
         });
     });
 
-    test('should call fetchUsername on button click event', () => {
+    test('should call checkUserInfo on button click event', () => {
         render(
             <UserContext.Provider value={{ 
                 setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
@@ -152,7 +152,7 @@ describe('LogIn', () => {
         const buttonElement = screen.getByText(/log in/i);
         fireEvent.click(buttonElement);
 
-        expect(fetchUsername).toHaveBeenCalledOnce();
+        expect(checkUserInfo).toHaveBeenCalledOnce();
     });
     
     test('should run setSignedIn when username and password are correct', async () => {
@@ -179,7 +179,7 @@ describe('LogIn', () => {
 
         const response = await fetch('http://localhost:5200/api/v1/users/user');
         const data = await response.json();
-        fetchUsername(data.username);
+        checkUserInfo(data.username);
         expect(fetch).toHaveBeenCalledWith(`http://localhost:5200/api/v1/users/user`);
         expect(mockSetSignedIn).toHaveBeenCalledOnce();
     });
@@ -208,7 +208,7 @@ describe('LogIn', () => {
 
         const response = await fetch('http://localhost:5200/api/v1/users/user');
         const data = await response.json();
-        fetchUsername(data.username);
+        checkUserInfo(data.username);
         expect(fetch).toHaveBeenCalledWith(`http://localhost:5200/api/v1/users/user`);
         expect(mockSetSignedIn).not.toHaveBeenCalled();
     });
