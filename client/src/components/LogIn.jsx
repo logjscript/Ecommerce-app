@@ -1,4 +1,4 @@
-import { fetchUsername } from "../utils";
+import { checkUserInfo } from "../utils";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
@@ -8,7 +8,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
 
     async function handleLogInButton() {
         try {
-            const response = await fetchUsername(userInfo, setUserInfo, setSignInError, setSignedIn);
+            const response = await checkUserInfo(userInfo, setUserInfo, setSignInError, setSignedIn);
             console.log(response);
         } catch (error) {
             console.log(error);

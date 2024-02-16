@@ -9,8 +9,7 @@ export default function UserProvider({ children }) {
     const [userInfo, setUserInfo] = useState({
         username: '',
         password: '',
-        items: [],
-        total: 0,
+        items: []
     });
 
     return (

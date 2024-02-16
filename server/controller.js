@@ -1,5 +1,6 @@
 const pool = require('./db');
-const queries = require('./queries')
+const queries = require('./queries');
+const bcrypt = require('bcrypt');
 
 const getUsers = (req, res) => {
     pool.query(queries.getUsers, (error, results) => {
@@ -8,29 +9,37 @@ const getUsers = (req, res) => {
     })
 }
 
-const getUserById = (req, res) => {
-    const username = req.params.username;
-    console.log(req.params.username);
+const getUserById = async (req, res) => {
+    const { username, password } = req.body;
 
-    pool.query(queries.getUserById, [username], (error, results) => {
+    pool.query(queries.getUserById, [username], async (error, results) => {
         if (error) throw error;
 
         if (results.rows.length === 0) {
             return res.status(404).send('User not found.');
         }
 
-        res.status(200).json(results.rows);
+        const checkUserPass = await bcrypt.compare(password, results.rows[0].password);
+
+        if (checkUserPass) {
+            return res.status(200).json(results.rows);
+        } else {
+            return res.status(401).send('Password is incorrect.')
+        }
     })
 }
 
 const addUser = (req, res) => {
     const { username, password } = req.body;
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
     pool.query(queries.checkUsernameExists, [username], (error, results) => {
         if (error) throw error;
         if (results.rows.length) {
             return res.status(400).send('Username already exists.');
         } else {
-            pool.query(queries.addUser, [username, password], (error, results) => {
+            pool.query(queries.addUser, [username, hashedPassword], (error, results) => {
                 if (error) throw error;
                 res.status(201).send('User created successfully!');
                 console.log("User Created")
