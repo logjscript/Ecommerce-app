@@ -44,7 +44,7 @@ export default function Bag() {
             (userInfo.items && userInfo.items.length > 0) ? (
                 <div data-testid='testContainerDiv' className='flex flex-col gap-8 items-center self-center md:h-[100%] md:row-start-2 md:py-[5%] md:overflow-y-scroll'>
                     {userInfo.items.map(item => (
-                        <div data-testid='testMappedDiv' key={item.name} className="w-[80%] grid grid-cols-[50%_1fr] bg-gray-100 rounded-3xl p-4 shadow-lg sm:w-[75%]">
+                        <div data-testid='testMappedDiv' key={item.name} className="w-[75%] grid grid-cols-[50%_1fr] bg-gray-100 rounded-3xl p-4 shadow-lg md:w-[85%]">
                             <img src={item.link} className="rounded-2xl aspect-square min-w-[125px] max-w-[80%] object-cover place-self-center shadow-2xl row-span-2"/>
 
                             <div className='place-self-center flex flex-col justify-center items-center'>
@@ -72,7 +72,7 @@ export default function Bag() {
 
     return (
         !bought ? (
-            <div className='flex flex-col gap-8 md:h-screen md:w-screen md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] md:gap-0'>
+            <div className='flex flex-col md:h-screen md:w-screen md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] md:gap-0'>
 
                 {itemsToDisplay}
 
