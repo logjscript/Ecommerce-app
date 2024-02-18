@@ -60,7 +60,7 @@ export default function Bag() {
                     ))}
                 </div>
             ) : (
-                <div data-testid='testContainerDiv' className={'flex justify-center items-center'}>
+                <div data-testid='testContainerDiv' className={'flex h-screen justify-center items-center'}>
                     <div className='text-3xl text-gray-600'>No Items</div>
                 </div>
             )
