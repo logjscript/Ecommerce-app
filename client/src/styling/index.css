@@ -9,7 +9,7 @@
 }
 
 .dashboard-header-title {
-    @apply text-base text-gray-800 flex justify-center items-center;
+    @apply text-base text-white flex justify-center items-center;
 }
 
 .dashboard-group {

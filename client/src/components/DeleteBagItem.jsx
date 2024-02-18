@@ -24,6 +24,6 @@ export default function DeleteBagItem({ item }) {
     }
 
     return (
-        <button onClick={handleClick}>Delete</button>
+        <button className='px-[15px] py-[8px] bg-gray-800 text-white text-sm rounded-3xl opacity-100 hover:opacity-50 ease-in-out duration-200' onClick={handleClick}>Remove Item</button>
     )
 }
