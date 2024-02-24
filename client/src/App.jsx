@@ -28,7 +28,7 @@ export default function App() {
         }
 
     return (
-        <div data-testid='div'>
+        <div data-testid='div' className='flex flex-col justify-center min-h-dvh bg-gray-100'>
           <ImageProvider>
             <Dashboard />
               {compToDisplay}

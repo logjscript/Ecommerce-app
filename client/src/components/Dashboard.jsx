@@ -33,7 +33,7 @@ export default function Dashboard () {
     }
 
     return (
-        <div data-testid='container' className='bg-black opacity-85 w-screen min-h-20 flex items-center fixed top-0 z-10'>  
+        <div data-testid='container' className='bg-black w-screen min-h-20 flex items-center fixed top-0 z-10'>  
             <div className='dashboard-group pl-6 justify-start'>
                 <button data-testid='itemTypeButton' onClick={(e) => handleTypeClick(e)} value='hats'className='dashboard-header-title'>Hats</button>
                 <button onClick={(e) => handleTypeClick(e)} value='sweatshirts' className='dashboard-header-title'>Sweatshirts</button>

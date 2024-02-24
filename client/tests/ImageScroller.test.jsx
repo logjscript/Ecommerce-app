@@ -36,7 +36,7 @@ describe('ImageScroller', () => {
         });
     });
 
-    test('should decrease scrollLeft value by 500 on click', () => {
+    test('should decrease scrollLeft value by 600 on click', () => {
         render(
             <ImageProvider>
                 <UserContext.Provider value={{ setType: mockSetType}}>
@@ -48,10 +48,10 @@ describe('ImageScroller', () => {
         const divElement = screen.getByTestId('slider');
         const leftArrow = screen.getByTestId('left');
         fireEvent.click(leftArrow);
-        expect(divElement.scrollLeft).toBe(-500);
+        expect(divElement.scrollLeft).toBe(-600);
     });
 
-    test('should increase scrollLeft value by 500 on click', () => {
+    test('should increase scrollLeft value by 600 on click', () => {
         render(
             <ImageProvider>
                 <UserContext.Provider value={{ setType: mockSetType}}>
@@ -62,7 +62,7 @@ describe('ImageScroller', () => {
         const divElement = screen.getByTestId('slider');
         const rightArrow = screen.getByTestId('right');
         fireEvent.click(rightArrow);
-        expect(divElement.scrollLeft).toBe(500);
+        expect(divElement.scrollLeft).toBe(600);
     });
     
     test("should set 'type' state based on index of img clicked", () => {

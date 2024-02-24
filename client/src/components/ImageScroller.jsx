@@ -38,23 +38,27 @@ export default function ImageScroller() {
 
     function slideLeft() {
         let slider = document.getElementById('slider');
-        slider.scrollLeft = slider.scrollLeft - 500;
+        slider.scrollLeft = slider.scrollLeft - 600;
     }
 
     function slideRight() {
         let slider = document.getElementById('slider');
-        slider.scrollLeft = slider.scrollLeft + 500;
+        slider.scrollLeft = slider.scrollLeft + 600;
     }
 
     return (
-        <div data-testid='scroller' className='relative flex items-center mb-8'>
-            <MdChevronLeft data-testid='left' onClick={slideLeft} size={40} className='opacity-50 cursor-pointer hover:opacity-100' />
-            <div data-testid='slider' id='slider' className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
+        <div data-testid='scroller' className='relative justify-center md:grid grid-cols-[50px_1fr_50px] w-10/12 md:w-full bg-gray-50 py-4 px-4 md:px-0 my-[5%] shadow-lg md:shadow-inner rounded-3xl md:rounded-none'>
+            <MdChevronLeft data-testid='left' onClick={slideLeft} className='hidden md:block absolute z-20 col-start-1 col-end-2 row-start-1 row-end-2 h-full w-full bg-black text-white opacity-80 hover:opacity-100 cursor-pointer'/>
+            
+            <div data-testid='slider' id='slider' className='col-span-full relative flex flex-col md:flex-row justify-center md:justify-start items-center w-full gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
                 {allClothes.map((item, i) =>(
-                    <img key={i} src={item.link} alt='/' onClick={() => handleClickScrollBar(i)} className='w-[220px] h-[220px] object-cover inline-block p-2 cursor-pointer hover:scale-105 ease-in-out duration-300' />
-                ))} 
+                    <div key={i} onClick={() => handleClickScrollBar(i)} className='flex md:inline-block justify-center items-center w-full md:min-h-[70dvh] aspect-square cursor-pointer'>
+                        <img src={item.link} alt='/' className='w-full md:w-full aspect-square object-cover rounded-2xl'/>
+                    </div>
+                ))}
             </div>
-            <MdChevronRight data-testid='right' onClick={slideRight} size={40} className='opacity-50 cursor-pointer hover:opacity-100' />
+
+            <MdChevronRight data-testid='right' onClick={slideRight} className='hidden md:block absolute z-20 col-start-3 row-start-1 row-end-2 h-full w-full bg-black text-white opacity-80 hover:opacity-100 cursor-pointer'/>
         </div>
     )
 }
