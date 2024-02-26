@@ -17,11 +17,11 @@ export function ImageProvider({ children }) {
             {link: '../../public/images/sweatshirt-imgs/sweat3.jpg', value: '$35.99', name: 'Sweatshirt Three', quantity: 0, id: 2},
             {link: '../../public/images/sweatshirt-imgs/sweat4.jpg', value: '$39.99', name: 'Sweatshirt Four', quantity: 0, id: 3},
         ],
-        tShirts: [
-            {link: '../../public/images/tshirt-imgs/shirt1.jpg', value: '$42.99', name: 'Tshirt One', quantity: 0, id: 0}, 
-            {link: '../../public/images/tshirt-imgs/shirt2.jpg', value: '$79.99', name: 'Tshirt Two', quantity: 0, id: 1},
-            {link: '../../public/images/tshirt-imgs/shirt3.jpg', value: '$63.95', name: 'Tshirt Three', quantity: 0, id: 2},
-            {link: '../../public/images/tshirt-imgs/shirt4.jpg', value: '$51.99', name: 'Tshirt Four', quantity: 0, id: 3},
+        shirts: [
+            {link: '../../public/images/shirt-imgs/shirt1.jpg', value: '$42.99', name: 'Tshirt One', quantity: 0, id: 0}, 
+            {link: '../../public/images/shirt-imgs/shirt2.jpg', value: '$79.99', name: 'Tshirt Two', quantity: 0, id: 1},
+            {link: '../../public/images/shirt-imgs/shirt3.jpg', value: '$63.95', name: 'Tshirt Three', quantity: 0, id: 2},
+            {link: '../../public/images/shirt-imgs/shirt4.jpg', value: '$51.99', name: 'Tshirt Four', quantity: 0, id: 3},
         ],
         pants: [
             {link: '../../public/images/pants-imgs/pants1.jpg', value: '$83.99', name: 'Pants One', quantity: 0, id: 0}, 
@@ -40,7 +40,7 @@ export function ImageProvider({ children }) {
     const allClothes = [
         ...imageGroups.hats,
         ...imageGroups.sweatshirts,
-        ...imageGroups.tShirts,
+        ...imageGroups.shirts,
         ...imageGroups.pants,
         ...imageGroups.shoes,
     ];

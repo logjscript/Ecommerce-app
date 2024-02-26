@@ -37,7 +37,7 @@ export default function Dashboard () {
             <div className='dashboard-group pl-6 justify-start'>
                 <button data-testid='itemTypeButton' onClick={(e) => handleTypeClick(e)} value='hats'className='dashboard-header-title'>Hats</button>
                 <button onClick={(e) => handleTypeClick(e)} value='sweatshirts' className='dashboard-header-title'>Sweatshirts</button>
-                <button onClick={(e) => handleTypeClick(e)} value='tShirts' className='dashboard-header-title'>Tshirts</button>
+                <button onClick={(e) => handleTypeClick(e)} value='shirts' className='dashboard-header-title'>Shirts</button>
                 <button onClick={(e) => handleTypeClick(e)} value='pants' className='dashboard-header-title'>Pants</button>
                 <button onClick={(e) => handleTypeClick(e)} value='shoes' className='dashboard-header-title'>Shoes</button>
             </div>
