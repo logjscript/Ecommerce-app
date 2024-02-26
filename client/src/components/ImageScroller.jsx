@@ -47,18 +47,18 @@ export default function ImageScroller() {
     }
 
     return (
-        <div data-testid='scroller' className='relative justify-center md:grid grid-cols-[50px_1fr_50px] w-10/12 md:w-full bg-gray-50 py-4 px-4 md:px-0 my-[5%] shadow-lg md:shadow-inner rounded-3xl md:rounded-none'>
-            <MdChevronLeft data-testid='left' onClick={slideLeft} className='hidden md:block absolute z-20 col-start-1 col-end-2 row-start-1 row-end-2 h-full w-full bg-black text-white opacity-80 hover:opacity-100 cursor-pointer'/>
+        <div data-testid='scroller' className='relative justify-center md:grid grid-cols-[50px_1fr_50px] w-10/12 md:w-full bg-gray-50 px-4 md:px-0 my-[5%] shadow-lg md:shadow-inner rounded-3xl md:rounded-none'>
+            <MdChevronLeft data-testid='left' onClick={slideLeft} className='hidden md:block absolute top-[37.5%] z-20 col-start-1 col-end-2 row-start-1 row-end-2 h-[25%] w-full bg-black text-white opacity-80 hover:opacity-100 cursor-pointer'/>
             
-            <div data-testid='slider' id='slider' className='col-span-full relative flex flex-col md:flex-row justify-center md:justify-start items-center w-full gap-4 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
+            <div data-testid='slider' id='slider' className='col-span-full relative flex flex-col md:flex-row justify-center md:justify-start items-center w-full my-1 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
                 {allClothes.map((item, i) =>(
-                    <div key={i} onClick={() => handleClickScrollBar(i)} className='flex md:inline-block justify-center items-center w-full md:min-h-[70dvh] aspect-square cursor-pointer'>
-                        <img src={item.link} alt='/' className='w-full md:w-full aspect-square object-cover rounded-2xl'/>
+                    <div key={i} onClick={() => handleClickScrollBar(i)} className='flex justify-center items-center w-full md:min-h-[70dvh] aspect-square cursor-pointer'>
+                        <img src={item.link} alt='/' className='w-[95%] md:w-[95%] aspect-square object-cover rounded-3xl hover:scale-105 ease-in-out duration-300'/>
                     </div>
                 ))}
             </div>
 
-            <MdChevronRight data-testid='right' onClick={slideRight} className='hidden md:block absolute z-20 col-start-3 row-start-1 row-end-2 h-full w-full bg-black text-white opacity-80 hover:opacity-100 cursor-pointer'/>
+            <MdChevronRight data-testid='right' onClick={slideRight} className='hidden md:block absolute top-[37.5%] z-20 col-start-3 row-start-1 row-end-2 h-[25%] w-full bg-black text-white opacity-80 hover:opacity-100 cursor-pointer'/>
         </div>
     )
 }
