@@ -7,12 +7,15 @@ import { UserContext } from "./UserContext";
 export default function ProductSection() {
     const { type } = useContext(UserContext);
     const { imageGroups } = useImages();
+    let title = type.charAt(0).toUpperCase() + type.slice(1);
 
     return (
+        <>
+            <h1 className='font-pacifico text-5xl text-center md:text-left p-8 md:pt-28 md:pl-20'>{title}</h1>
             <div 
                 data-testid='testDiv'
-                className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-center gap-11 pt-28 p-8"
-            >
+                className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-center gap-11 pt-0 p-8"
+                >
                 {imageGroups[type].map((image) => (
                     <div key={image.id} className="grid text-center gap-y-4 p-4 bg-white shadow-xl shadow-gray-300 rounded-3xl">
                         <div className="flex w-full h-72">
@@ -29,5 +32,6 @@ export default function ProductSection() {
                     </div>
                 ))}               
             </div>
+        </>
     )
 }
