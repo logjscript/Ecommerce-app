@@ -42,7 +42,7 @@ export default function Bag() {
 
         itemsToDisplay = (
             (userInfo.items && userInfo.items.length > 0) ? (
-                <div data-testid='testContainerDiv' className='flex flex-col gap-8 items-center self-center md:h-[100%] md:row-start-2 md:py-[5%] md:overflow-y-scroll'>
+                <div data-testid='testContainerDiv' className='flex flex-col gap-8 items-center self-center md:h-[100%] md:row-start-2 md:py-[5%] md:overflow-auto'>
                     {userInfo.items.map(item => (
                         <div data-testid='testMappedDiv' key={item.name} className="w-[75%] grid grid-cols-[50%_1fr] bg-gray-100 rounded-3xl p-4 shadow-lg md:w-[85%]">
                             <img src={item.link} className="rounded-2xl aspect-square min-w-[125px] max-w-[80%] object-cover place-self-center shadow-2xl row-span-2"/>
@@ -79,7 +79,7 @@ export default function Bag() {
                 <div className='self-center flex flex-col justify-center items-center gap-4 md:row-start-2 md:col-start-2 md:h-[90%] md:grid md:grid-rows-[15%_1fr_15%] md:border-l md:border-gray-400'>
                     {totalToDisplay}
                 
-                    <ul className='max-h-[100%] min-w-[35%] justify-self-center md:self-start overflow-y-scroll'>
+                    <ul className='max-h-[100%] min-w-[35%] justify-self-center md:self-start overflow-auto'>
                         {userInfo.items.map((item) => (
                             <li key={item.name} className='text-md text-gray-500'>{item.name}: {item.quantity}</li>
                         ))}

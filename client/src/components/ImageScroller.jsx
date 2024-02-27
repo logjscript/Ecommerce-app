@@ -47,7 +47,7 @@ export default function ImageScroller() {
     }
 
     return (
-        <div data-testid='scroller' className='relative items-center flex w-10/12 md:w-full bg-white px-4 md:px-0 my-[5%] shadow-lg md:shadow-inner rounded-3xl md:rounded-none'>
+        <div data-testid='scroller' className='relative items-center flex w-10/12 md:w-full bg-white px-4 md:px-0 mb-[5%] md:my-0 shadow-lg md:shadow-inner rounded-3xl md:rounded-none'>
             <MdChevronLeft data-testid='left' onClick={slideLeft} className='hidden md:inline-block absolute left-8 z-20 h-20 w-20 bg-black text-white opacity-80 hover:opacity-100 rounded-[50%] cursor-pointer'/>
             
             <div data-testid='slider' id='slider' className='col-span-full relative flex flex-col md:flex-row justify-center md:justify-start items-center w-full my-3 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
