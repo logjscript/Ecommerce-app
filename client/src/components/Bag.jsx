@@ -76,7 +76,7 @@ export default function Bag() {
 
                 {itemsToDisplay}
 
-                <div className='self-center flex flex-col justify-center items-center gap-4 md:row-start-2 md:col-start-2 md:h-[90%] md:grid md:grid-rows-[15%_1fr_15%] md:border-l md:border-gray-400'>
+                <div className='self-center flex flex-col justify-center items-center gap-4 pt-8 md:pt-0 md:row-start-2 md:col-start-2 md:h-[90%] md:grid md:grid-rows-[15%_1fr_15%] md:border-l md:border-gray-400'>
                     {totalToDisplay}
                 
                     <ul className='max-h-[100%] min-w-[35%] justify-self-center md:self-start overflow-auto'>

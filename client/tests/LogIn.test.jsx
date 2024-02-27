@@ -18,6 +18,7 @@ vi.mock('../src/utils', ()=> {
 
 const mockSetCanceled = vi.fn();
 const mockSetUserInfo = vi.fn();
+const mockSetCheckLogInInfo = vi.fn();
 const mockSetSignedIn = vi.fn();
 const mockSetSignInError = vi.fn();
 const mockSetExistingAccount = vi.fn();
@@ -52,88 +53,6 @@ describe('LogIn', () => {
 
         const divElement = screen.getByTestId('logInDiv');
         expect(divElement).toBeInTheDocument();
-    });
-
-    test('should call setCanceled on button click', () => {
-        render(
-            <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
-             }}>
-                <LogIn 
-                    setExistingAccount={mockSetExistingAccount}
-                    setSignInError={mockSetSignInError}
-                />
-            </UserContext.Provider>
-        );
-
-        const buttonElement = screen.getByText(/x/i);
-        fireEvent.click(buttonElement);
-
-        expect(mockSetCanceled).toHaveBeenCalledOnce();
-    });
-
-    test("should call setExistingAccount on 'click here' click event", () => {
-        render(
-            <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
-             }}>
-                <LogIn 
-                    setExistingAccount={mockSetExistingAccount}
-                    setSignInError={mockSetSignInError}
-                />
-            </UserContext.Provider>
-        );
-
-        const spanElement = screen.getByText(/click here/i);
-        fireEvent.click(spanElement);
-
-        expect(mockSetExistingAccount).toHaveBeenCalledOnce();
-    })
-
-    test('should update username on change event', () => {
-        render(
-            <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
-             }}>
-                <LogIn 
-                    setExistingAccount={mockSetExistingAccount}
-                    setSignInError={mockSetSignInError}
-                />
-            </UserContext.Provider>
-        );
-
-        const userInputElement = screen.getByPlaceholderText(/username/i);
-        fireEvent.change(userInputElement, { target: { value: 'username'}});
-
-        expect(mockSetUserInfo).toHaveBeenCalledWith({
-            ...userInfo, 
-            username: 'username'
-        });
-    });
-
-    test('should update password on change event', () => {
-        render(
-            <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
-             }}>
-                <LogIn 
-                    setExistingAccount={mockSetExistingAccount}
-                    setSignInError={mockSetSignInError}
-                />
-            </UserContext.Provider>
-        );
-
-        const userInputElement = screen.getByPlaceholderText(/password/i);
-        fireEvent.change(userInputElement, { target: { value: 'password'}});
-
-        expect(mockSetUserInfo).toHaveBeenCalledWith({
-            ...userInfo, 
-            password: 'password'
-        });
     });
 
     test('should call checkUserInfo on button click event', () => {

@@ -1,14 +1,18 @@
 import { checkUserInfo } from "../utils";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "./UserContext";
 
 
 export default function LogIn({ setExistingAccount, signInError, setSignInError }) {
     const { setSignedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
+    const [checkLogInInfo, setCheckLogInInfo] = useState({
+        username: '',
+        password: ''
+    });
 
     async function handleLogInButton() {
         try {
-            const response = await checkUserInfo(userInfo, setUserInfo, setSignInError, setSignedIn);
+            const response = await checkUserInfo(checkLogInInfo, setUserInfo, setSignInError, setSignedIn);
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -20,7 +24,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
             data-testid='logInDiv'
             className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
         >
-            <div className="w-[50%] min-w-[350px] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[30%] grid-cols-[25%_1fr]">  
+            <div className="w-[45%] min-w-[350px] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[30%] grid-cols-[125px_1fr]">  
                 <div className="relative flex justify-center items-start col-span-2 row-span-1">
                     <h1 className="text-4xl place-self-center  font-pacifico pt-4">
                         Sign In
@@ -46,8 +50,8 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
                 <input 
                     type="text" 
                     id="userInput" 
-                    value={userInfo.username}
-                    onChange={(e) => setUserInfo({...userInfo, username: e.target.value})}
+                    value={checkLogInInfo.username}
+                    onChange={(e) => setCheckLogInInfo({...checkLogInInfo, username: e.target.value})}
                     placeholder="Add your username here" 
                     className="row-span-1 col-span-1 w-[85%] h-[60px] place-self-center rounded-lg border-solid border-2 border-gray-400 pl-4" 
                 />
@@ -61,8 +65,8 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
                 <input 
                     type="password" 
                     id="passInput" 
-                    value={userInfo.password}
-                    onChange={(e) => setUserInfo({...userInfo, password: e.target.value})}
+                    value={checkLogInInfo.password}
+                    onChange={(e) => setCheckLogInInfo({...checkLogInInfo, password: e.target.value})}
                     placeholder="Add your password here"  
                     className="w-[85%] h-[60px] place-self-center rounded-lg border-solid border-2 border-gray-400 pl-4"
                 />

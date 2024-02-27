@@ -94,23 +94,23 @@ export const addUsername = async (newUserInfo) => {
 
 //LogIn component functions 
 
-export const checkUserInfo = async (userInfo, setUserInfo, setSignInError, setSignedIn) => {
+export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError, setSignedIn) => {
     try {
-        const response = await fetch(`${apiUrl}/${userInfo.username}`, {
+        const response = await fetch(`${apiUrl}/${checkLogInInfo.username}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: userInfo.username,
-                password: userInfo.password
+                username: checkLogInInfo.username,
+                password: checkLogInInfo.password
             })
         });
 
         if (response.ok) {
             const [{ username, password, items, total }] = await response.json();
 
-            if (!userInfo.username || !userInfo.password) {
+            if (!checkLogInInfo.username || !checkLogInInfo.password) {
                 throw new Error('Please fill in both fields');
             }
               
