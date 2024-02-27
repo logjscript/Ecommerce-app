@@ -7,20 +7,31 @@ import { UserContext } from "./UserContext";
 export default function ProductSection() {
     const { type } = useContext(UserContext);
     const { imageGroups } = useImages();
+    let title = type.charAt(0).toUpperCase() + type.slice(1);
 
     return (
-        <div 
-            data-testid='testDiv'
-            className="grid grid-cols-[repeat(2,minmax(200px,50%))] grid-rows-[repeat(2,minmax(200px,50%))] pt-[7.75rem] gap-y-[5%] mb-[5%]"
-        >
-            
+        <>
+            <h1 className='font-pacifico text-5xl text-center md:text-left p-8 md:pt-28 md:pl-20'>{title}</h1>
+            <div 
+                data-testid='testDiv'
+                className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-center gap-11 pt-0 p-8"
+                >
                 {imageGroups[type].map((image) => (
-                    <div key={image.id} className="w-full h-full flex flex-col justify-start items-center gap-4 place-self-center">
-                        <img src={image.link} alt="/" className="w-[80%] h-[80%] object-cover rounded-2xl shadow-lg hover:scale-105 ease-in-out duration-300" />
+                    <div key={image.id} className="grid text-center gap-y-4 p-4 bg-white shadow-xl shadow-gray-300 rounded-3xl">
+                        <div className="flex w-full h-72">
+                            <img src={image.link} alt="/" className="place-self-center h-full w-full object-cover rounded-xl shadow-lg shadow-gray-300" />
+                        </div>
+
+                        <div className="text-2xl">{image.name}</div>
+
+                        <p>{image.name} is both a stylish choice and a comfortable fit, making this one of our most loved products</p>
+
                         <div className="text-base text-gray-800 opacity-70">{image.value}</div>
+
                         <ProductSectionButton item={image} />
                     </div>
                 ))}               
-        </div>
+            </div>
+        </>
     )
 }

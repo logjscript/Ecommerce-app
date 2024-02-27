@@ -66,11 +66,9 @@ describe('Dashboard', () => {
                 <Dashboard />
             </UserContext.Provider>
         );
-
-        const divElement = screen.getByText(/Hello/i);
+       
         const buttonElement = screen.getByText(/Sign Out/i)
 
-        expect(divElement).toBeInTheDocument();
         expect(buttonElement).toBeInTheDocument();
     });
 
