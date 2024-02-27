@@ -45,7 +45,7 @@ export const itemsInBag = (items) => {
 
 //SignUp component functions
 
-export const changeBorderColor = (green, gray, red, password, verifyPassword, setInputColor, inputColor, setPasswordError) => {
+export const changeBorderColor = (green, gray, red, password, verifyPassword, setInputColor, inputColor) => {
     if (verifyPassword && (password === '' || verifyPassword !== password)){
         setInputColor({
             ...inputColor,
@@ -53,23 +53,18 @@ export const changeBorderColor = (green, gray, red, password, verifyPassword, se
             verifyPassword: red
         });
 
-        setPasswordError('Passwords do not match');
     } else if (password) {
         setInputColor({
             ...inputColor,
             password: green, 
             verifyPassword: !verifyPassword ? gray : green
         });
-
-        setPasswordError('');
     } else {
         setInputColor({
             ...inputColor,
             password: gray,
             verifyPassword: gray
         });
-
-        setPasswordError('');
     }
 }
 
