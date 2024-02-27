@@ -42,7 +42,9 @@ export default function Bag() {
 
         itemsToDisplay = (
             (userInfo.items && userInfo.items.length > 0) ? (
-                <div data-testid='testContainerDiv' className='flex flex-col gap-8 items-center self-center md:h-[100%] md:row-start-2 md:py-[5%] md:overflow-auto'>
+                <div data-testid='testContainerDiv' className='flex flex-col gap-8 items-center self-center md:h-[100%] md:row-start-2 py-[5%] md:overflow-auto'>
+                    <h1 className='text-center text-3xl pt-4 md:pt-0'>Bagged Items:</h1>
+
                     {userInfo.items.map(item => (
                         <div data-testid='testMappedDiv' key={item.name} className="w-[75%] grid grid-cols-[50%_1fr] bg-white rounded-3xl p-4 shadow-lg md:w-[85%]">
                             <img src={item.link} className="rounded-[50%] aspect-square min-w-[125px] max-w-[80%] object-cover justify-self-end self-center shadow-2xl shadow-gray-400 row-span-2"/>

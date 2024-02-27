@@ -24,7 +24,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
             data-testid='logInDiv'
             className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
         >
-            <div className="w-[45%] min-w-[350px] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[30%] grid-cols-[125px_1fr]">  
+            <div className="w-[45%] min-w-[350px] h-[57%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[30%] grid-cols-[100px_1fr]">  
                 <div className="relative flex justify-center items-start col-span-2 row-span-1">
                     <h1 className="text-4xl place-self-center  font-pacifico pt-4">
                         Sign In
@@ -79,7 +79,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
                         Log In
                     </button>
 
-                    {signInError && <div data-testid='signInError' className="absolute top-[-4px] col-span-2 place-self-center text-red-400">{signInError}</div>}
+                    {signInError && <div data-testid='signInError' className="absolute top-[-7px] col-span-2 place-self-center text-red-400">{signInError}</div>}
                 </div>
                 
 
