@@ -78,7 +78,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
             data-testid='signUpDiv' 
             className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
         >
-            <div className="w-[50%] min-w-[370px] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[25%_repeat(3,1fr)_20%] grid-cols-[120px_1fr] gap-y-2">
+            <div className="w-[45%] min-w-[370px] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[25%_repeat(3,1fr)_20%] grid-cols-[120px_1fr] gap-y-2">
                 <div className="relative flex justify-center items-start col-span-2 row-span-1">
                     <h1 className="text-4xl place-self-center font-pacifico p-2">
                         Sign Up
@@ -97,7 +97,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
 
                 <label 
                     htmlFor="userInput" 
-                    className="self-center justify-self-end text-gray-800 pl-5 text-lg"
+                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
                 > 
                     Create Username:
                 </label>
@@ -111,7 +111,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
 
                 <label 
                     htmlFor="passInput" 
-                    className="self-center justify-self-end text-gray-800 pl-5 text-lg"
+                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
                 > 
                     Create Password:
                 </label> 
@@ -126,7 +126,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
 
                 <label 
                     htmlFor="verifyPassInput" 
-                    className="self-center justify-self-end text-gray-800 pl-5 text-lg"
+                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
                 > 
                     Verify Password:
                 </label>
