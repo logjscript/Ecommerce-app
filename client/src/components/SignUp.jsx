@@ -88,7 +88,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                         className="absolute left-3 top-3"
                     >
                         <img 
-                            src="../../public/images/exit.svg" 
+                            src="../../images/exit.svg" 
                             alt="an exit button"
                             className="w-3 h-3"
                         />
