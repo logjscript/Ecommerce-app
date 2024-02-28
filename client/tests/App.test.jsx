@@ -45,8 +45,8 @@ describe('App', () => {
             </UserProvider>
         );
 
-        const buttonElement = screen.getByText(/shop now/i);
-        expect(buttonElement).toBeInTheDocument();
+        const divElement = screen.getByTestId('scroller');
+        expect(divElement).toBeInTheDocument();
     });
 
     test('should display ProductSection component', async () => {

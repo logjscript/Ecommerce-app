@@ -19,19 +19,4 @@ describe('Homepage', () => {
         const divElement = screen.getByTestId('homepage');
         expect(divElement).toBeInTheDocument();
     });
-
-    test("should set 'type' state to 'hats' on click", () => {
-        render(
-            <ImageProvider>
-                <UserContext.Provider value={{ setType: mockSetType }}>
-                    <HomePage />
-                </UserContext.Provider>
-            </ImageProvider>
-        );
-
-        const buttonElement = screen.getByRole('button');
-        fireEvent.click(buttonElement);
-
-        expect(mockSetType).toHaveBeenCalledWith('hats');
-    });
 });

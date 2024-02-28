@@ -17,8 +17,6 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
         password: borderColors[1], 
         verifyPassword: borderColors[1]
     });
-    const [passwordError, setPasswordError] = useState('');
-    const errorMessage = signInError ? signInError : passwordError; 
 
     useEffect(() => {
         changeBorderColor(
@@ -27,23 +25,27 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
             newUserInfo.verifyPassword,
             setInputColor,
             inputColor,
-            setPasswordError
         );
     }, [newUserInfo.password, newUserInfo.verifyPassword]);
 
     function handleUserChange(e) {
+        setSignInError('');
         setNewUserInfo({
             ...newUserInfo,
             username: e.target.value
         })
-        e.target.value ? (
+
+       
+        if (e.target.value) {
             setInputColor({...inputColor, user: borderColors[0]})
-        ) : (
+        } else {
             setInputColor({...inputColor, user: borderColors[1]})
-        )
+        }
     }
 
     function handlePasswordChange(e) {
+        setSignInError('');
+
         const passInput = e.target.value;
         let matchPasswords = passInput === newUserInfo.verifyPassword;
         if (newUserInfo.verifyPassword === ''){
@@ -57,6 +59,8 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
     }
 
     function handleVerifyChange(e) {
+        setSignInError('');
+      
         const verifyPassInput = e.target.value;
         let matchPasswords = newUserInfo.password === verifyPassInput;
         if (e.target.value === ''){
@@ -74,22 +78,26 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
             data-testid='signUpDiv' 
             className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
         >
-            <div className="w-[50%] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-cols-[25%_1fr] grid-rows-[25%_repeat(4,1fr)] gap-y-2">
+            <div className="w-[45%] min-w-[370px] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[25%_repeat(3,1fr)_20%] grid-cols-[120px_1fr] gap-y-2">
                 <div className="relative flex justify-center items-start col-span-2 row-span-1">
-                    <h1 className="text-3xl place-self-center text-gray-800 pt-4">
+                    <h1 className="text-4xl place-self-center font-pacifico p-2">
                         Sign Up
                     </h1>
                     <button 
                         onClick={() => setCanceled(true)} 
-                        className="absolute right-[.75rem] top-[.3rem] text-xl text-gray-500"
+                        className="absolute left-3 top-3"
                     >
-                        x
+                        <img 
+                            src="../../public/images/exit.svg" 
+                            alt="an exit button"
+                            className="w-3 h-3"
+                        />
                     </button>
                 </div>
 
                 <label 
                     htmlFor="userInput" 
-                    className="row-span-1 col-span-1 self-center justify-self-end text-gray-800 text-lg outline-none border{}"
+                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
                 > 
                     Create Username:
                 </label>
@@ -99,11 +107,11 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                     value={newUserInfo.username}
                     onChange={(e) => handleUserChange(e)}
                     placeholder="Create your username here" 
-                    className={`row-span-1 col-span-1 w-[90%] h-[80%] place-self-center rounded-lg border-solid border-2 ${inputColor.user} pl-4 text-lg`} />
+                    className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.user}`} />
 
                 <label 
                     htmlFor="passInput" 
-                    className="self-center justify-self-end text-gray-800 pl-5 text-lg"
+                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
                 > 
                     Create Password:
                 </label> 
@@ -113,12 +121,12 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                     placeholder="Create your password here" 
                     value={newUserInfo.password}
                     onChange={(e) => handlePasswordChange(e)} 
-                    className={`w-[90%] h-[80%] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.password}`}
+                    className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.password}`}
                 />
 
                 <label 
                     htmlFor="verifyPassInput" 
-                    className="self-center justify-self-end text-gray-800 pl-5 text-lg"
+                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
                 > 
                     Verify Password:
                 </label>
@@ -129,21 +137,23 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                     placeholder="Verify your password here" 
                     value={newUserInfo.verifyPassword}
                     onChange={(e) => handleVerifyChange(e)} 
-                    className={`w-[90%] h-[80%] rounded-lg border-2 border-solid pl-4 text-lg ${inputColor.verifyPassword}`}
+                    className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.verifyPassword}`}
                 />
-                
-                <div className="text-red-400 col-span-2 mx-auto place-self-center">
-                    {errorMessage}
-                </div>
 
-                <CreateUserButton 
-                    newUserInfo={newUserInfo} 
-                    setNewUserInfo={setNewUserInfo}
-                    setInputColor={setInputColor} 
-                    setExistingAccount={setExistingAccount} 
-                    setSignInError={setSignInError}
-                    borderColors={borderColors}
-                />
+                <div className="col-span-2 relative flex justify-center items-center w-full h-full">
+                    <div className="absolute top-[-8px] text-red-400">
+                        {!newUserInfo.passwordMatch ? 'Passwords do not match' : signInError}
+                    </div>
+
+                    <CreateUserButton 
+                        newUserInfo={newUserInfo} 
+                        setNewUserInfo={setNewUserInfo}
+                        setInputColor={setInputColor} 
+                        setExistingAccount={setExistingAccount} 
+                        setSignInError={setSignInError}
+                        borderColors={borderColors}
+                    />
+                </div>
             </div>
         </div> 
     )
