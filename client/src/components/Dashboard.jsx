@@ -9,6 +9,21 @@ export default function Dashboard () {
     const [navTransform, setNavTransform] = useState('');
     const totalItems = itemsInBag(userInfo?.items);
 
+    const navCheck = () => {
+        if (showNav === true) {
+            setNavTransform('transform ease-in-out duration-300 translate-x-0');
+            setTimeout(() => {
+                setNavTransform('transform translate-x-0');
+            }, 300);
+        } else {
+            setNavTransform('transform ease-in-out duration-300 translate-x-[150px]');
+            setTimeout(() => {
+                setNavTransform('transform translate-x-[150px]');
+            }, 300);
+        }
+        setShowNav(!showNav);
+    }
+
     const handleSignOutClick = () => {
         setSignedIn(false);
         setCanceled(true);
@@ -24,6 +39,7 @@ export default function Dashboard () {
     const handleTypeClick = (e) => {
         setType(e.target.value);
         window.scrollTo(0,0);
+        navCheck();
     }
 
     const handleBagClick = () => {
@@ -36,18 +52,7 @@ export default function Dashboard () {
     }
 
     const handleArrowClick = () => {
-        if (showNav === true) {
-            setNavTransform('transform ease-in-out duration-300 translate-x-0');
-            setTimeout(() => {
-                setNavTransform('transform translate-x-0');
-            }, 300);
-        } else {
-            setNavTransform('transform ease-in-out duration-300 translate-x-[150px]');
-            setTimeout(() => {
-                setNavTransform('transform translate-x-[150px]');
-            }, 300);
-        }
-        setShowNav(!showNav);
+       navCheck();
     }
 
     return (
@@ -70,7 +75,7 @@ export default function Dashboard () {
                 <button onClick={(e) => handleTypeClick(e)} value='shoes' className='text-left md:text-center'>Shoes</button>
             </div>
 
-            <div className='row-start-1 md:row-auto font-pacifico text-3xl'>Brand</div>
+            <button value={null} onClick={(e) => handleTypeClick(e)} className='row-start-1 md:row-auto font-pacifico text-3xl'>Brand</button>
 
             <div className='justify-self-start md:justify-self-end flex flex-col md:flex-row gap-x-3 gap-y-3'>
                 

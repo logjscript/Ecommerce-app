@@ -87,7 +87,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
                     Don't have an account? 
                     <span 
                         data-testid='span'
-                        onClick={() => setExistingAccount(false)} 
+                        onClick={() => {setExistingAccount(false); setSignInError(null);}} 
                         className="text-blue-500 cursor-pointer"
                     >
                         {' Click here'}
