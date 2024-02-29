@@ -6,9 +6,7 @@ const pool = require('./db');
 const PORT = process.env.PORT ?? 5200;
 
 app.use(express.json());
-app.use(cors({
-    origin: 'ecommerce-app.onrender.com'
-}));
+app.use(cors());
 
 app.use('/api/v1/users', userRoutes);
 
