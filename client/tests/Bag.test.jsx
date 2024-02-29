@@ -27,7 +27,7 @@ describe('Bag', () => {
             </UserContext.Provider>
         );
 
-        const headerElement = screen.getByRole('heading');
+        const headerElement = screen.getByText(/Total/i);
         const divElement = screen.getByTestId('testContainerDiv');
         expect(headerElement).toBeInTheDocument();
         expect(divElement).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe('Bag', () => {
 
         const priceTotal = userTotalPrice(userInfo.items);
 
-        const headerElement = screen.getByRole('heading');
+        const headerElement = screen.getByText(/Total/i);
         const headerContent = headerElement.textContent;
         expect(headerContent).toBe(`Total: $${priceTotal.toFixed(2)}`);
     });
