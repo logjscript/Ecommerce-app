@@ -87,7 +87,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                         onClick={() => setCanceled(true)} 
                         className="absolute left-3 top-3"
                     >
-                        <img 
+                        <img  
                             src="../../images/exit.svg" 
                             alt="an exit button"
                             className="w-3 h-3"
