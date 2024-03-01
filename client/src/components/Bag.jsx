@@ -74,7 +74,7 @@ export default function Bag() {
 
     return (
         !bought ? (
-            <div className='flex flex-col md:h-screen md:w-screen md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] md:gap-0'>
+            <div className='flex flex-col h-screen w-screen md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] md:gap-0'>
 
                 {itemsToDisplay}
 
