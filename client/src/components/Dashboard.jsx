@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { UserContext } from "./UserContext";
 import { MdChevronRight, MdChevronLeft } from 'react-icons/md';
 import {  FaBars, FaTimes } from 'react-icons/fa';
+import LeftDashboardItems from "./LeftDashboardItems";
 
 export default function Dashboard () {
     const { setType, signedIn, setSignedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
@@ -40,14 +41,7 @@ export default function Dashboard () {
             <nav data-testid='container' className={`fixed top-0 box-border z-30 grid grid-rows-1 grid-cols-[1fr_auto_1fr] justify-between items-center w-screen h-20 bg-black text-base text-white gap-8 pt-0 px-[1.5%]`}>
             
                 {/* left items */}
-                <ul className='justify-self-start hidden custom-md:flex text-sm gap-x-3 gap-y-3'>
-                    <li><button onClick={(e) => handleTypeClick(e)} value={null} className='text-left md:text-center'>Home</button></li>
-                    <li><button data-testid='itemTypeButton' onClick={(e) => handleTypeClick(e)} value='hats'className='text-left md:text-center'>Hats</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='sweatshirts' className='text-left md:text-center'>Sweatshirts</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='shirts' className='text-left md:text-center'>Shirts</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='pants' className='text-left md:text-center'>Pants</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='shoes' className='text-left md:text-center'>Shoes</button></li>
-                </ul>
+                <LeftDashboardItems classes={'justify-self-start hidden custom-md:flex text-sm gap-x-3 gap-y-3'} />
 
                 <button value={null} onClick={(e) => handleTypeClick(e)} className='col-start-2 font-pacifico text-4xl'>Lodi NW</button>
 
@@ -56,14 +50,7 @@ export default function Dashboard () {
                     {!showNav ? <FaBars size={20} /> : <FaTimes size={20} />}
                 </div>
 
-                <ul className={!showNav ? 'hidden' : 'fixed top-0 left-0 w-full h-screen bg-black flex flex-col justify-center items-center text-4xl opacity-90 text-white gap-12 font-pacifico'}>
-                    <li><button onClick={(e) => handleTypeClick(e)} value={null} className='text-left md:text-center'>Home</button></li>
-                    <li><button data-testid='itemTypeButton' onClick={(e) => handleTypeClick(e)} value='hats'className='text-left md:text-center'>Hats</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='sweatshirts' className='text-left md:text-center'>Sweatshirts</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='shirts' className='text-left md:text-center'>Shirts</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='pants' className='text-left md:text-center'>Pants</button></li>
-                    <li><button onClick={(e) => handleTypeClick(e)} value='shoes' className='text-left md:text-center'>Shoes</button></li>
-                </ul>
+                <LeftDashboardItems classes={!showNav ? 'hidden' : 'fixed top-0 left-0 w-full h-screen bg-black flex flex-col justify-center items-center text-4xl opacity-90 text-white gap-12 font-pacifico'} />
 
                 {/* right items */}
                 <div className='justify-self-end hidden custom-md:flex text-sm gap-x-3 gap-y-3'>
