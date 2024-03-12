@@ -10,8 +10,8 @@ export default function ProductSection() {
     let title = type.charAt(0).toUpperCase() + type.slice(1);
 
     return (
-        <>
-            <h1 className='font-pacifico text-5xl text-center md:text-left p-8 md:pt-28 md:pl-20'>{title}</h1>
+        <div className="grid grid-rows[auto_1fr]">
+            <h1 className='pt-28 p-8 font-pacifico text-5xl'>{title}</h1>
             <div 
                 data-testid='testDiv'
                 className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-center gap-11 pt-0 p-8"
@@ -32,6 +32,6 @@ export default function ProductSection() {
                     </div>
                 ))}               
             </div>
-        </>
+        </div>
     )
 }

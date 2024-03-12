@@ -4,10 +4,8 @@ export default function HomePage() {
     return (
         <div 
             data-testid='homepage'
-            className='flex-1 flex flex-col justify-center items-center md:pt-20'
+            className='pt-20 flex-1 flex flex-col justify-center items-center my-[4%]'
         >
-            <h1 className='md:hidden m-8 font-pacifico text-5xl'>Brand</h1>
-
             <ImageScroller />
         </div>
     )
