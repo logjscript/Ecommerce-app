@@ -9,14 +9,18 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
         username: '',
         password: ''
     });
+    const [loading, setLoading] = useState(false);
 
     async function handleLogInButton() {
         try {
+            setSignInError(null);
+            setLoading(true);
             const response = await checkUserInfo(checkLogInInfo, setUserInfo, setSignInError, setSignedIn);
             console.log(response);
         } catch (error) {
             console.log(error);
         }
+        setLoading(false);
     }
 
     return (
@@ -80,6 +84,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
                     </button>
 
                     {signInError && <div data-testid='signInError' className="absolute top-[-7px] col-span-2 place-self-center text-red-400">{signInError}</div>}
+                    {loading && <div className="absolute top-[-7px] col-span-2 place-self-center">{'Checking user data...'}</div>}
                 </div>
                 
 
