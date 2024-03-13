@@ -11,7 +11,7 @@ export default function ProductSection() {
 
     return (
         <div className="grid grid-rows[auto_1fr]">
-            <h1 className='pt-28 p-8 font-pacifico text-5xl'>{title}</h1>
+            <h1 className='pt-28 p-8 font-pacifico text-4xl'>{title}</h1>
             <div 
                 data-testid='testDiv'
                 className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-center gap-11 pt-0 p-8"

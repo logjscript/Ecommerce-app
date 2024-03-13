@@ -47,12 +47,12 @@ export default function ImageScroller() {
     }
 
     return (
-        <div data-testid='scroller' className='relative items-center flex w-10/12 md:w-full bg-white px-4 md:px-0 md:my-0 shadow-lg md:shadow-inner rounded-3xl md:rounded-none'>
+        <div data-testid='scroller' className='relative items-center flex w-10/12 md:w-full  bg-white px-4 md:px-0 md:my-0 shadow-lg md:shadow-inner rounded-3xl md:rounded-none'>
             <MdChevronLeft data-testid='left' onClick={slideLeft} className='hidden md:inline-block absolute left-8 z-20 h-20 w-20 bg-black text-white opacity-80 hover:opacity-100 rounded-[50%] cursor-pointer'/>
             
             <div data-testid='slider' id='slider' className='col-span-full flex flex-col md:flex-row justify-center md:justify-start items-center w-full my-3 overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
                 {allClothes.map((item, i) =>(
-                    <div key={i} onClick={() => handleClickScrollBar(i)} className='flex justify-center items-center w-full md:min-h-[70dvh] aspect-square cursor-pointer'>
+                    <div key={i} onClick={() => handleClickScrollBar(i)} className='flex justify-center items-center md:min-w-[70vh] md:max-w-[600px] aspect-square cursor-pointer'>
                         <img src={item.link} alt='/' className='w-[95%] md:w-[95%] aspect-square object-cover rounded-3xl hover:scale-105 ease-in-out duration-300'/>
                     </div>
                 ))}

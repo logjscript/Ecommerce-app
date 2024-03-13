@@ -42,7 +42,7 @@ export default function Dashboard () {
             <nav data-testid='container' className={`fixed top-0 box-border z-30 grid grid-rows-1 grid-cols-[1fr_auto_1fr] justify-between items-center w-screen h-20 bg-black text-base text-white gap-8 pt-0 px-[1.5%]`}>
             
                 {/* left items */}
-                <LeftDashboardItems classes={'justify-self-start hidden custom-md:flex text-sm gap-x-3 gap-y-3'} />
+                <LeftDashboardItems handleTypeClick={handleTypeClick} classes={'justify-self-start hidden custom-md:flex text-sm gap-x-3 gap-y-3'} />
 
                 <button value={null} onClick={(e) => handleTypeClick(e)} className='col-start-2 font-pacifico text-4xl'>Lodi NW</button>
 
@@ -60,10 +60,11 @@ export default function Dashboard () {
                 </div>
                 
                 <div className={!showNav ? 'hidden' : 'fixed top-0 left-0 w-full h-screen bg-black flex justify-center items-center text-4xl opacity-90 text-white font-pacifico'}>
-                    <div className="flex flex-col gap-16">
-                        <LeftDashboardItems classes={'flex flex-col gap-6'} />
+                    <div className="flex flex-col gap-16 pl-[10%]">
+                        <LeftDashboardItems handleTypeClick={handleTypeClick} classes={'flex flex-col gap-6'} />
 
                         <RightDashboardItems 
+                            handleTypeClick={handleTypeClick}
                             handleBagClick={handleBagClick} 
                             handleSignOutClick={handleSignOutClick} 
                             setCanceled={setCanceled} 
@@ -76,6 +77,7 @@ export default function Dashboard () {
 
                 {/* right items */}
                 <RightDashboardItems 
+                    handleTypeClick={handleTypeClick}
                     handleBagClick={handleBagClick} 
                     handleSignOutClick={handleSignOutClick} 
                     setCanceled={setCanceled} 

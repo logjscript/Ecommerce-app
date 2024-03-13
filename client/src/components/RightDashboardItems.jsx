@@ -1,7 +1,10 @@
 
-const RightDashboardItems = ({ classes, signedIn, handleSignOutClick, handleBagClick, setCanceled, totalItems }) => {
+const RightDashboardItems = ({ classes, signedIn, handleTypeClick, handleSignOutClick, handleBagClick, setCanceled, totalItems }) => {
+
   return (
     <div className={classes}>
+        <button onClick={(e) => handleTypeClick(e)} value={null} className='text-left md:text-center'>Home</button>
+
         {!signedIn ? (
             <button 
                 onClick={() => setCanceled(false)} 

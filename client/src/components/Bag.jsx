@@ -19,7 +19,7 @@ export default function Bag() {
                 /> 
             );
         } else if (bought) {
-            setShowPurchaseButton(<div className='text-5xl text-gray-800 text-center'>Thank you for shopping with us!</div>);
+            setShowPurchaseButton(<div className='px-12 text-3xl md:text-5xl text-gray-800 text-center'>Thank you for shopping with us!</div>);
         } else {
             setShowPurchaseButton(null);
         }
@@ -74,7 +74,7 @@ export default function Bag() {
 
     return (
         !bought ? (
-            <div className='flex flex-col h-screen w-screen md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] md:gap-0'>
+            <div className='flex flex-col min-h-screen w-screen md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] md:gap-0'>
 
                 {itemsToDisplay}
 
