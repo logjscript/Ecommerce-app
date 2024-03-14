@@ -17,9 +17,9 @@ export default function ProductSection() {
                 className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-center gap-11 pt-0 p-8"
                 >
                 {imageGroups[type].map((image) => (
-                    <div key={image.id} className="grid text-center gap-y-4 p-4 bg-white shadow-xl shadow-gray-300 rounded-3xl">
+                    <div key={image.id} className="grid text-center gap-y-4 p-4 bg-gray-100 shadow-lg shadow-gray-400 rounded-3xl">
                         <div className="flex w-full h-72">
-                            <img src={image.link} alt="/" className="place-self-center h-full w-full object-cover rounded-xl shadow-lg shadow-gray-300" />
+                            <img src={image.link} alt="/" className="place-self-center h-full w-full object-cover rounded-xl shadow-md shadow-gray-400" />
                         </div>
 
                         <div className="text-2xl">{image.name}</div>

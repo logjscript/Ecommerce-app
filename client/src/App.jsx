@@ -28,7 +28,7 @@ export default function App() {
         }
 
     return (
-        <div data-testid='div' className='flex flex-col justify-center min-h-screen bg-gray-200'>
+        <div data-testid='div' className='flex flex-col justify-center min-h-screen bg-gradient-to-l from-[#A5A5A5] to-gray-100'>
           <ImageProvider>
             <Dashboard />
               {compToDisplay}
