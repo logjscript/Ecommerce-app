@@ -41,7 +41,7 @@ export default function Dashboard () {
     }
 
     return (
-            <nav data-testid='container' className={`fixed top-0 box-border z-30 grid grid-rows-1 grid-cols-[1fr_auto_1fr] justify-between items-center w-screen h-20 bg-black text-base text-white gap-8 pt-0 px-[1.5%]`}>
+            <nav data-testid='container' className={`fixed top-0 box-border z-30 grid grid-rows-1 grid-cols-[1fr_auto_1fr] justify-between items-center w-screen h-20 bg-black text-base text-white gap-8 px-[1.5%]`}>
             
                 {/* left items */}
                 <LeftDashboardItems handleTypeClick={handleTypeClick} classes={'justify-self-start hidden custom-md:flex text-sm gap-x-3 gap-y-3'} />

@@ -30,7 +30,7 @@ export default function Bag() {
 
     if (!bought) {
         totalToDisplay = (
-            <h1 className="text-2xl text-gray-700 md:justify-self-center md:self-end text-center">
+            <h1 className="text-3xl md:text-2xl text-gray-700 md:justify-self-center md:self-end text-center">
                 Total: <br />
                 {priceTotal ? (
                      <span className='text-4xl'>${priceTotal.toFixed(2)}</span>
@@ -42,9 +42,9 @@ export default function Bag() {
 
         itemsToDisplay = (
             (userInfo.items && userInfo.items.length > 0) ? (
-                <div data-testid='testContainerDiv' className='flex flex-col gap-8 items-center self-center w-full min-h-screen md:min-h-full md:h-[100%] md:row-start-2 py-[5%] md:overflow-auto'>
+                <div data-testid='testContainerDiv' className='flex flex-col items-center self-center gap-6 lg:gap-8 w-full px-[5%] min-h-screen md:min-h-full md:h-full md:px-[10%] py-6 pt-[104px] md:pt-6 lg:py-8 md:row-start-2 md:overflow-auto'>
                     {userInfo.items.map(item => (
-                        <div data-testid='testMappedDiv' key={item.name} className="w-[75%] grid grid-cols-[50%_1fr] bg-white rounded-3xl p-4 shadow-lg md:w-[85%]">
+                        <div data-testid='testMappedDiv' key={item.name} className="w-full grid grid-cols-[50%_1fr] bg-white rounded-3xl p-4 shadow-lg">
                             <img src={item.link} className="rounded-[50%] aspect-square min-w-[125px] w-[80%] object-cover justify-self-end self-center shadow-2xl shadow-gray-400 row-span-2"/>
 
                             <div className='place-self-center flex flex-col justify-center items-center'>
@@ -72,11 +72,11 @@ export default function Bag() {
 
     return (
         !bought ? (
-            <div className='border-box flex flex-col h-screen w-screen md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] md:gap-0'>
+            <div className='border-box flex flex-col h-full md:h-screen min-h-screen w-full md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr]'>
 
                 {itemsToDisplay}
 
-                <div className='self-center flex flex-col justify-center items-center gap-4 pt-8 md:pt-0 md:row-start-2 md:col-start-2 md:h-[90%] md:grid md:grid-rows-[15%_1fr_15%] md:border-l md:border-gray-400'>
+                <div className='self-center flex flex-col justify-center items-center gap-4 md:row-start-2 md:col-start-2 md:h-[90%] md:grid md:grid-rows-[15%_1fr_15%] md:border-l md:border-gray-400'>
                     {totalToDisplay}
                 
                     <ul className='max-h-[100%] min-w-[35%] justify-self-center md:self-start overflow-auto'>

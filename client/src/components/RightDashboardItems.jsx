@@ -3,7 +3,7 @@ const RightDashboardItems = ({ classes, signedIn, handleTypeClick, handleSignOut
 
   return (
     <div className={classes}>
-        <button onClick={(e) => handleTypeClick(e)} value={null} className='text-left md:text-center'>Home</button>
+        <button onClick={(e) => handleTypeClick(e)} value={null} className='text-left'>Home</button>
 
         {!signedIn ? (
             <button 
