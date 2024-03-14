@@ -96,6 +96,10 @@ export const addUsername = async (newUserInfo) => {
 
 export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError, setSignedIn) => {
     try {
+        if (!checkLogInInfo.username || !checkLogInInfo.password) {
+            throw new Error('Please fill in both fields');
+        }
+
         const response = await fetch(`${apiUrl}/${checkLogInInfo.username}`, {
             method: 'POST',
             headers: {
@@ -109,10 +113,6 @@ export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError,
 
         if (response.ok) {
             const [{ username, password, items, total }] = await response.json();
-
-            if (!checkLogInInfo.username || !checkLogInInfo.password) {
-                throw new Error('Please fill in both fields');
-            }
               
             setUserInfo({
                 username: username,
@@ -126,7 +126,11 @@ export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError,
       
         setSignedIn(true);
     } catch (error) {
-        console.error(error);
-        setSignInError(error.message);
+        console.log(error.message);
+        if (error.message === 'Please fill in both fields') {
+            setSignInError(error.message)
+        } else {
+            setSignInError('Username or password is incorrect');
+        }
     }
 }

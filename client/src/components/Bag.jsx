@@ -30,22 +30,24 @@ export default function Bag() {
 
     if (!bought) {
         totalToDisplay = (
-            <h1 className="text-3xl md:text-2xl text-gray-700 md:justify-self-center md:self-end text-center">
-                Total: <br />
-                {priceTotal ? (
-                     <span className='text-4xl'>${priceTotal.toFixed(2)}</span>
-                ) : (
-                    <span className='text-4xl'>$0.00</span>
-                )}
-             </h1> 
-        );
+            priceTotal ? (
+                <h1 className="text-3xl md:text-2xl text-gray-700 md:justify-self-center md:self-end text-center">
+                    Total: <br />
+                        <span className='text-4xl'>${priceTotal.toFixed(2)}</span>
+                </h1>
+            ) : (
+                <h1 className="hidden md:block md:text-2xl text-gray-700 md:justify-self-center md:self-end text-center">
+                    Total: <br />
+                        <span className='text-4xl'>$0.00</span>
+                </h1>
+        ));
 
         itemsToDisplay = (
             (userInfo.items && userInfo.items.length > 0) ? (
-                <div data-testid='testContainerDiv' className='flex flex-col items-center self-center gap-6 lg:gap-8 w-full px-[5%] min-h-screen md:min-h-full md:h-full md:px-[10%] py-6 pt-[104px] md:pt-6 lg:py-8 md:row-start-2 md:overflow-auto'>
+                <div data-testid='testContainerDiv' className='flex flex-col items-center self-center gap-6 lg:gap-8 w-full px-[5%] min-h-full md:h-full md:px-[20%] py-6 pt-[104px] md:pt-6 lg:py-8 md:row-start-2 md:overflow-auto'>
                     {userInfo.items.map(item => (
-                        <div data-testid='testMappedDiv' key={item.name} className="w-full grid grid-cols-[50%_1fr] bg-white rounded-3xl p-4 shadow-lg">
-                            <img src={item.link} className="rounded-[50%] aspect-square min-w-[125px] w-[80%] object-cover justify-self-end self-center shadow-2xl shadow-gray-400 row-span-2"/>
+                        <div data-testid='testMappedDiv' key={item.name} className="w-full grid grid-cols-[40%_1fr] bg-white rounded-3xl p-4 shadow-lg shadow-gray-500 bg-gradient-to-r from-gray-300 to-white">
+                            <img src={item.link} className="rounded-xl aspect-square min-w-[125px] w-full object-cover justify-self-start self-center shadow-md shadow-gray-400 row-span-2"/>
 
                             <div className='place-self-center flex flex-col justify-center items-center'>
                                 <div className='text-xl text-gray-600 text-center sm:text-2xl'>{item.name}</div>
@@ -72,7 +74,7 @@ export default function Bag() {
 
     return (
         !bought ? (
-            <div className='border-box flex flex-col h-full md:h-screen min-h-screen w-full md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr]'>
+            <div className='border-box flex flex-col h-full gap-16 md:gap-0 md:h-screen min-h-screen w-full bg-gray-100 md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr]'>
 
                 {itemsToDisplay}
 
