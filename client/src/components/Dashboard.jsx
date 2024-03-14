@@ -21,6 +21,7 @@ export default function Dashboard () {
             items: [],
             total: 0,
         });
+        setShowNav(false);
     }
 
     const handleTypeClick = (e) => {
@@ -36,6 +37,7 @@ export default function Dashboard () {
           setType('bag');
           window.scrollTo(0,0);
         }
+        setShowNav(false);
     }
 
     return (
@@ -71,6 +73,7 @@ export default function Dashboard () {
                             totalItems={totalItems} 
                             signedIn={signedIn} 
                             classes={'flex flex-col gap-6'} 
+                            setShowNav={setShowNav}
                         />
                     </div>
                 </div>
@@ -84,6 +87,7 @@ export default function Dashboard () {
                     totalItems={totalItems} 
                     signedIn={signedIn} 
                     classes={'justify-self-end hidden custom-md:flex text-sm gap-x-3 gap-y-3'} 
+                    setShowNav={setShowNav}
                 />
             </nav>
 
