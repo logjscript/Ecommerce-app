@@ -78,29 +78,23 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
             data-testid='signUpDiv' 
             className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
         >
-            <div className="w-[45%] min-w-[370px] h-[55%] bg-slate-100 border-4 border-solid border-gray-200 rounded-3xl grid grid-rows-[25%_repeat(3,1fr)_20%] grid-cols-[120px_1fr] gap-y-2">
-                <div className="relative flex justify-center items-start col-span-2 row-span-1">
+            <div className="w-[45%] min-w-[370px] h-[57%] bg-gradient-to-br from-gray-300 to-white rounded-3xl grid grid-rows-[25%_repeat(3,1fr)_20%] grid-cols-1 gap-y-2">
+                <div className="relative flex justify-center items-start">
                     <h1 className="text-4xl place-self-center font-pacifico p-2">
                         Sign Up
                     </h1>
                     <button 
                         onClick={() => setCanceled(true)} 
-                        className="absolute left-3 top-3"
+                        className="absolute right-3 top-3"
                     >
                         <img  
                             src="../../images/exit.svg" 
                             alt="an exit button"
-                            className="w-3 h-3"
+                            className="w-4 h-4"
                         />
                     </button>
                 </div>
 
-                <label 
-                    htmlFor="userInput" 
-                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
-                > 
-                    Create Username:
-                </label>
                 <input 
                     type="text" 
                     id="userInput" 
@@ -109,12 +103,6 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                     placeholder="Create your username here" 
                     className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.user}`} />
 
-                <label 
-                    htmlFor="passInput" 
-                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
-                > 
-                    Create Password:
-                </label> 
                 <input 
                     type="password" 
                     id="passInput" 
@@ -123,13 +111,6 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                     onChange={(e) => handlePasswordChange(e)} 
                     className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.password}`}
                 />
-
-                <label 
-                    htmlFor="verifyPassInput" 
-                    className="self-center justify-self-end text-gray-800 pl-8 text-lg"
-                > 
-                    Verify Password:
-                </label>
                 
                 <input 
                     type="password" 
@@ -140,7 +121,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                     className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.verifyPassword}`}
                 />
 
-                <div className="col-span-2 relative flex justify-center items-center w-full h-full">
+                <div className="relative flex justify-center items-center w-full h-full">
                     <div className="absolute top-[-8px] text-red-400">
                         {!newUserInfo.passwordMatch ? 'Passwords do not match' : signInError}
                     </div>
