@@ -1,6 +1,6 @@
 import { addUsername } from "../utils";
 
-export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInputColor, setExistingAccount, setSignInError, borderColors }) {
+export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInputColor, setExistingAccount, setSignInError, borderColors, loading, setLoading }) {
 
     async function handleCreateClick() {        
         try {
@@ -10,6 +10,7 @@ export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInput
                 
                 throw new Error('Please fill in all required fields')
             }
+            setLoading(true);
 
             if (newUserInfo.username &&
                 newUserInfo.password &&
@@ -34,6 +35,7 @@ export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInput
         } catch (error) {
             setSignInError(error.message);
         }   
+        setLoading(false);
     }
 
 

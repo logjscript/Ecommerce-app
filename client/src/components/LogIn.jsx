@@ -3,13 +3,12 @@ import { useContext, useState } from "react";
 import { UserContext } from "./UserContext";
 
 
-export default function LogIn({ setExistingAccount, signInError, setSignInError }) {
+export default function LogIn({ setExistingAccount, signInError, setSignInError, loading, setLoading }) {
     const { setSignedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
     const [checkLogInInfo, setCheckLogInInfo] = useState({
         username: '',
         password: ''
     });
-    const [loading, setLoading] = useState(false);
 
     async function handleLogInButton() {
         try {
@@ -84,7 +83,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError 
                     </button>
 
                     {signInError && <div data-testid='signInError' className="absolute top-[-7px] col-span-2 place-self-center text-red-400">{signInError}</div>}
-                    {loading && <div className="absolute top-[-7px] col-span-2 place-self-center">{'Checking user data...'}</div>}
+                    {loading && <div className="absolute top-[-7px] col-span-2 place-self-center">Checking user data...</div>}
                 </div>
                 
 

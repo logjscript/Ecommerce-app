@@ -3,7 +3,7 @@ import { changeBorderColor } from "../utils";
 import CreateUserButton from "./CreateUserButton";
 import { UserContext } from "./UserContext";
 
-export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError }) {
+export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError, setLoading, loading }) {
     const { setCanceled } = useContext(UserContext);
 
     const borderColors = [
@@ -145,6 +145,8 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                         {!newUserInfo.passwordMatch ? 'Passwords do not match' : signInError}
                     </div>
 
+                    {loading && <div className="absolute top-[-8px]">Creating user...</div>}
+
                     <CreateUserButton 
                         newUserInfo={newUserInfo} 
                         setNewUserInfo={setNewUserInfo}
@@ -152,6 +154,8 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                         setExistingAccount={setExistingAccount} 
                         setSignInError={setSignInError}
                         borderColors={borderColors}
+                        loading={loading}
+                        setLoading={setLoading}
                     />
                 </div>
             </div>

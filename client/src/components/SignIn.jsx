@@ -12,6 +12,7 @@ export default function SignIn() {
     const [errorIsVisible, setErrorIsVisible] = useState(false);
     const [existingAccount, setExistingAccount] = useState(true);
     const [signInError, setSignInError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
 
     return (
@@ -21,6 +22,8 @@ export default function SignIn() {
                 signInError={signInError}
                 setErrorIsVisible={setErrorIsVisible}
                 setSignInError={setSignInError}
+                loading={loading}
+                setLoading={setLoading}
             />
         ) : (
            <SignUp 
@@ -31,6 +34,8 @@ export default function SignIn() {
                 signInError={signInError}
                 setErrorIsVisible={setErrorIsVisible}
                 setSignInError={setSignInError}
+                loading={loading}
+                setLoading={setLoading}
            />
         )
     )
