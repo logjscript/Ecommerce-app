@@ -4,11 +4,11 @@ import PurchaseButton from '../src/components/PurchaseButton';
 import { UserContext } from '../src/components/UserContext';
 
 const mockSetBought = vi.fn();
-const mockSetUserInfo = vi.fn();
-let userInfo;
+const mockSetSignedInUserInfo = vi.fn();
+let signedInUserInfo;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'password',
         items: [
@@ -22,7 +22,7 @@ beforeEach(() => {
 describe('PurchaseButton', () => {
     test('should render', () => {
         render(
-            <UserContext.Provider value={{ userInfo, setUserInfo: mockSetUserInfo }}>
+            <UserContext.Provider value={{ signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo }}>
                 <PurchaseButton setBought={mockSetBought} />
             </UserContext.Provider>
         );
@@ -33,7 +33,7 @@ describe('PurchaseButton', () => {
 
     test('should change bought value on click event', () => {
         render(
-            <UserContext.Provider value={{ userInfo, setUserInfo: mockSetUserInfo }}>
+            <UserContext.Provider value={{ signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo }}>
                 <PurchaseButton setBought={mockSetBought} />
             </UserContext.Provider>
         );
@@ -44,9 +44,9 @@ describe('PurchaseButton', () => {
         expect(mockSetBought).toHaveBeenCalledWith(true);
     });
 
-    test('should change userInfo value on click event', () => {
+    test('should change signedInUserInfo value on click event', () => {
         render(
-            <UserContext.Provider value={{ userInfo, setUserInfo: mockSetUserInfo }}>
+            <UserContext.Provider value={{ signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo }}>
                 <PurchaseButton setBought={mockSetBought} />
             </UserContext.Provider>
         );
@@ -54,6 +54,6 @@ describe('PurchaseButton', () => {
         const buttonElement = screen.getByRole('button');
         fireEvent.click(buttonElement);
 
-        expect(mockSetUserInfo).toHaveBeenCalled();
+        expect(mockSetSignedInUserInfo).toHaveBeenCalled();
     });
 })

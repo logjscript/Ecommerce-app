@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 export default function PurchaseButton({ setBought }) {
-    const { userInfo, setUserInfo } = useContext(UserContext);
+    const { signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
     function handleClick() {
         setBought(true);
-        setUserInfo({
-            ...userInfo,
+        setSignedInUserInfo({
+            ...signedInUserInfo,
             items: [],
         })
         

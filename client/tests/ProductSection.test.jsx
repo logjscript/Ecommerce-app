@@ -4,10 +4,10 @@ import ProductSection from '../src/components/ProductSection';
 import { ImageProvider } from '../src/components/ImageContext';
 import { UserContext } from '../src/components/UserContext';
 
-let userInfo;
+let signedInUserInfo;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'password',
         items: [
@@ -22,7 +22,7 @@ describe('ProductSection', () => {
     test('should render on page', () => {
         render(
             <ImageProvider>
-                <UserContext.Provider value={{ type: 'hats'}}>
+                <UserContext.Provider value={{ itemType: 'hats'}}>
                     <ProductSection />
                 </UserContext.Provider>
             </ImageProvider>
@@ -35,7 +35,7 @@ describe('ProductSection', () => {
     test('should render hat images on page', () => {
         render(
             <ImageProvider>
-                <UserContext.Provider value={{ type: 'hats'}}>
+                <UserContext.Provider value={{ itemType: 'hats'}}>
                     <ProductSection />
                 </UserContext.Provider>
             </ImageProvider>

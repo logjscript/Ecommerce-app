@@ -3,10 +3,10 @@ import { describe, expect } from 'vitest';
 import SignIn from '../src/components/SignIn';
 import { UserContext } from '../src/components/UserContext';
 
-let userInfo;
+let signedInUserInfo;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'password',
         items: [
@@ -20,7 +20,7 @@ beforeEach(() => {
 describe('SignIn', () => {
     test('should render LogIn component', () => {
         render(
-            <UserContext.Provider value={{ userInfo }}>
+            <UserContext.Provider value={{ signedInUserInfo }}>
                 <SignIn />
             </UserContext.Provider>
         );
@@ -31,7 +31,7 @@ describe('SignIn', () => {
 
     test('should render SignUp component', async () => {
         render(
-            <UserContext.Provider value={{ userInfo }}>
+            <UserContext.Provider value={{ signedInUserInfo }}>
                 <SignIn />
             </UserContext.Provider>
         );

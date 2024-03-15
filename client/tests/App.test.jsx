@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import App from '../src/App';
 import { itemToBag } from '../src/utils';
-import { userInfo } from './testUserInfo';
+import { signedInUserInfo } from './testUserInfo';
 import UserProvider from '../src/components/UserContext';
 
 global.fetch = vi.fn();
@@ -26,15 +26,15 @@ describe('App', () => {
             </UserProvider>
         );
 
-        await itemToBag(userInfo);
+        await itemToBag(signedInUserInfo);
 
         expect(global.fetch).toHaveBeenCalledWith(
-            `http://localhost:5200/api/v1/users/${userInfo.username}`, {
+            `http://localhost:5200/api/v1/users/${signedInUserInfo.username}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...userInfo})
+            body: JSON.stringify({...signedInUserInfo})
         });
     });
 

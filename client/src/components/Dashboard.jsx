@@ -7,15 +7,15 @@ import LeftDashboardItems from "./LeftDashboardItems";
 import RightDashboardItems from "./RightDashboardItems";
 
 export default function Dashboard () {
-    const { setType, signedIn, setSignedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
+    const { setItemType, userSignedIn, setUserSignedIn, setCancelSignIn, signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
     const [showNav, setShowNav] = useState(false);
-    const totalItems = itemsInBag(userInfo?.items);
+    const totalItems = itemsInBag(signedInUserInfo?.items);
 
     const handleSignOutClick = () => {
-        setSignedIn(false);
-        setCanceled(true);
-        setType(null);
-        setUserInfo({
+        setUserSignedIn(false);
+        setCancelSignIn(true);
+        setItemType(null);
+        setSignedInUserInfo({
             username: '',
             password: '',
             items: [],
@@ -25,16 +25,16 @@ export default function Dashboard () {
     }
 
     const handleTypeClick = (e) => {
-        setType(e.target.value);
+        setItemType(e.target.value);
         setShowNav(false);
         window.scrollTo(0,0);
     }
 
     const handleBagClick = () => {
-        if (!signedIn) {
-          setCanceled(false);
+        if (!userSignedIn) {
+          setCancelSignIn(false);
         } else {
-          setType('bag');
+          setItemType('bag');
           window.scrollTo(0,0);
         }
         setShowNav(false);
@@ -77,9 +77,9 @@ export default function Dashboard () {
                         handleTypeClick={handleTypeClick}
                         handleBagClick={handleBagClick} 
                         handleSignOutClick={handleSignOutClick} 
-                        setCanceled={setCanceled} 
+                        setCancelSignIn={setCancelSignIn} 
                         totalItems={totalItems} 
-                        signedIn={signedIn} 
+                        userSignedIn={userSignedIn} 
                         testIdNumber={'1'}
                         classes={'flex flex-col gap-6'} 
                         setShowNav={setShowNav}
@@ -92,9 +92,9 @@ export default function Dashboard () {
                 handleTypeClick={handleTypeClick}
                 handleBagClick={handleBagClick} 
                 handleSignOutClick={handleSignOutClick} 
-                setCanceled={setCanceled} 
+                setCancelSignIn={setCancelSignIn} 
                 totalItems={totalItems} 
-                signedIn={signedIn} 
+                userSignedIn={userSignedIn} 
                 testIdNumber={'2'}
                 classes={'justify-self-end hidden custom-md:flex text-sm gap-x-3 gap-y-3'} 
                 setShowNav={setShowNav}

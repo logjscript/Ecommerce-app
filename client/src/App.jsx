@@ -10,18 +10,18 @@ import Bag from './components/Bag';
 
 
 export default function App() {
-    const { type, signedIn, canceled, userInfo } = useContext(UserContext);
+    const { itemType, userSignedIn, cancelSignIn, signedInUserInfo } = useContext(UserContext);
 
     useEffect(() => {
-        if (signedIn) {
-            itemToBag(userInfo);
+        if (userSignedIn) {
+            itemToBag(signedInUserInfo);
         }
-    }, [userInfo?.items, signedIn]);
+    }, [signedInUserInfo?.items, userSignedIn]);
 
     let compToDisplay;
-        if (!type) {
+        if (!itemType) {
             compToDisplay = <HomePage />
-        } else if (type === 'bag') {
+        } else if (itemType === 'bag') {
             compToDisplay = <Bag />;
         } else {
             compToDisplay = <ProductSection />;
@@ -32,7 +32,7 @@ export default function App() {
           <ImageProvider>
             <Dashboard />
               {compToDisplay}
-              {(signedIn || canceled) ? null : (
+              {(userSignedIn || cancelSignIn) ? null : (
                   <SignIn />
               )}
           </ImageProvider>

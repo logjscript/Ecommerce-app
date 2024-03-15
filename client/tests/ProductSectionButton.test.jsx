@@ -3,14 +3,14 @@ import { describe, expect, vi } from 'vitest';
 import ProductSectionButton from '../src/components/ProductSectionButton';
 import { UserContext } from '../src/components/UserContext';
 
-const mockSetCanceled = vi.fn();
-const mockSetUserInfo = vi.fn();
+const mockSetCancelSignIn = vi.fn();
+const mockSetSignedInUserInfo = vi.fn();
 
-let userInfo;
+let signedInUserInfo;
 let item;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'password',
         items: [
@@ -32,8 +32,8 @@ describe('ProductSectionButton', () => {
     test('should render on page', () => {
         render(
             <UserContext.Provider value={{
-                userInfo, setUserInfo: mockSetUserInfo,
-                signedIn: true, setCanceled: mockSetCanceled
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                userSignedIn: true, setCancelSignIn: mockSetCancelSignIn
             }}>
                 <ProductSectionButton item={item} />
             </UserContext.Provider>
@@ -43,11 +43,11 @@ describe('ProductSectionButton', () => {
         expect(buttonElement).toBeInTheDocument();
     });
 
-    test("should change 'canceled' state to 'false' if not signed in", () => {
+    test("should change 'cancelSignIn' to 'false' if not signed in", () => {
         render(
             <UserContext.Provider value={{
-                userInfo, setUserInfo: mockSetUserInfo,
-                signedIn: false, setCanceled: mockSetCanceled
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                userSignedIn: false, setCancelSignIn: mockSetCancelSignIn
             }}>
                 <ProductSectionButton item={item} />
             </UserContext.Provider>
@@ -55,36 +55,36 @@ describe('ProductSectionButton', () => {
 
         const buttonElement = screen.getByRole('button');
         fireEvent.click(buttonElement);
-        expect(mockSetCanceled).toHaveBeenCalledWith(false);
+        expect(mockSetCancelSignIn).toHaveBeenCalledWith(false);
     });
 
     test('should increment quantity of item if item exists', () => {
         render(
             <UserContext.Provider value={{
-                userInfo, setUserInfo: mockSetUserInfo,
-                signedIn: true, setCanceled: mockSetCanceled
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                userSignedIn: true, setCancelSignIn: mockSetCancelSignIn
             }}>
-                <ProductSectionButton item={userInfo.items[0]} />
+                <ProductSectionButton item={signedInUserInfo.items[0]} />
             </UserContext.Provider>
         );
 
         const buttonElement = screen.getByRole('button');
         fireEvent.click(buttonElement);
 
-        expect(mockSetUserInfo).toHaveBeenCalledWith({
-            ...userInfo,
+        expect(mockSetSignedInUserInfo).toHaveBeenCalledWith({
+            ...signedInUserInfo,
             items: [
-                {...userInfo.items[0], quantity: userInfo.items[0].quantity + 1},
-                {...userInfo.items[1]}
+                {...signedInUserInfo.items[0], quantity: signedInUserInfo.items[0].quantity + 1},
+                {...signedInUserInfo.items[1]}
             ]
         });
     });
 
-    test('should add item to userInfo.items array if item does not exist', () => {
+    test('should add item to signedInUserInfo.items array if item does not exist', () => {
         render(
             <UserContext.Provider value={{
-                userInfo, setUserInfo: mockSetUserInfo,
-                signedIn: true, setCanceled: mockSetCanceled
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                userSignedIn: true, setCancelSignIn: mockSetCancelSignIn
             }}>
                 <ProductSectionButton item={item} />
             </UserContext.Provider>
@@ -93,10 +93,10 @@ describe('ProductSectionButton', () => {
         const buttonElement = screen.getByRole('button');
         fireEvent.click(buttonElement);
 
-        expect(mockSetUserInfo).toHaveBeenCalledWith({
-            ...userInfo,
+        expect(mockSetSignedInUserInfo).toHaveBeenCalledWith({
+            ...signedInUserInfo,
             items: [
-                ...userInfo.items,
+                ...signedInUserInfo.items,
                 {...item, quantity: 1}
             ]
         });

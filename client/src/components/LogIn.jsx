@@ -4,7 +4,7 @@ import { UserContext } from "./UserContext";
 
 
 export default function LogIn({ setExistingAccount, signInError, setSignInError, loading, setLoading }) {
-    const { setSignedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
+    const { setUserSignedIn, setCancelSignIn, setSignedInUserInfo } = useContext(UserContext);
     const [checkLogInInfo, setCheckLogInInfo] = useState({
         username: '',
         password: ''
@@ -14,7 +14,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError,
         try {
             setSignInError(null);
             setLoading(true);
-            const response = await checkUserInfo(checkLogInInfo, setUserInfo, setSignInError, setSignedIn);
+            const response = await checkUserInfo(checkLogInInfo, setSignedInUserInfo, setSignInError, setUserSignedIn);
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -33,7 +33,7 @@ export default function LogIn({ setExistingAccount, signInError, setSignInError,
                         Sign In
                     </h1>
                     <button 
-                        onClick={() => setCanceled(true)} 
+                        onClick={() => setCancelSignIn(true)} 
                         className="absolute right-3 top-3"
                     >
                         <img 

@@ -4,7 +4,7 @@ import CreateUserButton from "./CreateUserButton";
 import { UserContext } from "./UserContext";
 
 export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError, setLoading, loading }) {
-    const { setCanceled } = useContext(UserContext);
+    const { setCancelSignIn } = useContext(UserContext);
 
     const borderColors = [
         'border-green-500 shadow-sm outline-none',
@@ -84,7 +84,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                         Sign Up
                     </h1>
                     <button 
-                        onClick={() => setCanceled(true)} 
+                        onClick={() => setCancelSignIn(true)} 
                         className="absolute right-3 top-3"
                     >
                         <img  

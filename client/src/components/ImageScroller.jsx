@@ -4,29 +4,29 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 export default function ImageScroller() {
-    const { setType } = useContext(UserContext);
+    const { setItemType } = useContext(UserContext);
     const { allClothes } = useImages();
 
     function handleClickScrollBar(id) {
         switch(true) {
             case id < 4: {
-                setType('hats');
+                setItemType('hats');
                 break;
             }
             case id >= 4 && id < 8: {
-                setType('sweatshirts');
+                setItemType('sweatshirts');
                 break;
             }
             case id >= 8 && id < 12: {
-                setType('shirts');
+                setItemType('shirts');
                 break;
             }
             case id >= 12 && id < 16: {
-                setType('pants');
+                setItemType('pants');
                 break;
             }
             case id >= 16 && id < 20: {
-                setType('shoes');
+                setItemType('shoes');
                 break;
             }
             default: {

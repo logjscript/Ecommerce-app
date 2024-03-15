@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 export default function DeleteBagItem({ item }) {
-    const { userInfo, setUserInfo } = useContext(UserContext);
+    const { signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
     
     const handleClick = () => {
-        const existingItem = userInfo.items.findIndex(bagItem => bagItem.name === item.name);
-        const updatedState = [...userInfo.items];
+        const existingItem = signedInUserInfo.items.findIndex(bagItem => bagItem.name === item.name);
+        const updatedState = [...signedInUserInfo.items];
 
         if (updatedState[existingItem].quantity > 1) {
             updatedState[existingItem] = {
@@ -17,8 +17,8 @@ export default function DeleteBagItem({ item }) {
             updatedState.splice(existingItem, 1);
         }
 
-        setUserInfo({
-            ...userInfo,
+        setSignedInUserInfo({
+            ...signedInUserInfo,
             items: updatedState
         })
     }

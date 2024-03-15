@@ -3,14 +3,14 @@ const apiUrl = import.meta.env.VITE_APP_SERVERURL;
 
 //App component functions
 
-export const itemToBag = async (userInfo) => {
+export const itemToBag = async (signedInUserInfo) => {
     try {
-        const response = await fetch(`${apiUrl}/${userInfo.username}`, {
+        const response = await fetch(`${apiUrl}/${signedInUserInfo.username}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...userInfo})
+            body: JSON.stringify({...signedInUserInfo})
         });
 
         if (!response.ok) {
@@ -94,7 +94,7 @@ export const addUsername = async (newUserInfo) => {
 
 //LogIn component functions 
 
-export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError, setSignedIn) => {
+export const checkUserInfo = async (checkLogInInfo, setSignedInUserInfo, setSignInError, setUserSignedIn) => {
     try {
         if (!checkLogInInfo.username || !checkLogInInfo.password) {
             throw new Error('Please fill in both fields');
@@ -114,7 +114,7 @@ export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError,
         if (response.ok) {
             const [{ username, password, items, total }] = await response.json();
               
-            setUserInfo({
+            setSignedInUserInfo({
                 username: username,
                 password: password,
                 items: items, 
@@ -124,7 +124,7 @@ export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError,
             throw new Error('Username or password is incorrect');
         }
       
-        setSignedIn(true);
+        setUserSignedIn(true);
     } catch (error) {
         console.log(error.message);
         if (error.message === 'Please fill in both fields') {

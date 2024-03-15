@@ -2,35 +2,35 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 export default function ProductSectionButton({ item }) {
-    const { signedIn, setCanceled, userInfo, setUserInfo } = useContext(UserContext);
+    const { userSignedIn, setCancelSignIn, signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
 
     const handleClick = () => {
 
-        if (signedIn) {
-            const existingItemIndex = userInfo.items?.findIndex(bagItem => {
+        if (userSignedIn) {
+            const existingItemIndex = signedInUserInfo.items?.findIndex(bagItem => {
                 return bagItem.name === item.name;
             });
 
             if (existingItemIndex !== -1 && existingItemIndex !== undefined) {
-                let updatedState = [...userInfo.items];
+                let updatedState = [...signedInUserInfo.items];
                 updatedState[existingItemIndex] = {
                     ...item, 
-                    quantity: userInfo.items[existingItemIndex].quantity + 1
+                    quantity: signedInUserInfo.items[existingItemIndex].quantity + 1
                 };
 
-                setUserInfo({
-                    ...userInfo,
+                setSignedInUserInfo({
+                    ...signedInUserInfo,
                     items: updatedState
                 });
             } else {
-                setUserInfo({
-                    ...userInfo, items: [
-                        ...(userInfo.items || []), {value: item.value, link: item.link, name: item.name, quantity: 1}
+                setSignedInUserInfo({
+                    ...signedInUserInfo, items: [
+                        ...(signedInUserInfo.items || []), {value: item.value, link: item.link, name: item.name, quantity: 1}
                     ]
                 });
             }
         } else {
-            setCanceled(false);
+            setCancelSignIn(false);
         }
     }
 

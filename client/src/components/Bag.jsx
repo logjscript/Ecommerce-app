@@ -5,13 +5,13 @@ import { userTotalPrice } from "../utils";
 import { UserContext } from "./UserContext";
 
 export default function Bag() {
-    const { userInfo, setUserInfo } = useContext(UserContext);
+    const { signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
     const [bought, setBought] = useState(false);
     const [showPurchaseButton, setShowPurchaseButton] = useState(null);
-    const priceTotal = userTotalPrice(userInfo.items);  
+    const priceTotal = userTotalPrice(signedInUserInfo.items);  
 
     useEffect(() => {
-        if (userInfo.items.length > 0) {
+        if (signedInUserInfo.items.length > 0) {
             setBought(false);
             setShowPurchaseButton(
                 <PurchaseButton 
@@ -23,7 +23,7 @@ export default function Bag() {
         } else {
             setShowPurchaseButton(null);
         }
-    }, [userInfo.items, bought]);
+    }, [signedInUserInfo.items, bought]);
 
     let totalToDisplay;
     let itemsToDisplay;
@@ -43,9 +43,9 @@ export default function Bag() {
         ));
 
         itemsToDisplay = (
-            (userInfo.items && userInfo.items.length > 0) ? (
+            (signedInUserInfo.items && signedInUserInfo.items.length > 0) ? (
                 <div data-testid='testContainerDiv' className='flex flex-col items-center self-center gap-6 lg:gap-8 w-full px-[5%] min-h-full md:h-full md:px-[20%] py-6 pt-[104px] md:pt-6 lg:py-8 md:row-start-2 md:overflow-auto'>
-                    {userInfo.items.map(item => (
+                    {signedInUserInfo.items.map(item => (
                         <div data-testid='testMappedDiv' key={item.name} className="w-full grid grid-cols-[40%_1fr] bg-white rounded-3xl p-4 shadow-lg shadow-gray-500 bg-gradient-to-r from-gray-300 to-white">
                             <img src={item.link} className="rounded-xl aspect-square min-w-[125px] w-full object-cover justify-self-start self-center shadow-md shadow-gray-400 row-span-2"/>
 
@@ -56,7 +56,7 @@ export default function Bag() {
                             </div>
 
                             <div className='place-self-center'>
-                                <DeleteBagItem item={item} setUserInfo={setUserInfo} userInfo={userInfo} />
+                                <DeleteBagItem item={item} setSignedInUserInfo={setSignedInUserInfo} signedInUserInfo={signedInUserInfo} />
                             </div>
                         </div>
                     ))}
@@ -82,7 +82,7 @@ export default function Bag() {
                     {totalToDisplay}
                 
                     <ul className='max-h-[100%] min-w-[35%] justify-self-center md:self-start overflow-auto'>
-                        {userInfo.items.map((item) => (
+                        {signedInUserInfo.items.map((item) => (
                             <li key={item.name} className='text-md text-gray-500'>{item.name}: {item.quantity}</li>
                         ))}
                     </ul>
