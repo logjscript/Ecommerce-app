@@ -1,12 +1,12 @@
 import { useEffect, useContext } from 'react';
+import { ImageProvider } from './components/ImageContext';
+import { UserContext } from "./components/UserContext";
+import { itemToBag } from './utils';
 import Dashboard from './components/Dashboard';
 import HomePage from './components/HomePage';
-import { ImageProvider } from './components/ImageContext';
 import ProductSection from './components/ProductSection';
 import SignIn from './components/SignIn';
 import Bag from './components/Bag';
-import { itemToBag } from './utils';
-import { UserContext } from "./components/UserContext";
 
 
 export default function App() {

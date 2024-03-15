@@ -23,6 +23,7 @@ const mockSetNewUserInfo = vi.fn();
 const mockSetInputColor = vi.fn();
 const mockSetExistingAccount = vi.fn();
 const mockSetSignInError = vi.fn();
+const mockSetLoading = vi.fn();
 
 describe('CreateUserButton', () => {
     test('should render on page', () => {
@@ -48,6 +49,7 @@ describe('CreateUserButton', () => {
                 setInputColor={mockSetInputColor}
                 setExistingAccount={mockSetExistingAccount}
                 setSignInError={mockSetSignInError}
+                setLoading={mockSetLoading}
             />
         );
 
@@ -71,6 +73,7 @@ describe('CreateUserButton', () => {
                 setExistingAccount={mockSetExistingAccount}
                 setSignInError={mockSetSignInError}
                 borderColors={['green', 'gray', 'red']}
+                setLoading={mockSetLoading}
             />
         );
 
@@ -94,6 +97,7 @@ describe('CreateUserButton', () => {
                 setExistingAccount={mockSetExistingAccount}
                 setSignInError={mockSetSignInError}
                 borderColors={['green', 'gray', 'red']}
+                setLoading={mockSetLoading}
             />
         );
 
@@ -116,6 +120,7 @@ describe('CreateUserButton', () => {
                 setInputColor={mockSetInputColor}
                 setExistingAccount={mockSetExistingAccount}
                 setSignInError={mockSetSignInError}
+                setLoading={mockSetLoading}
                 borderColors={['green', 'gray', 'red']}
             />
         );

@@ -50,26 +50,10 @@ describe('Dashboard', () => {
             </UserContext.Provider>
         );
 
-        const buttonElement = screen.getByTestId('itemTypeButton');
+        const buttonElement = screen.getByTestId('itemTypeButton1');
         fireEvent.click(buttonElement);
         
         expect(mockSetType).toHaveBeenCalledWith('hats')
-    });
-
-    test('should show username and sign out button when signed in', () => {
-        render(
-            <UserContext.Provider value={{ 
-                signedIn: true, setSignedIn: mockSetSignedIn, 
-                userInfo, setUserInfo: mockSetUserInfo,
-                setType: mockSetType, setCanceled: mockSetCanceled
-             }}>
-                <Dashboard />
-            </UserContext.Provider>
-        );
-       
-        const buttonElement = screen.getByText(/Sign Out/i)
-
-        expect(buttonElement).toBeInTheDocument();
     });
 
     test('should show number of items in Bag when signed in and items > 0', () => {
@@ -85,7 +69,7 @@ describe('Dashboard', () => {
 
         const totalItems = itemsInBag(userInfo?.items);
 
-        const divElement = screen.getByTestId('itemQuantity');
+        const divElement = screen.getByTestId('dashIconItemCount');
         const divContent = Number(divElement.textContent);
 
         expect(divElement).toBeInTheDocument();
@@ -121,9 +105,9 @@ describe('Dashboard', () => {
             </UserContext.Provider>
         );
 
-        const buttonElement = screen.getByText(/Sign In/i)
+        const buttonElements = screen.getAllByText(/Sign In/i)
 
-        expect(buttonElement).toBeInTheDocument();
+        expect(buttonElements.length).toBeGreaterThan(0);
     });
 
     test("should set appropriate state when clicking 'sign out'", () => {
@@ -137,7 +121,7 @@ describe('Dashboard', () => {
             </UserContext.Provider>
         );
 
-        const buttonElement = screen.getByText(/Sign out/i);
+        const buttonElement = screen.getByTestId('signOutButton1');
         fireEvent.click(buttonElement);
 
         expect(mockSetSignedIn).toHaveBeenCalledWith(false);

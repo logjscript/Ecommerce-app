@@ -1,5 +1,5 @@
 
-const RightDashboardItems = ({ classes, signedIn, handleTypeClick, handleSignOutClick, handleBagClick, setCanceled, totalItems, setShowNav }) => {
+const RightDashboardItems = ({ classes, signedIn, handleTypeClick, handleSignOutClick, handleBagClick, setCanceled, totalItems, setShowNav, testIdNumber }) => {
 
   return (
     <div className={classes}>
@@ -15,6 +15,7 @@ const RightDashboardItems = ({ classes, signedIn, handleTypeClick, handleSignOut
             </button>
         ) : (
             <button 
+                data-testId={`signOutButton${testIdNumber}`}
                 className='text-left' 
                 onClick={handleSignOutClick}
             >
@@ -23,7 +24,7 @@ const RightDashboardItems = ({ classes, signedIn, handleTypeClick, handleSignOut
         )}
 
         <button 
-            data-testid='bag'
+            data-testid={`bag${testIdNumber}`}
             onClick={() => handleBagClick()} 
             className='relative w-8'
         >

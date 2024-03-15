@@ -18,7 +18,7 @@ vi.mock('../src/utils', ()=> {
 
 const mockSetCanceled = vi.fn();
 const mockSetUserInfo = vi.fn();
-const mockSetCheckLogInInfo = vi.fn();
+const mockSetLoading = vi.fn();
 const mockSetSignedIn = vi.fn();
 const mockSetSignInError = vi.fn();
 const mockSetExistingAccount = vi.fn();
@@ -47,6 +47,7 @@ describe('LogIn', () => {
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
                     setSignInError={mockSetSignInError}
+                    setLoading={mockSetLoading}
                 />
             </UserContext.Provider>
         );
@@ -64,6 +65,7 @@ describe('LogIn', () => {
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
                     setSignInError={mockSetSignInError}
+                    setLoading={mockSetLoading}
                 />
             </UserContext.Provider>
         );
@@ -92,6 +94,7 @@ describe('LogIn', () => {
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
                     setSignInError={mockSetSignInError}
+                    setLoading={mockSetLoading}
                 />
             </UserContext.Provider>
         );
@@ -121,6 +124,7 @@ describe('LogIn', () => {
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
                     setSignInError={mockSetSignInError}
+                    setLoading={mockSetLoading}
                 />
             </UserContext.Provider>
         );
@@ -142,6 +146,7 @@ describe('LogIn', () => {
                     setExistingAccount={mockSetExistingAccount}
                     setSignInError={mockSetSignInError}
                     signInError={true}
+                    setLoading={mockSetLoading}
                 />
             </UserContext.Provider>
         );
@@ -161,6 +166,7 @@ describe('LogIn', () => {
                     setExistingAccount={mockSetExistingAccount}
                     setSignInError={mockSetSignInError}
                     signInError={false}
+                    setLoading={mockSetLoading}
                 />
             </UserContext.Provider>
         );

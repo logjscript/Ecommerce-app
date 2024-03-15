@@ -56,11 +56,11 @@ describe('App', () => {
             </UserProvider>
         );
 
-        const buttonElement = screen.getByText(/hats/i);
+        const buttonElement = screen.getByTestId('itemTypeButton1');
         fireEvent.click(buttonElement);
         
-        const childComponent = await screen.findAllByText(/add to bag/i);        
-        childComponent.forEach((child) => {
+        const childComponents = await screen.findAllByText(/add to bag/i);        
+        childComponents.forEach((child) => {
             expect(child).toBeInTheDocument()
         });
     });
@@ -72,7 +72,7 @@ describe('App', () => {
             </UserProvider>
         );
 
-        const buttonElement = screen.getByTestId('bag');
+        const buttonElement = screen.getByTestId('bag1');
         fireEvent.click(buttonElement);
 
         const logInElement = await screen.findByText(/Log in/i);
