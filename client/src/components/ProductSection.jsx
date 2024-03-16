@@ -1,4 +1,4 @@
-import { useItems } from "./ImageContext";
+import { useItems } from "./ItemContext";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import ProductSectionButton from './ProductSectionButton';

@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect } from 'vitest';
-import SignIn from '../src/components/SignIn';
+import SignIn from '../src/components/ShowLogIn';
 import { UserContext } from '../src/components/UserContext';
 
 let signedInUserInfo;

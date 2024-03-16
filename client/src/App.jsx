@@ -1,11 +1,11 @@
 import { useEffect, useContext } from 'react';
-import { ItemProvider } from './components/ImageContext';
+import { ItemProvider } from './components/ItemContext';
 import { UserContext } from "./components/UserContext";
 import { addItemsToBag } from './utils';
 import Dashboard from './components/Dashboard';
 import HomePage from './components/HomePage';
 import ProductSection from './components/ProductSection';
-import SignIn from './components/SignIn';
+import SignIn from './components/ShowLogIn';
 import Bag from './components/Bag';
 
 

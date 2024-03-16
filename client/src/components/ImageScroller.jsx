@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useItems } from './ImageContext';
+import { useItems } from './ItemContext';
 import { UserContext } from "./UserContext";
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 

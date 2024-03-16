@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test} from 'vitest';
 import ProductSection from '../src/components/ProductSection';
-import { ItemProvider } from '../src/components/ImageContext';
+import { ItemProvider } from '../src/components/ItemContext';
 import { UserContext } from '../src/components/UserContext';
 
 let signedInUserInfo;
