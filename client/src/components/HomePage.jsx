@@ -1,6 +1,6 @@
 import ImageScroller from './ImageScroller';
 
-export default function HomePage() {  
+const HomePage = () => {  
     return (
         <div 
             data-testid='homepage'
@@ -10,3 +10,5 @@ export default function HomePage() {
         </div>
     )
 }
+
+export default HomePage;

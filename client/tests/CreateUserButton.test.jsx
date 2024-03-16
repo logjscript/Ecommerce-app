@@ -1,6 +1,5 @@
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
-import { addUsername } from '../src/utils';
 import CreateUserButton from '../src/components/CreateUserButton';
 
 vi.mock('../src/utils', () => {

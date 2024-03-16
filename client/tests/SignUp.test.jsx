@@ -1,7 +1,6 @@
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import SignUp from '../src/components/SignUp';
-import { changeBorderColor } from '../src/utils';
 
 vi.mock('../src/utils', () => {
     return {

@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
-export default function DeleteBagItem({ item }) {
-    const { userInfo, setUserInfo } = useContext(UserContext);
+const DeleteBagItem = ({ item }) => {
+    const { signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
     
     const handleClick = () => {
-        const existingItem = userInfo.items.findIndex(bagItem => bagItem.name === item.name);
-        const updatedState = [...userInfo.items];
+        const existingItem = signedInUserInfo.items.findIndex(bagItem => bagItem.name === item.name);
+        const updatedState = [...signedInUserInfo.items];
 
         if (updatedState[existingItem].quantity > 1) {
             updatedState[existingItem] = {
@@ -17,13 +17,15 @@ export default function DeleteBagItem({ item }) {
             updatedState.splice(existingItem, 1);
         }
 
-        setUserInfo({
-            ...userInfo,
+        setSignedInUserInfo({
+            ...signedInUserInfo,
             items: updatedState
         })
     }
 
     return (
-        <button className='px-[10px] py-[8px] bg-gray-800 text-white text-xs rounded-3xl opacity-100 hover:opacity-50 ease-in-out duration-200 sm:text-sm lg:text-base' onClick={handleClick}>Remove Item</button>
+        <button className='px-[16px] py-[8px] bg-gray-800 text-white rounded-3xl rounded- opacity-100 hover:opacity-50 ease-in-out duration-200 text-xs sm:text-sm xl:text-lg lg:text-base font-voltaire' onClick={handleClick}>Remove Item</button>
     )
 }
+
+export default DeleteBagItem;

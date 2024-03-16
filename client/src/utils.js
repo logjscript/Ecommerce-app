@@ -3,14 +3,14 @@ const apiUrl = import.meta.env.VITE_APP_SERVERURL;
 
 //App component functions
 
-export const itemToBag = async (userInfo) => {
+export const addItemsToBag = async (signedInUserInfo) => {
     try {
-        const response = await fetch(`${apiUrl}/${userInfo.username}`, {
+        const response = await fetch(`${apiUrl}/${signedInUserInfo.username}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...userInfo})
+            body: JSON.stringify({...signedInUserInfo})
         });
 
         if (!response.ok) {
@@ -24,7 +24,7 @@ export const itemToBag = async (userInfo) => {
 
 //Bag component functions
 
-export const userTotalPrice = (items) => {
+export const totalBagPrice = (items) => {
    const total = items?.reduce((acc, item) => {    
         if (item.value[0] === '$') {
             return acc + Number((item.value.slice(1)) * item.quantity);
@@ -38,14 +38,16 @@ export const userTotalPrice = (items) => {
 
 //Dashboard component functions
 
-export const itemsInBag = (items) => {
+export const countItemsInBag = (items) => {
     return items?.reduce((acc, item) => {return item.quantity + acc}, 0);
 }
 
 
 //SignUp component functions
 
-export const changeBorderColor = (green, gray, red, password, verifyPassword, setInputColor, inputColor) => {
+export const changeBorderColor = (borderColors, password, verifyPassword, setInputColor, inputColor) => {
+    const { green, gray, red } = borderColors;
+    
     if (verifyPassword && (password === '' || verifyPassword !== password)){
         setInputColor({
             ...inputColor,
@@ -94,37 +96,37 @@ export const addUsername = async (newUserInfo) => {
 
 //LogIn component functions 
 
-export const checkUserInfo = async (checkLogInInfo, setUserInfo, setSignInError, setSignedIn) => {
+export const checkUserInfo = async (userInputInfo, setSignedInUserInfo, setSignInError, setUserSignedIn) => {
     try {
-        if (!checkLogInInfo.username || !checkLogInInfo.password) {
+        if (!userInputInfo.username || !userInputInfo.password) {
             throw new Error('Please fill in both fields');
         }
 
-        const response = await fetch(`${apiUrl}/${checkLogInInfo.username}`, {
+        const response = await fetch(`${apiUrl}/${userInputInfo.username}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: checkLogInInfo.username,
-                password: checkLogInInfo.password
+                username: userInputInfo.username,
+                password: userInputInfo.password
             })
         });
 
         if (response.ok) {
             const [{ username, password, items, total }] = await response.json();
               
-            setUserInfo({
+            setSignedInUserInfo({
                 username: username,
                 password: password,
                 items: items, 
                 total: total
             });      
         } else {
-            throw new Error('Username or password is incorrect');
+            throw new Error();
         }
       
-        setSignedIn(true);
+        setUserSignedIn(true);
     } catch (error) {
         console.log(error.message);
         if (error.message === 'Please fill in both fields') {

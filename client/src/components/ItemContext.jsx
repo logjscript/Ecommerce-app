@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
 
-const ImageContext = createContext();
+const ItemContext = createContext();
 
-export function ImageProvider({ children }) {
-    const imageGroups = {
+const ItemProvider = ({ children }) => {
+    const itemGroups = {
         home: ['../../images/home-imgs/home1.jpg', '../../public/images/home-imgs/home2.jpg', '../../public/images/home-imgs/home3.jpg'],
         hats: [
             {link: '../../images/hat-imgs/hat1.jpg', value: '$54.99', name: 'Striped Hat', description: 'This is a beautiful striped hat with a red decorated band wrapping around it', quantity: 0, id: 0}, 
@@ -38,20 +38,22 @@ export function ImageProvider({ children }) {
     }
 
     const allClothes = [
-        ...imageGroups.hats,
-        ...imageGroups.sweatshirts,
-        ...imageGroups.shirts,
-        ...imageGroups.pants,
-        ...imageGroups.shoes,
+        ...itemGroups.hats,
+        ...itemGroups.sweatshirts,
+        ...itemGroups.shirts,
+        ...itemGroups.pants,
+        ...itemGroups.shoes,
     ];
 
     return (
-        <ImageContext.Provider value={{ imageGroups, allClothes }}>
+        <ItemContext.Provider value={{ itemGroups, allClothes }}>
             {children}
-        </ImageContext.Provider>
+        </ItemContext.Provider>
     )
 }
 
-export function useImages() {
-    return useContext(ImageContext);
+export function useItems() {
+    return useContext(ItemContext);
 }
+
+export { ItemProvider };

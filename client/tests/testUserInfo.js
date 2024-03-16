@@ -1,6 +1,6 @@
 //Dummy user info
 
-export const userInfo = {
+export const signedInUserInfo = {
     username: 'User', 
     password: 'pass', 
     items: [

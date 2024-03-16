@@ -1,18 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import Dashboard from '../src/components/Dashboard';
-import { itemsInBag } from '../src/utils';
+import { countItemsInBag } from '../src/utils';
 import { UserContext } from '../src/components/UserContext';
 
-const mockSetType = vi.fn();
-const mockSetCanceled = vi.fn();
-const mockSetSignedIn = vi.fn();
-const mockSetUserInfo = vi.fn();
+const mockSetItemType = vi.fn();
+const mockSetCancelSignIn = vi.fn();
+const mockSetUserSignedIn = vi.fn();
+const mockSetSignedInUserInfo = vi.fn();
 
-let userInfo;
+let signedInUserInfo;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'password',
         items: [
@@ -27,9 +27,9 @@ describe('Dashboard', () => {
     test('should render on page', () => {
         render(
             <UserContext.Provider value={{ 
-                signedIn: true, setSignedIn: mockSetSignedIn, 
-                userInfo, setUserInfo: mockSetUserInfo,
-                setType: mockSetType, setCanceled: mockSetCanceled
+                userSignedIn: true, setUserSignedIn: mockSetUserSignedIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                setItemType: mockSetItemType, setCancelSignIn: mockSetCancelSignIn
              }}>
                 <Dashboard />
             </UserContext.Provider>
@@ -42,9 +42,9 @@ describe('Dashboard', () => {
     test("should set 'type' state when clicking an item header", () => {
         render(
             <UserContext.Provider value={{ 
-                signedIn: true, setSignedIn: mockSetSignedIn, 
-                userInfo, setUserInfo: mockSetUserInfo,
-                setType: mockSetType, setCanceled: mockSetCanceled
+                userSignedIn: true, setUserSignedIn: mockSetUserSignedIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                setItemType: mockSetItemType, setCancelSignIn: mockSetCancelSignIn
                 }}>
                 <Dashboard />
             </UserContext.Provider>
@@ -53,21 +53,21 @@ describe('Dashboard', () => {
         const buttonElement = screen.getByTestId('itemTypeButton1');
         fireEvent.click(buttonElement);
         
-        expect(mockSetType).toHaveBeenCalledWith('hats')
+        expect(mockSetItemType).toHaveBeenCalledWith('hats')
     });
 
     test('should show number of items in Bag when signed in and items > 0', () => {
         render(
             <UserContext.Provider value={{ 
-                signedIn: true, setSignedIn: mockSetSignedIn, 
-                userInfo, setUserInfo: mockSetUserInfo,
-                setType: mockSetType, setCanceled: mockSetCanceled
+                userSignedIn: true, setUserSignedIn: mockSetUserSignedIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                setItemType: mockSetItemType, setCancelSignIn: mockSetCancelSignIn
              }}>
                 <Dashboard />
             </UserContext.Provider>
         );
 
-        const totalItems = itemsInBag(userInfo?.items);
+        const totalItems = countItemsInBag(signedInUserInfo?.items);
 
         const divElement = screen.getByTestId('dashIconItemCount');
         const divContent = Number(divElement.textContent);
@@ -77,13 +77,13 @@ describe('Dashboard', () => {
     });
 
     test('should not show number of items in Bag when there are no items in Bag', () => {
-        userInfo.items = [];
+        signedInUserInfo.items = [];
 
         render(
             <UserContext.Provider value={{ 
-                signedIn: true, setSignedIn: mockSetSignedIn, 
-                userInfo, setUserInfo: mockSetUserInfo,
-                setType: mockSetType, setCanceled: mockSetCanceled
+                userSignedIn: true, setUserSignedIn: mockSetUserSignedIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                setItemType: mockSetItemType, setCancelSignIn: mockSetCancelSignIn
              }}>
                 <Dashboard />
             </UserContext.Provider>
@@ -97,9 +97,9 @@ describe('Dashboard', () => {
     test('should show sign in button when signed out', () => {
         render(
             <UserContext.Provider value={{ 
-                signedIn: false, setSignedIn: mockSetSignedIn, 
-                userInfo, setUserInfo: mockSetUserInfo,
-                setType: mockSetType, setCanceled: mockSetCanceled
+                userSignedIn: false, setUserSignedIn: mockSetUserSignedIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                setItemType: mockSetItemType, setCancelSignIn: mockSetCancelSignIn
                 }}>
                 <Dashboard />
             </UserContext.Provider>
@@ -113,9 +113,9 @@ describe('Dashboard', () => {
     test("should set appropriate state when clicking 'sign out'", () => {
         render(
             <UserContext.Provider value={{ 
-                signedIn: true, setSignedIn: mockSetSignedIn, 
-                userInfo, setUserInfo: mockSetUserInfo,
-                setType: mockSetType, setCanceled: mockSetCanceled
+                userSignedIn: true, setUserSignedIn: mockSetUserSignedIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo,
+                setItemType: mockSetItemType, setCancelSignIn: mockSetCancelSignIn
                 }}>
                 <Dashboard />
             </UserContext.Provider>
@@ -124,10 +124,10 @@ describe('Dashboard', () => {
         const buttonElement = screen.getByTestId('signOutButton1');
         fireEvent.click(buttonElement);
 
-        expect(mockSetSignedIn).toHaveBeenCalledWith(false);
-        expect(mockSetCanceled).toHaveBeenCalledWith(true);
-        expect(mockSetType).toHaveBeenCalledWith(null);
-        expect(mockSetUserInfo).toHaveBeenCalledWith({
+        expect(mockSetUserSignedIn).toHaveBeenCalledWith(false);
+        expect(mockSetCancelSignIn).toHaveBeenCalledWith(true);
+        expect(mockSetItemType).toHaveBeenCalledWith(null);
+        expect(mockSetSignedInUserInfo).toHaveBeenCalledWith({
             username: '',
             password: '',
             items: [],

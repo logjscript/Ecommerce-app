@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test} from 'vitest';
 import ProductSection from '../src/components/ProductSection';
-import { ImageProvider } from '../src/components/ImageContext';
+import { ItemProvider } from '../src/components/ItemContext';
 import { UserContext } from '../src/components/UserContext';
 
-let userInfo;
+let signedInUserInfo;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'password',
         items: [
@@ -21,11 +21,11 @@ beforeEach(() => {
 describe('ProductSection', () => {
     test('should render on page', () => {
         render(
-            <ImageProvider>
-                <UserContext.Provider value={{ type: 'hats'}}>
+            <ItemProvider>
+                <UserContext.Provider value={{ itemType: 'hats'}}>
                     <ProductSection />
                 </UserContext.Provider>
-            </ImageProvider>
+            </ItemProvider>
         );
 
         const divElement = screen.getByTestId('testDiv');
@@ -34,11 +34,11 @@ describe('ProductSection', () => {
     
     test('should render hat images on page', () => {
         render(
-            <ImageProvider>
-                <UserContext.Provider value={{ type: 'hats'}}>
+            <ItemProvider>
+                <UserContext.Provider value={{ itemType: 'hats'}}>
                     <ProductSection />
                 </UserContext.Provider>
-            </ImageProvider>
+            </ItemProvider>
         );
 
         const imageElements = screen.getAllByRole('img');

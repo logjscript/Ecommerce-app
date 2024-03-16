@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import LogIn from '../src/components/LogIn';
 import { checkUserInfo } from '../src/utils';
@@ -8,7 +8,7 @@ vi.mock('../src/utils', ()=> {
     return {
         checkUserInfo: vi.fn().mockImplementation((username) => {
             if (username === 'user') {
-                mockSetSignedIn();
+                mockSetUserSignedIn();
             } else {
                 mockSetSignInError('username does not exist');
             }
@@ -16,17 +16,17 @@ vi.mock('../src/utils', ()=> {
     }
 });
 
-const mockSetCanceled = vi.fn();
-const mockSetUserInfo = vi.fn();
+const mockSetCancelSignIn = vi.fn();
+const mockSetSignedInUserInfo = vi.fn();
 const mockSetLoading = vi.fn();
-const mockSetSignedIn = vi.fn();
+const mockSetUserSignedIn = vi.fn();
 const mockSetSignInError = vi.fn();
 const mockSetExistingAccount = vi.fn();
 
-let userInfo;
+let signedInUserInfo;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'pass',
         items: [
@@ -41,8 +41,8 @@ describe('LogIn', () => {
     test('should render on page', () => {
         render(
             <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
+                setUserSignedIn: mockSetUserSignedIn, setCancelSignIn: mockSetCancelSignIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo
              }}>
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
@@ -59,8 +59,8 @@ describe('LogIn', () => {
     test('should call checkUserInfo on button click event', () => {
         render(
             <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
+                setUserSignedIn: mockSetUserSignedIn, setCancelSignIn: mockSetCancelSignIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo
              }}>
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
@@ -76,7 +76,7 @@ describe('LogIn', () => {
         expect(checkUserInfo).toHaveBeenCalledOnce();
     });
     
-    test('should run setSignedIn when username and password are correct', async () => {
+    test('should update setUserSignedIn when username and password are correct', async () => {
         global.fetch = vi.fn(() => 
             Promise.resolve({
                 ok: true,
@@ -88,8 +88,8 @@ describe('LogIn', () => {
 
         render(
             <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
+                setUserSignedIn: mockSetUserSignedIn, setCancelSignIn: mockSetCancelSignIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo
              }}>
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
@@ -103,10 +103,10 @@ describe('LogIn', () => {
         const data = await response.json();
         checkUserInfo(data.username);
         expect(fetch).toHaveBeenCalledWith(`http://localhost:5200/api/v1/users/user`);
-        expect(mockSetSignedIn).toHaveBeenCalledOnce();
+        expect(mockSetUserSignedIn).toHaveBeenCalledOnce();
     });
 
-    test('should not run setSignedIn when username or password is incorrect', async () => {
+    test('should not run setUserSignedIn when username or password is incorrect', async () => {
         global.fetch = vi.fn(() => 
             Promise.resolve({
                 ok: true,
@@ -118,8 +118,8 @@ describe('LogIn', () => {
 
         render(
             <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
+                setUserSignedIn: mockSetUserSignedIn, setCancelSignIn: mockSetCancelSignIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo
              }}>
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
@@ -133,14 +133,14 @@ describe('LogIn', () => {
         const data = await response.json();
         checkUserInfo(data.username);
         expect(fetch).toHaveBeenCalledWith(`http://localhost:5200/api/v1/users/user`);
-        expect(mockSetSignedIn).not.toHaveBeenCalled();
+        expect(mockSetUserSignedIn).not.toHaveBeenCalled();
     });
 
     test('should render signInError on page when signInError is truthy', () => {
         render(
             <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
+                setUserSignedIn: mockSetUserSignedIn, setCancelSignIn: mockSetCancelSignIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo
              }}>
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}
@@ -159,8 +159,8 @@ describe('LogIn', () => {
     test('should not render signInError when signInError is falsy', () => {
         render(
             <UserContext.Provider value={{ 
-                setSignedIn: mockSetSignedIn, setCanceled: mockSetCanceled, 
-                userInfo, setUserInfo: mockSetUserInfo
+                setUserSignedIn: mockSetUserSignedIn, setCancelSignIn: mockSetCancelSignIn, 
+                signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo
              }}>
                 <LogIn 
                     setExistingAccount={mockSetExistingAccount}

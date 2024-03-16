@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import Bag from '../src/components/Bag';
-import { userTotalPrice } from '../src/utils';
+import { totalBagPrice } from '../src/utils';
 import { UserContext } from '../src/components/UserContext';
 
-const mockSetUserInfo = vi.fn();
-let userInfo;
+const mockSetSignedInUserInfo = vi.fn();
+let signedInUserInfo;
 
 beforeEach(() => {
-    userInfo = {
+    signedInUserInfo = {
         username: 'user',
         password: 'password',
         items: [
@@ -22,7 +22,7 @@ beforeEach(() => {
 describe('Bag', () => {
     test('should render on page', () => {
         render(
-            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+            <UserContext.Provider value={{signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo}}>
                 <Bag />
             </UserContext.Provider>
         );
@@ -33,26 +33,26 @@ describe('Bag', () => {
         expect(divElement).toBeInTheDocument();
     });
     
-    test('should render total price on page when userTotalPrice is truthy', () => {
+    test('should render total price on page when totalBagPrice is truthy', () => {
         render(
-            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+            <UserContext.Provider value={{signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo}}>
                 <Bag />
             </UserContext.Provider>
         );
 
-        const priceTotal = userTotalPrice(userInfo.items);
+        const priceTotal = totalBagPrice(signedInUserInfo.items);
 
         const headerElement = screen.getByText(/Total/i);
         const headerContent = headerElement.textContent;
         expect(headerContent).toBe(`Total: $${priceTotal.toFixed(2)}`);
     });
 
-    test("should render '$0.00' when userTotalPrice is falsy", () => {
-        userInfo.items = [];
-        userInfo.total = 0.00;
+    test("should render '$0.00' when totalBagPrice is falsy", () => {
+        signedInUserInfo.items = [];
+        signedInUserInfo.total = 0.00;
 
         render(
-            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+            <UserContext.Provider value={{signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo}}>
                 <Bag />
             </UserContext.Provider>
         );
@@ -62,25 +62,25 @@ describe('Bag', () => {
         expect(headerContent).toBe('Total: $0.00');
     });
 
-    test('should render mapped items when userInfo.items is truthy', () => {
+    test('should render mapped items when signedInUserInfo.items is truthy', () => {
         render(
-            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+            <UserContext.Provider value={{signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo}}>
                 <Bag />
             </UserContext.Provider>
         );
-            console.log(userInfo);
+            console.log(signedInUserInfo);
         const divElements = screen.getAllByTestId('testMappedDiv');
         divElements.forEach((div) => {
             expect(div).toBeInTheDocument();
         });
     });
 
-    test("should render 'no items' when userInfo.items is falsy", () => {
-        userInfo.items = [];
-        userInfo.total = 0.00;
+    test("should render 'no items' when signedInUserInfo.items is falsy", () => {
+        signedInUserInfo.items = [];
+        signedInUserInfo.total = 0.00;
 
         render(
-            <UserContext.Provider value={{userInfo, setUserInfo: mockSetUserInfo}}>
+            <UserContext.Provider value={{signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo}}>
                 <Bag />
             </UserContext.Provider>
         );
