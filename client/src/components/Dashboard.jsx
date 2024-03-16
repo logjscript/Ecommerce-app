@@ -50,7 +50,7 @@ const Dashboard = () => {
             <button 
                 value={null} 
                 onClick={(e) => handleItemTypeClick(e)} 
-                className='col-start-2 font-pacifico text-3xl sm:4xl'
+                className='col-start-2 font-pacifico text-3xl sm:4xl p-3'
             >
                 Pacific Clothing
             </button>

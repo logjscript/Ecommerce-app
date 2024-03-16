@@ -50,9 +50,9 @@ const Bag = () => {
                             <img src={item.link} className="rounded-xl aspect-square min-w-[125px] w-full object-cover justify-self-start self-center shadow-md shadow-gray-400 row-span-2"/>
 
                             <div className='place-self-center flex flex-col justify-center items-center'>
-                                <div className='text-xl text-gray-600 text-center sm:text-2xl'>{item.name}</div>
-                                <div className='text-md text-gray-500 sm:text-lg'>{`Quantity: ${item.quantity}`}</div>
-                                <div className='text-md text-gray-500 sm:text-lg'>{`Price: ${item.value}`}</div>
+                                <div className='text-xl text-gray-600 text-center sm:text-2xl xl:text-3xl'>{item.name}</div>
+                                <div className='text-md text-gray-500 sm:text-lg xl:text-xl'>{`Quantity: ${item.quantity}`}</div>
+                                <div className='text-md text-gray-500 sm:text-lg xl:text-xl'>{`Price: ${item.value}`}</div>
                             </div>
 
                             <div className='place-self-center'>
@@ -83,7 +83,7 @@ const Bag = () => {
                 
                     <ul className='max-h-[100%] min-w-[35%] justify-self-center md:self-start overflow-auto'>
                         {signedInUserInfo.items.map((item) => (
-                            <li key={item.name} className='text-md text-gray-500'>{item.name}: {item.quantity}</li>
+                            <li key={item.name} className='text-md sm:text-lg xl:text-xl text-gray-500'>{item.name}: {item.quantity}</li>
                         ))}
                     </ul>
 

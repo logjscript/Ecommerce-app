@@ -10,12 +10,12 @@ const ProductSection = () => {
     let headerText = itemType.charAt(0).toUpperCase() + itemType.slice(1);
 
     return (
-        <div className="grid grid-rows[auto_1fr] font-voltaire">
-            <h1 className='pt-28 p-8 font-pacifico text-4xl'>{headerText}</h1>
+        <div className="grid grid-rows-[auto_1fr] h-screen font-voltaire">
+            <h1 className='pt-28 p-8 font-pacifico text-4xl h-auto'>{headerText}</h1>
 
             <div 
                 data-testid='testDiv'
-                className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-center gap-11 pt-0 p-8"
+                className="grid grid-cols-[repeat(auto-fit,300px)] justify-evenly items-start gap-11 py-[16px] px-8"
             >
                 {itemGroups[itemType].map(item => (
                     <div key={item.id} className="grid text-center gap-y-4 p-4 h-[575px] bg-gray-100 shadow-lg shadow-gray-400 rounded-3xl">
