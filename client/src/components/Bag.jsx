@@ -44,9 +44,9 @@ const Bag = () => {
 
         itemsToDisplay = (
             (signedInUserInfo.items && signedInUserInfo.items.length > 0) ? (
-                <div data-testid='testContainerDiv' className='flex flex-col items-center self-center gap-6 lg:gap-8 w-full px-[5%] min-h-full md:h-full md:px-[20%] py-6 pt-[104px] md:pt-6 lg:py-8 md:row-start-2 md:overflow-auto'>
+                <div data-testid='testContainerDiv' className='flex flex-col items-center self-center gap-6 lg:gap-8 w-full px-[5%] min-h-full md:h-full md:px-[10%] py-6 pt-[104px] md:pt-6 lg:py-8 md:row-start-2 md:overflow-auto'>
                     {signedInUserInfo.items.map(item => (
-                        <div data-testid='testMappedDiv' key={item.name} className="w-full grid grid-cols-[40%_1fr] bg-white rounded-3xl p-4 shadow-lg shadow-gray-500 bg-gradient-to-r from-gray-300 to-white">
+                        <div data-testid='testMappedDiv' key={item.name} className="w-full grid grid-cols-[40%_1fr] bg-white rounded-3xl p-4 pr-0 shadow-lg shadow-gray-500 bg-gradient-to-r from-gray-300 to-white">
                             <img src={item.link} className="rounded-xl aspect-square min-w-[125px] w-full object-cover justify-self-start self-center shadow-md shadow-gray-400 row-span-2"/>
 
                             <div className='place-self-center flex flex-col justify-center items-center'>

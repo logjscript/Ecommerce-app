@@ -20,7 +20,7 @@ const RightDashboardItems = ({ classes, userSignedIn, handleItemTypeClick, handl
                 </button>
             ) : (
                 <button 
-                    data-testId={`signOutButton${testIdNumber}`}
+                    data-testid={`signOutButton${testIdNumber}`}
                     className='text-left' 
                     onClick={handleSignOutClick}
                 >
