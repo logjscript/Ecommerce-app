@@ -74,7 +74,7 @@ const SignUp = ({ setNewUserInfo, newUserInfo, setExistingAccount, signInError, 
     return (
         <div
             data-testid='signUpDiv' 
-            className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20"
+            className="fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-20 font-voltaire"
         >
             <div className="w-[45%] min-w-[370px] h-[57%] bg-gradient-to-br from-gray-300 to-white rounded-3xl grid grid-rows-[25%_repeat(3,1fr)_20%] grid-cols-1 gap-y-2">
                 <div className="relative flex justify-center items-start">

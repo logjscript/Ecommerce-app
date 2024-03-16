@@ -10,7 +10,7 @@ const ProductSection = () => {
     let headerText = itemType.charAt(0).toUpperCase() + itemType.slice(1);
 
     return (
-        <div className="grid grid-rows[auto_1fr]">
+        <div className="grid grid-rows[auto_1fr] font-voltaire">
             <h1 className='pt-28 p-8 font-pacifico text-4xl'>{headerText}</h1>
 
             <div 
@@ -23,7 +23,7 @@ const ProductSection = () => {
                             <img src={item.link} alt="/" className="place-self-center h-full w-full object-cover rounded-xl shadow-md shadow-gray-400" />
                         </div>
 
-                        <div className="text-2xl font-semibold">{item.name}</div>
+                        <div className="text-3xl font-semibold">{item.name}</div>
 
                         <p>{item.description}</p>
 

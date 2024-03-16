@@ -40,17 +40,17 @@ const Dashboard = () => {
     }
 
     return (
-        <nav data-testid='container' className={`fixed top-0 box-border z-30 grid grid-rows-1 grid-cols-[1fr_auto_1fr] justify-between items-center w-screen h-20 bg-black text-base text-white gap-8 px-[1.5%]`}>
+        <nav data-testid='container' className={`fixed top-0 box-border z-30 grid grid-rows-1 grid-cols-[1fr_auto_1fr] justify-between items-center w-screen h-20 bg-black text-white gap-8 px-[1.5%] font-voltaire`}>
             <LeftDashboardItems 
                 handleItemTypeClick={handleItemTypeClick} 
                 testIdNumber={'1'}
-                classes={'justify-self-start hidden custom-md:flex text-sm gap-x-3 gap-y-3'
+                classes={'justify-self-start hidden custom-md:flex text-lg gap-x-3 gap-y-3'
             } />
 
             <button 
                 value={null} 
                 onClick={(e) => handleItemTypeClick(e)} 
-                className='col-start-2 font-pacifico text-4xl'
+                className='col-start-2 font-pacifico text-3xl sm:4xl'
             >
                 Pacific Clothing
             </button>
@@ -63,7 +63,7 @@ const Dashboard = () => {
                 totalItems={totalItems} 
                 userSignedIn={userSignedIn} 
                 testIdNumber={'2'}
-                classes={'justify-self-end hidden custom-md:flex text-sm gap-x-3 gap-y-3'} 
+                classes={'justify-self-end hidden custom-md:flex text-lg gap-x-3 gap-y-3'} 
                 setShowNav={setShowNav}
             />
 

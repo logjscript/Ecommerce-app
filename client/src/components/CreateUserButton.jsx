@@ -41,7 +41,7 @@ const CreateUserButton = ({ newUserInfo, setNewUserInfo, setInputColor, setExist
     return (
         <button 
             onClick={handleClick} 
-            className='bg-gray-800 text-white rounded-3xl w-44 h-11 text-xl hover:opacity-50 ease-in-out duration-200'
+            className='bg-gray-800 text-white rounded-3xl w-44 h-11 text-2xl hover:opacity-50 ease-in-out duration-200 font-voltaire'
         >
             Create Account
         </button>

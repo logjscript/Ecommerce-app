@@ -22,7 +22,7 @@ export default {
     extend: {
       fontFamily: {
         pacifico: ["Pacifico", "sans-serif"],
-        fjalla: ["Fjalla One", "sans-serif"],
+        voltaire: ["Voltaire", "sans-serif"],
       }
     },
   },

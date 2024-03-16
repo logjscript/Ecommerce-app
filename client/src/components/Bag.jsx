@@ -19,7 +19,7 @@ const Bag = () => {
                 /> 
             );
         } else if (itemsArePurchased) {
-            setShowPurchaseButton(<div className='px-12 text-3xl md:text-5xl text-gray-800 text-center'>Thank you for shopping with us!</div>);
+            setShowPurchaseButton(<div className='px-12 text-3xl md:text-5xl text-gray-800 text-center font-voltaire'>Thank you for shopping with us!</div>);
         } else {
             setShowPurchaseButton(null);
         }
@@ -74,7 +74,7 @@ const Bag = () => {
 
     return (
         !itemsArePurchased ? (
-            <div className='border-box flex flex-col h-full gap-16 md:gap-0 md:h-screen min-h-screen w-full bg-gray-100 md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr]'>
+            <div className='border-box flex flex-col h-full gap-16 md:gap-0 md:h-screen min-h-screen w-full bg-gray-100 md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr] font-voltaire'>
 
                 {itemsToDisplay}
 

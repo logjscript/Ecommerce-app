@@ -24,7 +24,7 @@ const DeleteBagItem = ({ item }) => {
     }
 
     return (
-        <button className='px-[10px] py-[8px] bg-gray-800 text-white text-xs rounded-3xl opacity-100 hover:opacity-50 ease-in-out duration-200 sm:text-sm lg:text-base' onClick={handleClick}>Remove Item</button>
+        <button className='px-[10px] py-[8px] bg-gray-800 text-white text-xs rounded-3xl opacity-100 hover:opacity-50 ease-in-out duration-200 sm:text-sm lg:text-base font-voltaire' onClick={handleClick}>Remove Item</button>
     )
 }
 
