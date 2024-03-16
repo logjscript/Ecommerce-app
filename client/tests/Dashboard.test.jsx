@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import Dashboard from '../src/components/Dashboard';
-import { itemsInBag } from '../src/utils';
+import { countItemsInBag } from '../src/utils';
 import { UserContext } from '../src/components/UserContext';
 
 const mockSetItemType = vi.fn();
@@ -67,7 +67,7 @@ describe('Dashboard', () => {
             </UserContext.Provider>
         );
 
-        const totalItems = itemsInBag(signedInUserInfo?.items);
+        const totalItems = countItemsInBag(signedInUserInfo?.items);
 
         const divElement = screen.getByTestId('dashIconItemCount');
         const divContent = Number(divElement.textContent);

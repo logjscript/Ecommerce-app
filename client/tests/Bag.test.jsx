@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import Bag from '../src/components/Bag';
-import { userTotalPrice } from '../src/utils';
+import { totalBagPrice } from '../src/utils';
 import { UserContext } from '../src/components/UserContext';
 
 const mockSetSignedInUserInfo = vi.fn();
@@ -33,21 +33,21 @@ describe('Bag', () => {
         expect(divElement).toBeInTheDocument();
     });
     
-    test('should render total price on page when userTotalPrice is truthy', () => {
+    test('should render total price on page when totalBagPrice is truthy', () => {
         render(
             <UserContext.Provider value={{signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo}}>
                 <Bag />
             </UserContext.Provider>
         );
 
-        const priceTotal = userTotalPrice(signedInUserInfo.items);
+        const priceTotal = totalBagPrice(signedInUserInfo.items);
 
         const headerElement = screen.getByText(/Total/i);
         const headerContent = headerElement.textContent;
         expect(headerContent).toBe(`Total: $${priceTotal.toFixed(2)}`);
     });
 
-    test("should render '$0.00' when userTotalPrice is falsy", () => {
+    test("should render '$0.00' when totalBagPrice is falsy", () => {
         signedInUserInfo.items = [];
         signedInUserInfo.total = 0.00;
 

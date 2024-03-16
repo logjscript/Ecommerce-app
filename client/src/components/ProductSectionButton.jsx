@@ -1,26 +1,25 @@
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
-export default function ProductSectionButton({ item }) {
+const ProductSectionButton = ({ item }) => {
     const { userSignedIn, setCancelSignIn, signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
 
     const handleClick = () => {
-
         if (userSignedIn) {
             const existingItemIndex = signedInUserInfo.items?.findIndex(bagItem => {
                 return bagItem.name === item.name;
             });
 
             if (existingItemIndex !== -1 && existingItemIndex !== undefined) {
-                let updatedState = [...signedInUserInfo.items];
-                updatedState[existingItemIndex] = {
+                let updateItemQuantity = [...signedInUserInfo.items];
+                updateItemQuantity[existingItemIndex] = {
                     ...item, 
                     quantity: signedInUserInfo.items[existingItemIndex].quantity + 1
                 };
 
                 setSignedInUserInfo({
                     ...signedInUserInfo,
-                    items: updatedState
+                    items: updateItemQuantity
                 });
             } else {
                 setSignedInUserInfo({
@@ -43,3 +42,5 @@ export default function ProductSectionButton({ item }) {
         </button>
     )
 }
+
+export default ProductSectionButton;

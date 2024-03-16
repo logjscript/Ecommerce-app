@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
-export default function DeleteBagItem({ item }) {
+const DeleteBagItem = ({ item }) => {
     const { signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
     
     const handleClick = () => {
@@ -27,3 +27,5 @@ export default function DeleteBagItem({ item }) {
         <button className='px-[10px] py-[8px] bg-gray-800 text-white text-xs rounded-3xl opacity-100 hover:opacity-50 ease-in-out duration-200 sm:text-sm lg:text-base' onClick={handleClick}>Remove Item</button>
     )
 }
+
+export default DeleteBagItem;

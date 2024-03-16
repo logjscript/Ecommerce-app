@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from 'vitest';
 import PurchaseButton from '../src/components/PurchaseButton';
 import { UserContext } from '../src/components/UserContext';
 
-const mockSetBought = vi.fn();
+const mockSetItemsArePurchased = vi.fn();
 const mockSetSignedInUserInfo = vi.fn();
 let signedInUserInfo;
 
@@ -23,7 +23,7 @@ describe('PurchaseButton', () => {
     test('should render', () => {
         render(
             <UserContext.Provider value={{ signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo }}>
-                <PurchaseButton setBought={mockSetBought} />
+                <PurchaseButton setItemsArePurchased={mockSetItemsArePurchased} />
             </UserContext.Provider>
         );
 
@@ -31,23 +31,23 @@ describe('PurchaseButton', () => {
         expect(buttonElement).toBeInTheDocument();
     });
 
-    test('should change bought value on click event', () => {
+    test('should change itemsArePurchased value on click event', () => {
         render(
             <UserContext.Provider value={{ signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo }}>
-                <PurchaseButton setBought={mockSetBought} />
+                <PurchaseButton setItemsArePurchased={mockSetItemsArePurchased} />
             </UserContext.Provider>
         );
         
         const buttonElement = screen.getByRole('button');
         fireEvent.click(buttonElement);
 
-        expect(mockSetBought).toHaveBeenCalledWith(true);
+        expect(mockSetItemsArePurchased).toHaveBeenCalledWith(true);
     });
 
     test('should change signedInUserInfo value on click event', () => {
         render(
             <UserContext.Provider value={{ signedInUserInfo, setSignedInUserInfo: mockSetSignedInUserInfo }}>
-                <PurchaseButton setBought={mockSetBought} />
+                <PurchaseButton setItemsArePurchased={mockSetItemsArePurchased} />
             </UserContext.Provider>
         );
         

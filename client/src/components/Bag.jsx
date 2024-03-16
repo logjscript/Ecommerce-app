@@ -1,34 +1,34 @@
 import { useEffect, useState, useContext } from 'react';
+import { totalBagPrice } from "../utils";
+import { UserContext } from "./UserContext";
 import DeleteBagItem from "./DeleteBagItem";
 import PurchaseButton from './PurchaseButton';
-import { userTotalPrice } from "../utils";
-import { UserContext } from "./UserContext";
 
-export default function Bag() {
+const Bag = () => {
     const { signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
-    const [bought, setBought] = useState(false);
+    const [itemsArePurchased, setItemsArePurchased] = useState(false);
     const [showPurchaseButton, setShowPurchaseButton] = useState(null);
-    const priceTotal = userTotalPrice(signedInUserInfo.items);  
+    const priceTotal = totalBagPrice(signedInUserInfo.items);  
 
     useEffect(() => {
         if (signedInUserInfo.items.length > 0) {
-            setBought(false);
+            setItemsArePurchased(false);
             setShowPurchaseButton(
                 <PurchaseButton 
-                    setBought={setBought} 
+                    setItemsArePurchased={setItemsArePurchased} 
                 /> 
             );
-        } else if (bought) {
+        } else if (itemsArePurchased) {
             setShowPurchaseButton(<div className='px-12 text-3xl md:text-5xl text-gray-800 text-center'>Thank you for shopping with us!</div>);
         } else {
             setShowPurchaseButton(null);
         }
-    }, [signedInUserInfo.items, bought]);
+    }, [signedInUserInfo.items, itemsArePurchased]);
 
     let totalToDisplay;
     let itemsToDisplay;
 
-    if (!bought) {
+    if (!itemsArePurchased) {
         totalToDisplay = (
             priceTotal ? (
                 <h1 className="text-3xl md:text-2xl text-gray-700 md:justify-self-center md:self-end text-center">
@@ -73,7 +73,7 @@ export default function Bag() {
     }
 
     return (
-        !bought ? (
+        !itemsArePurchased ? (
             <div className='border-box flex flex-col h-full gap-16 md:gap-0 md:h-screen min-h-screen w-full bg-gray-100 md:grid md:grid-rows-[5rem_1fr] md:grid-cols-[1.5fr_1fr]'>
 
                 {itemsToDisplay}
@@ -97,3 +97,5 @@ export default function Bag() {
         )
     )
 }
+
+export default Bag;

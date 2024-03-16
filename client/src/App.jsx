@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react';
-import { ImageProvider } from './components/ImageContext';
+import { ItemProvider } from './components/ImageContext';
 import { UserContext } from "./components/UserContext";
-import { itemToBag } from './utils';
+import { addItemsToBag } from './utils';
 import Dashboard from './components/Dashboard';
 import HomePage from './components/HomePage';
 import ProductSection from './components/ProductSection';
@@ -9,34 +9,37 @@ import SignIn from './components/SignIn';
 import Bag from './components/Bag';
 
 
-export default function App() {
+const App = () => {
     const { itemType, userSignedIn, cancelSignIn, signedInUserInfo } = useContext(UserContext);
+    let componentToDisplay;
 
     useEffect(() => {
         if (userSignedIn) {
-            itemToBag(signedInUserInfo);
+            addItemsToBag(signedInUserInfo);
         }
     }, [signedInUserInfo?.items, userSignedIn]);
 
-    let compToDisplay;
-        if (!itemType) {
-            compToDisplay = <HomePage />
-        } else if (itemType === 'bag') {
-            compToDisplay = <Bag />;
-        } else {
-            compToDisplay = <ProductSection />;
-        }
+    if (!itemType) {
+        componentToDisplay = <HomePage />
+    } else if (itemType === 'bag') {
+        componentToDisplay = <Bag />;
+    } else {
+        componentToDisplay = <ProductSection />;
+    }
 
     return (
         <div data-testid='div' className='flex flex-col justify-center min-h-screen bg-gradient-to-l from-[#A5A5A5] to-gray-100'>
-          <ImageProvider>
+          <ItemProvider>
             <Dashboard />
-              {compToDisplay}
+              {componentToDisplay}
+              
               {(userSignedIn || cancelSignIn) ? null : (
                   <SignIn />
               )}
-          </ImageProvider>
+          </ItemProvider>
         </div>
     )
 }
+
+export default App;
 

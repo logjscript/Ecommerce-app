@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import App from '../src/App';
-import { itemToBag } from '../src/utils';
+import { addItemsToBag } from '../src/utils';
 import { signedInUserInfo } from './testUserInfo';
 import UserProvider from '../src/components/UserContext';
 
@@ -26,7 +26,7 @@ describe('App', () => {
             </UserProvider>
         );
 
-        await itemToBag(signedInUserInfo);
+        await addItemsToBag(signedInUserInfo);
 
         expect(global.fetch).toHaveBeenCalledWith(
             `http://localhost:5200/api/v1/users/${signedInUserInfo.username}`, {

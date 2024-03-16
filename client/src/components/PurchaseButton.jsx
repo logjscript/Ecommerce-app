@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
-export default function PurchaseButton({ setBought }) {
+const PurchaseButton = ({ setItemsArePurchased }) => {
     const { signedInUserInfo, setSignedInUserInfo } = useContext(UserContext);
-    function handleClick() {
-        setBought(true);
+    const handleClick = () => {
+        setItemsArePurchased(true);
         setSignedInUserInfo({
             ...signedInUserInfo,
             items: [],
@@ -21,3 +21,5 @@ export default function PurchaseButton({ setBought }) {
         </button>
     )
 }
+
+export default PurchaseButton;

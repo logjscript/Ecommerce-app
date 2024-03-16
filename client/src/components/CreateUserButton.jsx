@@ -1,8 +1,7 @@
 import { addUsername } from "../utils";
 
-export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInputColor, setExistingAccount, setSignInError, borderColors, loading, setLoading }) {
-
-    async function handleCreateClick() {        
+const CreateUserButton = ({ newUserInfo, setNewUserInfo, setInputColor, setExistingAccount, setSignInError, gray, setLoading }) => {
+    const handleClick = async () => {        
         try {
             if (!newUserInfo.username || 
                 !newUserInfo.password || 
@@ -24,9 +23,9 @@ export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInput
                     passwordMatch: true
                 });
                 setInputColor({
-                    user: borderColors[1], 
-                    password: borderColors[1], 
-                    verifyPassword: borderColors[1]
+                    user: gray, 
+                    password: gray, 
+                    verifyPassword: gray
                 });
                 await addUsername(newUserInfo);
                 setSignInError(null);
@@ -41,10 +40,12 @@ export default function CreateUserButton({ newUserInfo, setNewUserInfo, setInput
 
     return (
         <button 
-            onClick={handleCreateClick} 
+            onClick={handleClick} 
             className='bg-gray-800 text-white rounded-3xl w-44 h-11 text-xl hover:opacity-50 ease-in-out duration-200'
         >
             Create Account
         </button>
     )
 }
+
+export default CreateUserButton;

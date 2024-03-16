@@ -3,24 +3,22 @@ import { changeBorderColor } from "../utils";
 import CreateUserButton from "./CreateUserButton";
 import { UserContext } from "./UserContext";
 
-export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError, setLoading, loading }) {
+const SignUp = ({ setNewUserInfo, newUserInfo, setExistingAccount, signInError, setSignInError, setLoading, loading }) => {
     const { setCancelSignIn } = useContext(UserContext);
-
-    const borderColors = [
-        'border-green-500 shadow-sm outline-none',
-        'border-gray-400 shadow-sm',
-        'border-red-500 shadow-sm outline-none',
-    ]
-
+    const borderColors = {
+        green: 'border-green-500 shadow-sm outline-none',
+        gray: 'border-gray-400 shadow-sm',
+        red: 'border-red-500 shadow-sm outline-none',
+    }
     const [inputColor, setInputColor] = useState({
-        user: borderColors[1], 
-        password: borderColors[1], 
-        verifyPassword: borderColors[1]
+        user: borderColors.gray, 
+        password: borderColors.gray, 
+        verifyPassword: borderColors.gray
     });
 
     useEffect(() => {
         changeBorderColor(
-            ...borderColors, 
+            borderColors, 
             newUserInfo.password, 
             newUserInfo.verifyPassword,
             setInputColor,
@@ -28,7 +26,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
         );
     }, [newUserInfo.password, newUserInfo.verifyPassword]);
 
-    function handleUserChange(e) {
+    const handleUserChange = (e) => {
         setSignInError('');
         setNewUserInfo({
             ...newUserInfo,
@@ -37,9 +35,9 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
 
        
         if (e.target.value) {
-            setInputColor({...inputColor, user: borderColors[0]})
+            setInputColor({...inputColor, user: borderColors.green})
         } else {
-            setInputColor({...inputColor, user: borderColors[1]})
+            setInputColor({...inputColor, user: borderColors.gray})
         }
     }
 
@@ -101,7 +99,8 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                     value={newUserInfo.username}
                     onChange={(e) => handleUserChange(e)}
                     placeholder="Create your username here" 
-                    className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.user}`} />
+                    className={`w-[85%] h-[60px] rounded-lg border-2 border-solid pl-4 text-lg place-self-center ${inputColor.user}`} 
+                />
 
                 <input 
                     type="password" 
@@ -134,7 +133,7 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
                         setInputColor={setInputColor} 
                         setExistingAccount={setExistingAccount} 
                         setSignInError={setSignInError}
-                        borderColors={borderColors}
+                        gray={borderColors.gray}
                         loading={loading}
                         setLoading={setLoading}
                     />
@@ -143,3 +142,5 @@ export default function SignUp({ setNewUserInfo, newUserInfo, setExistingAccount
         </div> 
     )
 }
+
+export default SignUp;

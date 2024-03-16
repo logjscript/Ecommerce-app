@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, test, vi } from 'vitest';
 import ImageScroller from '../src/components/ImageScroller';
-import { ImageProvider } from '../src/components/ImageContext';
+import { ItemProvider } from '../src/components/ImageContext';
 import { UserContext } from '../src/components/UserContext';
 
 const mockSetItemType = vi.fn();
@@ -10,11 +10,11 @@ const mockSetItemType = vi.fn();
 describe('ImageScroller', () => {
     test('should render on page', () => {
         render(
-            <ImageProvider>
+            <ItemProvider>
                 <UserContext.Provider value={{ setItemType: mockSetItemType}}>
                     <ImageScroller />
                 </UserContext.Provider>
-            </ImageProvider>
+            </ItemProvider>
         );
 
         const divElement = screen.getByTestId('scroller');
@@ -23,11 +23,11 @@ describe('ImageScroller', () => {
     
     test('should render images on page', () => {
         render(
-            <ImageProvider>
+            <ItemProvider>
                 <UserContext.Provider value={{ setItemType: mockSetItemType}}>
                     <ImageScroller />
                 </UserContext.Provider>
-            </ImageProvider>
+            </ItemProvider>
         );
 
         const imgElements = screen.getAllByRole('img');
@@ -38,11 +38,11 @@ describe('ImageScroller', () => {
 
     test('should decrease scrollLeft value by 600 on click', () => {
         render(
-            <ImageProvider>
+            <ItemProvider>
                 <UserContext.Provider value={{ setItemType: mockSetItemType}}>
                     <ImageScroller />
                 </UserContext.Provider>
-            </ImageProvider>
+            </ItemProvider>
         );
 
         const divElement = screen.getByTestId('slider');
@@ -53,11 +53,11 @@ describe('ImageScroller', () => {
 
     test('should increase scrollLeft value by 600 on click', () => {
         render(
-            <ImageProvider>
+            <ItemProvider>
                 <UserContext.Provider value={{ setItemType: mockSetItemType}}>
                     <ImageScroller />
                 </UserContext.Provider>
-            </ImageProvider>
+            </ItemProvider>
         );
         const divElement = screen.getByTestId('slider');
         const rightArrow = screen.getByTestId('right');
@@ -67,11 +67,11 @@ describe('ImageScroller', () => {
     
     test("should set 'itemType' state based on index of img clicked", () => {
         render(
-            <ImageProvider>
+            <ItemProvider>
                 <UserContext.Provider value={{ setItemType: mockSetItemType}}>
                     <ImageScroller />
                 </UserContext.Provider>
-            </ImageProvider>
+            </ItemProvider>
         );
 
         const imgElements = screen.getAllByRole('img');

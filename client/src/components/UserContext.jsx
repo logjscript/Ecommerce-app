@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const UserContext = createContext('user');
 
-export default function UserProvider({ children }) {
+const UserProvider = ({ children }) => {
     const [itemType, setItemType] = useState(null);
     const [userSignedIn, setUserSignedIn] = useState(false);
     const [cancelSignIn, setCancelSignIn] = useState(true);
@@ -18,3 +18,5 @@ export default function UserProvider({ children }) {
         </UserContext.Provider>
     )
 }
+
+export default UserProvider;
