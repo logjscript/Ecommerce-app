@@ -52,7 +52,7 @@ const Dashboard = () => {
                 onClick={(e) => handleItemTypeClick(e)} 
                 className='col-start-2 font-pacifico text-4xl'
             >
-                Lodi NW
+                Pacific Clothing
             </button>
 
             <RightDashboardItems 
