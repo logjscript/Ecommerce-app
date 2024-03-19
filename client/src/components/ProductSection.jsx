@@ -10,7 +10,7 @@ const ProductSection = () => {
     let headerText = itemType.charAt(0).toUpperCase() + itemType.slice(1);
 
     return (
-        <div className="grid grid-rows-[auto_1fr] h-screen font-voltaire">
+        <div className="grid grid-rows-[auto_1fr] min-h-screen md:h-screen font-voltaire">
             <h1 className='pt-28 p-8 font-pacifico text-4xl h-auto'>{headerText}</h1>
 
             <div 
