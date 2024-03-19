@@ -7,9 +7,9 @@ CREATE TABLE user_list(
 );
 
 INSERT INTO user_list(username, password, items, total) VALUES (
-'Logan', 
-'password', 
-'[]',
-0.00
+    'username', 
+    'password', 
+    '[]',
+    0.00
 );
 
