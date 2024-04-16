@@ -14,7 +14,7 @@ const Bag = () => {
     let itemsToDisplay;
 
     useEffect(() => {
-        if (signedInUserInfo.items.length > 0) {
+        if (signedInUserInfo.items && signedInUserInfo.items.length > 0) {
             setItemsArePurchased(false);
             setShowPurchaseButton(
                 <PurchaseButton 
