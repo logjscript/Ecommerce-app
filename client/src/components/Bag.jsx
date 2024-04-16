@@ -9,6 +9,9 @@ const Bag = () => {
     const [itemsArePurchased, setItemsArePurchased] = useState(false);
     const [showPurchaseButton, setShowPurchaseButton] = useState(null);
     const priceTotal = totalBagPrice(signedInUserInfo.items);  
+    
+    let totalToDisplay;
+    let itemsToDisplay;
 
     useEffect(() => {
         if (signedInUserInfo.items.length > 0) {
@@ -24,9 +27,6 @@ const Bag = () => {
             setShowPurchaseButton(null);
         }
     }, [signedInUserInfo.items, itemsArePurchased]);
-
-    let totalToDisplay;
-    let itemsToDisplay;
 
     if (!itemsArePurchased) {
         totalToDisplay = (
@@ -81,7 +81,7 @@ const Bag = () => {
                 <div className='self-center flex flex-col justify-center items-center gap-4 md:row-start-2 md:col-start-2 md:h-[90%] md:grid md:grid-rows-[15%_1fr_15%] md:border-l md:border-gray-400'>
                     {totalToDisplay}
                 
-                    {signedInUserInfo.items.length > 0 && (
+                    {signedInUserInfo.items && signedInUserInfo.items.length > 0 && (
                         <ul className='max-h-[100%] min-w-[35%] justify-self-center md:self-start overflow-auto'>
                             {signedInUserInfo.items.map((item) => (
                                 <li key={item.name} className='text-md sm:text-lg xl:text-xl text-gray-500'>{item.name}: {item.quantity}</li>
