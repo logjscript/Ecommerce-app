@@ -95,11 +95,11 @@ The `.env` file is used to store sensitive environment variables, such as databa
 Paste the following code into the .env file and fill in the variables with your database information:
 
 ```JavaScript
-process.env.USERNAME=
-process.env.PASSWORD=
-process.env.HOST=
-process.env.DBPORT=
-process.env.DATABASE_NAME=
+USERNAME= //your info
+PASSWORD= ...
+HOST= ...
+DBPORT= ...
+DATABASE_NAME= ...
 ```
 
 ### Run the Project
